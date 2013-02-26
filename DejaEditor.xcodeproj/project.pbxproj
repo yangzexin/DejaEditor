@@ -674,6 +674,7 @@
 				3E65414216DCE0E900368931 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
