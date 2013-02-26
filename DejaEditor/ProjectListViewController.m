@@ -115,7 +115,7 @@
                 [self reloadProjectList];
                 [Waiting showWaiting:NO inView:self.view];
                 [AlertDialog showWithTitle:@""
-                                   message:@"zip包为源代码压缩包，app包为可以直接点击运行的程序"
+                                   message:@"zip包为源代码包，pkg包为可以直接点击运行的程序"
                                 completion:nil
                          cancelButtonTitle:@"我知道了"
                       otherButtonTitleList:nil];
