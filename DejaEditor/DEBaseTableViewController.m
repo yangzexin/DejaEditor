@@ -26,6 +26,7 @@
 - (UITableView *)createTableView
 {
     UITableView *tableView = [UIFactory tableViewWithStyle:self.tableViewStyle];
+    tableView.frame = self.view.bounds;
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
