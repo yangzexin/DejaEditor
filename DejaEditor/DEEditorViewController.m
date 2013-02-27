@@ -126,6 +126,9 @@
     
     self.topToolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, -44, self.view.frame.size.width, 44)] autorelease];
     self.topToolbar.barStyle = UIBarStyleBlack;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        self.topToolbar.barStyle = UIBarStyleDefault;
+    }
     self.topToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.topToolbar];
     self.findReplaceView = [[[QRFindReplaceView alloc] initWithFrame:self.topToolbar.bounds] autorelease];
@@ -1132,7 +1135,9 @@
 
 - (void)QRFindReplaceViewFindTextFieldDidEndEdit:(QRFindReplaceView *)view
 {
-    
+    if(view.findTextField.text.length == 0){
+        [self showTopToolbar:NO];
+    }
 }
 
 - (void)QRFindReplaceViewReplaceButtonDidTapped:(QRFindReplaceView *)view
