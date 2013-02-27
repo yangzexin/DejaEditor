@@ -285,9 +285,9 @@
         *outFunctionParamList = tmpFunctionParamList;
     }
     if(outFunctionPositionList){
-        [tmpFunctionPositionList sortUsingComparator:^NSComparisonResult(DEFunctionPosition *obj1, DEFunctionPosition *obj2) {
-            return [[obj1.functionName lowercaseString] compare:[obj2.functionName lowercaseString]];
-        }];
+//        [tmpFunctionPositionList sortUsingComparator:^NSComparisonResult(DEFunctionPosition *obj1, DEFunctionPosition *obj2) {
+//            return [[obj1.functionName lowercaseString] compare:[obj2.functionName lowercaseString]];
+//        }];
         *outFunctionPositionList = tmpFunctionPositionList;
     }
 }
@@ -421,21 +421,7 @@
         NSString *matching = @"local ";
         while((beginIndex = [script find:matching fromIndex:endIndex]) != -1){
             NSInteger assignPosition = [script find:@"=" fromIndex:beginIndex];
-            if(assignPosition != -1){
-                NSString *innerText = [script substringWithBeginIndex:beginIndex + matching.length endIndex:assignPosition];
-                innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if(![SVLuaCommonUtils isAlphbelts:innerText]){
-                    assignPosition = -1;
-                }
-            }
             NSInteger endPosition = [script find:@";" fromIndex:beginIndex];
-            if(endPosition != -1){
-                NSString *innerText = [script substringWithBeginIndex:beginIndex + matching.length endIndex:endPosition];
-                innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if(![SVLuaCommonUtils isAlphbelts:innerText]){
-                    endPosition = -1;
-                }
-            }
             if(assignPosition == -1){
                 endIndex = endPosition;
             }else if(endPosition == -1){

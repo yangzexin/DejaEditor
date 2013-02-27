@@ -220,15 +220,15 @@
                                                                       target:self
                                                                       action:@selector(showFunctionIndexButtonTapped)];
     self.bottomToolbar.items = @[[UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Console", nil)
-                                                                  target:self
-                                                                  action:@selector(consoleButtonTapped)],
+                                                                    target:self
+                                                                    action:@selector(consoleButtonTapped)],
                                  self.showTopBarButton,
                                  [UIFactory barButtonItemSystemItemFlexibleSpace],
                                  self.showFunctionIndexButton,
                                  [UIFactory barButtonItemSystemItemFlexibleSpace],
                                  [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemBookmarks
-                                                                                target:self
-                                                                                action:@selector(viewAPIButtonTapped:)]];
+                                                             target:self
+                                                             action:@selector(viewAPIButtonTapped:)]];
     self.textView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.bounds.size.height - 44);
     
     self.pretypeSelectionListTableView = [UIFactory tableView];
