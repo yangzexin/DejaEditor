@@ -196,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				3E65412C16DCE0E900368931 /* DejaEditor */,
-				3E6541AE16DCE2C700368931 /* Subprojects */,
+				3E6541AE16DCE2C700368931 /* SubProjects */,
 				3E65412516DCE0E900368931 /* Frameworks */,
 				3E6541B616DCE30400368931 /* AddInFrameworks */,
 				3E65412416DCE0E900368931 /* Products */,
@@ -397,12 +397,12 @@
 			name = DemoProjects;
 			sourceTree = "<group>";
 		};
-		3E6541AE16DCE2C700368931 /* Subprojects */ = {
+		3E6541AE16DCE2C700368931 /* SubProjects */ = {
 			isa = PBXGroup;
 			children = (
 				3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */,
 			);
-			name = Subprojects;
+			name = SubProjects;
 			sourceTree = "<group>";
 		};
 		3E6541B016DCE2E100368931 /* Products */ = {
