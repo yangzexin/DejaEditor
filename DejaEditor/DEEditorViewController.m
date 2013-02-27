@@ -807,6 +807,9 @@
 - (void)applicationDidEnterBackgroundNotification:(NSNotification *)n
 {
     [self saveScript];
+    if(self.stopRunningBlock){
+        self.stopRunningBlock();
+    }
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)n
