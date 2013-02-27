@@ -8,7 +8,7 @@
 
 #import "DEFileProjectManager.h"
 #import "DEFileProject.h"
-#import "CommonUtils.h"
+#import "SVCommonUtils.h"
 
 @implementation DEFileProjectManager
 
@@ -54,7 +54,7 @@
 
 + (NSString *)projectsHomePath
 {
-    NSString *path = [[CommonUtils documentPath] stringByAppendingPathComponent:@"projects"];
+    NSString *path = [[SVCommonUtils documentPath] stringByAppendingPathComponent:@"projects"];
     if(![[NSFileManager defaultManager] fileExistsAtPath:path]){
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil];
     }

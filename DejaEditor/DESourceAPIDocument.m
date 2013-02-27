@@ -7,7 +7,7 @@
 //
 
 #import "DESourceAPIDocument.h"
-#import "FileUtils.h"
+#import "SVFileUtils.h"
 #import "NSString+Substring.h"
 
 @interface DESourceAPIDocument ()
@@ -34,7 +34,7 @@
     NSString *bundlePath = [bundle bundlePath];
     NSMutableArray *tmpClassFilePathList = [NSMutableArray array];
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
-    [FileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
+    [SVFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
         if(!isDirectory){
             [tmpClassFilePathList addObject:filePath];
             [tmpClassNameList addObject:[[filePath lastPathComponent] stringByDeletingPathExtension]];

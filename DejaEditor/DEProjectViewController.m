@@ -14,7 +14,7 @@
 #import "AlertDialog.h"
 #import "InputDialog.h"
 #import "LogView.h"
-#import "ImagePicker.h"
+#import "SVImagePicker.h"
 #import "DELinkProjectViewController.h"
 #import "LuaCommonUtils.h"
 #import "LINavigationController.h"
@@ -241,7 +241,7 @@
 
 - (void)createImage
 {
-    [ImagePicker presentWithViewController:self completion:^(UIImage *image) {
+    [SVImagePicker presentWithViewController:self completion:^(UIImage *image) {
         [self addImageToProject:image];
     }];
 }

@@ -7,13 +7,13 @@
 //
 
 #import "DETextInputCatcher.h"
-#import "DelayControl.h"
+#import "SVDelayControl.h"
 
 @interface DETextInputCatcher ()
 
 @property(nonatomic, copy)void(^textInputCatchBlock)();
 @property(nonatomic, assign)NSTimeInterval waitingInterval;
-@property(nonatomic, retain)DelayControl *delayControl;
+@property(nonatomic, retain)SVDelayControl *delayControl;
 
 @end
 
@@ -37,7 +37,7 @@
 - (void)mark
 {
     [self.delayControl cancel];
-    self.delayControl = [[[DelayControl alloc] initWithInterval:self.waitingInterval completion:^{
+    self.delayControl = [[[SVDelayControl alloc] initWithInterval:self.waitingInterval completion:^{
         if(self.textInputCatchBlock){
             self.textInputCatchBlock();
         }

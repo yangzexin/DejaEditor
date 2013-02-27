@@ -8,13 +8,13 @@
 
 #import "DEBaseViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ProviderPool.h"
+#import "SVProviderPool.h"
 
 @interface DEBaseViewController ()
 
 @property(nonatomic, retain)UILabel *titleLabel;
 @property(nonatomic, copy)NSString *customTitle;
-@property(nonatomic, retain)ProviderPool *providerPool;
+@property(nonatomic, retain)SVProviderPool *providerPool;
 
 @end
 
@@ -37,7 +37,7 @@
     self.title = NSLocalizedString(@"Back", nil);
     self.customTitle = @"Untitled";
     
-    self.providerPool = [[ProviderPool new] autorelease];
+    self.providerPool = [[SVProviderPool new] autorelease];
     
     return self;
 }

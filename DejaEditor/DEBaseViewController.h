@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProviderPool.h"
+#import "SVProviderPool.h"
 
 @interface DEBaseViewController : UIViewController
 

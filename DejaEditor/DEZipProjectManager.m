@@ -7,10 +7,10 @@
 //
 
 #import "DEZipProjectManager.h"
-#import "ZipHandler.h"
-#import "ZipHandlerFactory.h"
+#import "SVZipHandler.h"
+#import "SVZipHandlerFactory.h"
 #import "DEProject.h"
-#import "CommonUtils.h"
+#import "SVCommonUtils.h"
 #import "LuaScriptCompiler.h"
 
 NSString *kPackageFileExtenstion = @".pkg";
@@ -39,14 +39,14 @@ NSString *kPackageFileExtenstion = @".pkg";
 {
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *zipFilePath = [documentPath stringByAppendingPathComponent:zipProjectName];
-    id<ZipHandler> zipHandler = [ZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     [zipHandler unzipWithFilePath:zipFilePath toDirectoryPath:toDirectoryPath];
 }
 
 + (void)zipProject:(id<DEProject>)mainProject
 {
     BOOL zipLinkedProject = NO;
-    id<ZipHandler> zipHandler = [ZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     NSString *tmpPath = [NSString stringWithFormat:@"%@/tmp", NSHomeDirectory()];
     tmpPath = [tmpPath stringByAppendingPathComponent:@"__tmp"];
     if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]){
@@ -78,13 +78,13 @@ NSString *kPackageFileExtenstion = @".pkg";
     }
     
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
-    NSString *zipFilePath = [documentPath stringByAppendingPathComponent:[CommonUtils countableTempFileName:[NSString stringWithFormat:@"%@.zip", [mainProject name]] atDirectory:documentPath]];
+    NSString *zipFilePath = [documentPath stringByAppendingPathComponent:[SVCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@.zip", [mainProject name]] atDirectory:documentPath]];
     [zipHandler zipWithDirectoryPath:projectPath toFilePath:zipFilePath];
 }
 
 + (void)packageProject:(id<DEProject>)mainProject
 {
-    id<ZipHandler> zipHandler = [ZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     NSString *tmpPath = [NSString stringWithFormat:@"%@/tmp", NSHomeDirectory()];
     tmpPath = [tmpPath stringByAppendingPathComponent:@"__tmp"];
     if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]){
@@ -132,7 +132,7 @@ NSString *kPackageFileExtenstion = @".pkg";
     
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *zipFilePath = [documentPath stringByAppendingPathComponent:
-                             [CommonUtils countableTempFileName:[NSString stringWithFormat:@"%@%@", [mainProject name], kPackageFileExtenstion]
+                             [SVCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@%@", [mainProject name], kPackageFileExtenstion]
                                                     atDirectory:documentPath]];
     [zipHandler zipWithDirectoryPath:projectPath toFilePath:zipFilePath];
 }
@@ -141,7 +141,7 @@ NSString *kPackageFileExtenstion = @".pkg";
 {
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *fileName = [filePath lastPathComponent];
-    fileName = [CommonUtils countableTempFileName:fileName atDirectory:documentPath];
+    fileName = [SVCommonUtils countableTempFileName:fileName atDirectory:documentPath];
     [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:[documentPath stringByAppendingPathComponent:fileName] error:nil];
     return fileName;
 }

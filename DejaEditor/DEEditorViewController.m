@@ -14,7 +14,7 @@
 #import "DEMethodFinderFactory.h"
 #import "DETextInputCatcher.h"
 #import "LuaCommonUtils.h"
-#import "DelayControl.h"
+#import "SVDelayControl.h"
 #import "DEPretype.h"
 #import "NSString+Substring.h"
 #import "DEStringPosition.h"
@@ -50,7 +50,7 @@
 @property(nonatomic, retain)UITableView *pretypeSelectionListTableView;
 @property(nonatomic, retain)UIView *pretypeSelectionListTableViewShadowView;
 @property(nonatomic, retain)NSArray *pretypeSelectionList;
-@property(nonatomic, retain)DelayControl *delayControlForAnalyzer;
+@property(nonatomic, retain)SVDelayControl *delayControlForAnalyzer;
 @property(nonatomic, retain)UIToolbar *bottomToolbar;
 @property(nonatomic, retain)UIToolbar *topToolbar;
 @property(nonatomic, retain)UIBarButtonItem *showTopBarButton;
@@ -391,7 +391,7 @@
 - (void)startAnalyse
 {
     [self.methodFinder analyzeWithScriptName:self.scriptName script:self.textView.text project:self.project];
-    self.delayControlForAnalyzer = [[[DelayControl alloc] initWithInterval:5.0f completion:^{
+    self.delayControlForAnalyzer = [[[SVDelayControl alloc] initWithInterval:5.0f completion:^{
         [self startAnalyse];
     }] autorelease];
     [self.delayControlForAnalyzer start];
