@@ -7,7 +7,7 @@
 //
 
 #import "DEFileProject.h"
-#import "LuaCommonUtils.h"
+#import "SVLuaCommonUtils.h"
 #import "DEProjectManager.h"
 
 @interface DEFileProject ()
@@ -57,7 +57,7 @@
 - (BOOL)mainScriptExists
 {
     for(NSString *scriptName in [self scriptNameList]){
-        if([LuaCommonUtils scriptIsMainScript:[self scriptContentWithName:scriptName]]){
+        if([SVLuaCommonUtils scriptIsMainScript:[self scriptContentWithName:scriptName]]){
             return YES;
         }
     }

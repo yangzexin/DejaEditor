@@ -11,9 +11,9 @@
 #import "DEScriptAPIDocumentFactory.h"
 #import "DEPretype.h"
 #import "NSString+Substring.h"
-#import "LuaCommonUtils.h"
+#import "SVLuaCommonUtils.h"
 #import "DEProject.h"
-#import "ClassDefineReplaceChecker.h"
+#import "SVClassDefineReplaceChecker.h"
 #import "DEFunctionPosition.h"
 
 #define kMethodTypeInstanceMethod 0
@@ -238,7 +238,7 @@
                         methodType = kMethodTypeCommonFunction;
                     }
                 }
-                if([LuaCommonUtils isAlphbelts:funcName]){
+                if([SVLuaCommonUtils isAlphbelts:funcName]){
                     NSString *funcParamsWithBracket = [script substringWithBeginIndex:leftBracketLocation endIndex:endIndex + 1];
                     funcName = [NSString stringWithFormat:@"%@%@", funcName, funcParamsWithBracket];
                     DEFunctionPosition *tmpFP = [DEFunctionPosition createWithFunctionName:[script substringWithBeginIndex:beginIndex endIndex:endIndex + 1]
@@ -345,8 +345,8 @@
             NSString *paramText = [script substringWithBeginIndex:leftBracketLocation + 1 endIndex:endIndex];
             NSString *className = nil;
             NSString *baseClassName = nil;
-            if(leftInnerText.length == 0 && [ClassDefineReplaceChecker paramValid:paramText className:&className baseClassName:&baseClassName]){
-                if([LuaCommonUtils isAlphbelts:className]){
+            if(leftInnerText.length == 0 && [SVClassDefineReplaceChecker paramValid:paramText className:&className baseClassName:&baseClassName]){
+                if([SVLuaCommonUtils isAlphbelts:className]){
                     [nameList addObject:className];
                 }
             }else{
@@ -424,7 +424,7 @@
             if(assignPosition != -1){
                 NSString *innerText = [script substringWithBeginIndex:beginIndex + matching.length endIndex:assignPosition];
                 innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if(![LuaCommonUtils isAlphbelts:innerText]){
+                if(![SVLuaCommonUtils isAlphbelts:innerText]){
                     assignPosition = -1;
                 }
             }
@@ -432,7 +432,7 @@
             if(endPosition != -1){
                 NSString *innerText = [script substringWithBeginIndex:beginIndex + matching.length endIndex:endPosition];
                 innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if(![LuaCommonUtils isAlphbelts:innerText]){
+                if(![SVLuaCommonUtils isAlphbelts:innerText]){
                     endPosition = -1;
                 }
             }
@@ -446,7 +446,7 @@
             if(endIndex != -1){
                 NSString *varName = [script substringWithBeginIndex:beginIndex + 6 endIndex:endIndex];
                 varName = [varName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if([LuaCommonUtils isAlphbelts:varName] && ![tmpLocalVarNameList containsObject:varName]){
+                if([SVLuaCommonUtils isAlphbelts:varName] && ![tmpLocalVarNameList containsObject:varName]){
                     [tmpLocalVarNameList addObject:varName];
                 }else if([varName rangeOfString:@","].location != NSNotFound){
                     NSArray *varNameList = [varName componentsSeparatedByString:@","];
@@ -490,7 +490,7 @@
                     NSString *subVarName = [script substringWithBeginIndex:beginIndex + varName.length endIndex:endIndex];
                     subVarName = [subVarName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                     endIndex = beginIndex + varName.length;
-                    if([LuaCommonUtils isAlphbelts:subVarName] && ![tmpSubVarNameList containsObject:subVarName]){
+                    if([SVLuaCommonUtils isAlphbelts:subVarName] && ![tmpSubVarNameList containsObject:subVarName]){
                         [tmpSubVarNameList addObject:subVarName];
                     }
                 }else{

@@ -8,15 +8,15 @@
 
 #import "DEProjectViewController.h"
 #import "DEEditorViewController.h"
-#import "LuaApp.h"
-#import "LuaAppManager.h"
+#import "SVApp.h"
+#import "SVAppManager.h"
 #import "DEProjectBundle.h"
 #import "AlertDialog.h"
 #import "InputDialog.h"
 #import "LogView.h"
 #import "SVImagePicker.h"
 #import "DELinkProjectViewController.h"
-#import "LuaCommonUtils.h"
+#import "SVLuaCommonUtils.h"
 #import "LINavigationController.h"
 
 @interface DEProjectViewController ()
@@ -65,7 +65,7 @@
         NSString *mainScriptName = nil;
         for(NSString *fileName in [self.project scriptNameList]){
             NSString *script = [self.project scriptContentWithName:fileName];
-            if([LuaCommonUtils scriptIsMainScript:script]){
+            if([SVLuaCommonUtils scriptIsMainScript:script]){
                 mainScriptName = fileName;
                 break;
             }
@@ -186,12 +186,12 @@
         [nc setConsoleButtonTapBlock:^{
             [[LogView sharedInstance] setHidden:NO];
         }];
-        LuaApp *app = [[[LuaApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
+        SVApp *app = [[[SVApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
         [app setConsoleOutputBlock:^(NSString *output) {
             VLog(@"%@", output);
         }];
         [self presentViewController:nc animated:YES completion:nil];
-        [LuaAppManager runApp:app];
+        [SVAppManager runApp:app];
         [self.runningAppList addObject:app];
     }
 }
@@ -212,8 +212,8 @@
     }
     [self.navigationController setViewControllers:newViewControllers animated:animated];
     
-    for(LuaApp *app in self.runningAppList){
-        [LuaAppManager destoryAppWithAppId:[app.scriptBundle bundleId]];
+    for(SVApp *app in self.runningAppList){
+        [SVAppManager destoryAppWithAppId:[app.scriptBundle bundleId]];
         [[LogView sharedInstance] log:[NSString stringWithFormat:@"stop app:%@", [app.scriptBundle bundleId]]];
     }
     [self.runningAppList removeAllObjects];
@@ -371,7 +371,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     NSString *scriptName = [self.scriptNameList objectAtIndex:indexPath.row];
     NSString *script = [self.project scriptContentWithName:scriptName];
-    if([LuaCommonUtils scriptIsMainScript:script]){
+    if([SVLuaCommonUtils scriptIsMainScript:script]){
         [self.project setMainScriptName:scriptName];
         [self.tableView reloadData];
     }else{
@@ -421,13 +421,13 @@
                     [nc setStopButtonTapBlock:^{
                         [self stopAllRunningAppAnimated:NO];
                     }];
-                    LuaApp *app = [[[LuaApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
+                    SVApp *app = [[[SVApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
                     [app setConsoleOutputBlock:^(NSString *output) {
                         [[LogView sharedInstance] log:output];
                     }];
                     [self presentViewController:nc animated:YES completion:nil];
                     [self.runningAppList addObject:app];
-                    [LuaAppManager runApp:app params:resData];
+                    [SVAppManager runApp:app params:resData];
                 }
             } cancelButtonTitle:@"取消" otherButtonTitleList:projectNameList];
         }

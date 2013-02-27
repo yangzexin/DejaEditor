@@ -7,13 +7,13 @@
 //
 
 #import "DEEditorViewController.h"
-#import "LuaCommonUtils.h"
+#import "SVLuaCommonUtils.h"
 #import "AlertDialog.h"
 #import "DEAPIDocumentViewController.h"
 #import "DEMethodFinder.h"
 #import "DEMethodFinderFactory.h"
 #import "DETextInputCatcher.h"
-#import "LuaCommonUtils.h"
+#import "SVLuaCommonUtils.h"
 #import "SVDelayControl.h"
 #import "DEPretype.h"
 #import "NSString+Substring.h"
@@ -431,7 +431,7 @@
                                               range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastDotLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastDotLocation + 1, caretLocation - lastDotLocation - 1)];
-        if(![LuaCommonUtils isAlphbelts:innerText]){
+        if(![SVLuaCommonUtils isAlphbelts:innerText]){
             lastDotLocation = NSNotFound;
         }
     }
@@ -440,7 +440,7 @@
                                                 range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastColonLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastColonLocation + 1, caretLocation - lastColonLocation - 1)];
-        if(![LuaCommonUtils isAlphbelts:innerText]){
+        if(![SVLuaCommonUtils isAlphbelts:innerText]){
             lastColonLocation = NSNotFound;
         }
     }
@@ -585,7 +585,7 @@
 {   
     NSString *script = self.textView.text;
     NSString *scriptName = self.scriptName;
-    if(![LuaCommonUtils scriptIsMainScript:script]){
+    if(![SVLuaCommonUtils scriptIsMainScript:script]){
         scriptName = nil;
     }
     [self saveScript];
@@ -910,7 +910,7 @@
                                                         range:NSMakeRange(self.currentInvokeCaretLocation, text.length - self.currentInvokeCaretLocation)].location;
         if(rightBracketLocation != NSNotFound){
             NSString *innerText = [text substringWithRange:NSMakeRange(self.currentInvokeCaretLocation, rightBracketLocation - self.currentInvokeCaretLocation)];
-            if([LuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
+            if([SVLuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
                 rightBracketExists = YES;
             }
         }

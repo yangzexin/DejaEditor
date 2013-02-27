@@ -14,9 +14,9 @@
 #import "AlertDialog.h"
 #import "DEZipProjectManager.h"
 #import "Waiting.h"
-#import "LocalAppBundle.h"
-#import "LuaApp.h"
-#import "LuaAppManager.h"
+#import "SVLocalAppBundle.h"
+#import "SVApp.h"
+#import "SVAppManager.h"
 #import "LINavigationController.h"
 
 @interface DEProjectListViewController ()
@@ -130,7 +130,7 @@
     [self reloadProjectList];
     self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
     
-    [LuaAppManager destoryAllApps];
+    [SVAppManager destoryAllApps];
 }
 
 #pragma mark - private methods
@@ -331,15 +331,15 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [Waiting showWaiting:NO inView:self.view];
                     if(unzipedProjectPath){
-                        id<ScriptBundle> sb = [[[LocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
+                        id<SVScriptBundle> sb = [[[SVLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
                         LINavigationController *nc = [[LINavigationController new] autorelease];
                         [nc setStopButtonTapBlock:^{
                             [self dismissViewControllerAnimated:YES completion:nil];
-                            [LuaAppManager destoryAllApps];
+                            [SVAppManager destoryAllApps];
                         }];
                         [self presentViewController:nc animated:YES completion:nil];
-                        LuaApp *app = [[[LuaApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
-                        [LuaAppManager runApp:app];
+                        SVApp *app = [[[SVApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
+                        [SVAppManager runApp:app];
                     }else{
                         [AlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
                     }

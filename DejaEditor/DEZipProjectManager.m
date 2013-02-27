@@ -11,7 +11,7 @@
 #import "SVZipHandlerFactory.h"
 #import "DEProject.h"
 #import "SVCommonUtils.h"
-#import "LuaScriptCompiler.h"
+#import "SVLuaScriptCompiler.h"
 
 NSString *kPackageFileExtenstion = @".pkg";
 
@@ -108,7 +108,7 @@ NSString *kPackageFileExtenstion = @".pkg";
     NSMutableArray *projectList = [NSMutableArray arrayWithArray:[mainProject linkedProjectList]];
     [projectList addObject:mainProject];// add main project to last, as to override resource files
     
-    id<ScriptCompiler> scriptCompiler = [LuaScriptCompiler defaultScriptCompiler];
+    id<SVScriptCompiler> scriptCompiler = [SVLuaScriptCompiler defaultScriptCompiler];
     for(id<DEProject> tmpProject in projectList){
         for(NSString *resName in [tmpProject resourceNameList]){
             NSData *data = [tmpProject resourceDataWithName:resName];
