@@ -57,23 +57,15 @@
                                                                                style:UIBarButtonItemStyleBordered
                                                                               target:self
                                                                               action:@selector(editButtonTapped:)] autorelease];
-    self.archiveButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Archive", nil)
-                                                           style:UIBarButtonItemStyleBordered
-                                                          target:self
-                                                          action:@selector(archiveButtonTapped)] autorelease];
-    self.packageButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Package", nil)
-                                                           style:UIBarButtonItemStyleBordered
-                                                          target:self
-                                                          action:@selector(packageButtonTapped)] autorelease];
-    self.renameButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Rename", nil)
-                                                          style:UIBarButtonItemStyleBordered
-                                                         target:self
-                                                         action:@selector(renameButtonTapped)] autorelease];
+    self.archiveButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Archive", nil) target:self action:@selector(archiveButtonTapped)];
+    self.packageButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Package", nil) target:self action:@selector(packageButtonTapped)];
+    self.renameButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Rename", nil) target:self action:@selector(renameButtonTapped)];
     self.toolbarItems = @[self.archiveButton,
                           self.renameButton,
-                          [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+                          [UIFactory barButtonItemSystemItemFlexibleSpace],
                           self.packageButton,
-                          [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]];
+                          [UIFactory barButtonItemSystemItemFlexibleSpace]
+                          ];
 }
 
 - (void)viewDidLoad

@@ -103,34 +103,18 @@
 - (void)loadView
 {
     [super loadView];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil)
-                                                                               style:UIBarButtonItemStyleBordered
-                                                                              target:self
-                                                                              action:@selector(editButtonTapped:)] autorelease];
-    self.linkProjectButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Link Other Project", nil)
-                                                               style:UIBarButtonItemStyleBordered
-                                                              target:self
-                                                              action:@selector(linkButtonTapped)] autorelease];
-    self.setMainScriptButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Set as Main", nil)
-                                                                 style:UIBarButtonItemStyleBordered
-                                                                target:self
-                                                                action:@selector(setAsMainButtonTapped)] autorelease];
+    self.navigationItem.rightBarButtonItem = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Edit", nil) target:self action:@selector(editButtonTapped:)];
+    self.linkProjectButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Link Other Project", nil) target:self action:@selector(linkButtonTapped)];
+    self.setMainScriptButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Set as Main", nil) target:self action:@selector(setAsMainButtonTapped)];
     self.editToolbarItems = @[self.linkProjectButton,
                               self.setMainScriptButton,
-                              [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-                              [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                             target:self
-                                                                             action:@selector(addButtonTapped)] autorelease],
+                              [UIFactory barButtonItemSystemItemFlexibleSpace],
+                              [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)],
                               ];
     self.normalToolbarItems = @[
-                                [[[UIBarButtonItem alloc] initWithTitle:@"Console"
-                                                                  style:UIBarButtonItemStyleBordered
-                                                                 target:self
-                                                                 action:@selector(consoleButtonTapped)] autorelease],
-                                [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
-                                [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                                                                               target:self
-                                                                               action:@selector(runButtonTapped)] autorelease]
+                                [UIFactory borderedBarButtonItemWithTitle:@"Console" target:self action:@selector(consoleButtonTapped)],
+                                [UIFactory barButtonItemSystemItemFlexibleSpace],
+                                [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(runButtonTapped)]
                                 ];
     
     self.toolbarItems = self.normalToolbarItems;

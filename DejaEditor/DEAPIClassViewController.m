@@ -50,7 +50,7 @@
     tmpRect.size.width -= 60;
     self.searchBar.frame = tmpRect;
     
-    self.classNameLabel = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.classNameLabel = [UIFactory buttonWithType:UIButtonTypeRoundedRect];
     self.classNameLabel.frame = CGRectMake(5, 5, self.view.frame.size.width - 10, 50);
     [self.classNameLabel setTitle:self.className forState:UIControlStateNormal];
     self.classNameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;

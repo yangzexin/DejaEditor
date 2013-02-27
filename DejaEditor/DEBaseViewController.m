@@ -50,10 +50,9 @@
 {
     [super loadView];
     
-    self.titleLabel = [[[UILabel alloc] init] autorelease];
+    self.titleLabel = [UIFactory label];
     self.titleLabel.textAlignment = UITextAlignmentCenter;
     self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     self.titleLabel.text = _customTitle;
     self.titleLabel.layer.shadowRadius = 0.5f;

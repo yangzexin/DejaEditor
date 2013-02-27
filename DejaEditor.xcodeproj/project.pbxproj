@@ -62,6 +62,7 @@
 		3E6541CE16DCE35900368931 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C316DCE35900368931 /* QuartzCore.framework */; };
 		3E6541CF16DCE35900368931 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C416DCE35900368931 /* SystemConfiguration.framework */; };
 		3E6541D116DCE41200368931 /* BaseScripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541D016DCE41200368931 /* BaseScripts.bundle */; };
+		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,8 @@
 		3E6541C316DCE35900368931 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3E6541C416DCE35900368931 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E6541D016DCE41200368931 /* BaseScripts.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BaseScripts.bundle; path = ../../Savanna/Resources/BaseScripts.bundle; sourceTree = "<group>"; };
+		3E934B1E16DDD91600458E83 /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
+		3E934B1F16DDD91600458E83 /* UIFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +269,8 @@
 				3E65414B16DCE19600368931 /* LogView.m */,
 				3E65414816DCE19600368931 /* QRFindReplaceView.h */,
 				3E65414916DCE19600368931 /* QRFindReplaceView.m */,
+				3E934B1E16DDD91600458E83 /* UIFactory.h */,
+				3E934B1F16DDD91600458E83 /* UIFactory.m */,
 			);
 			name = UIComponents;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				3E65419B16DCE22800368931 /* DEAPIClassViewController.m in Sources */,
 				3E65419C16DCE22800368931 /* DEBaseSearchViewController.m in Sources */,
 				3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */,
+				3E934B2016DDD91600458E83 /* UIFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,21 +21,10 @@
 {
     [super loadView];
     
-    _searchBar = [UISearchBar new];
+    _searchBar = [[UIFactory searchBarWithTransparentBackground] retain];
     self.searchBar.frame = self.navigationController.navigationBar.frame;
-    self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.searchBar.delegate = self;
-    self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.searchBar.tintColor = [UIColor clearColor];
-    for(UIView *subview in [self.searchBar subviews]){
-        if([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]){
-            [subview removeFromSuperview];
-        }
-    }
     UITextField *textField = [self searchTextField];
-    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.returnKeyType = UIReturnKeyDone;
 }
 

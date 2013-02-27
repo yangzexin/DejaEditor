@@ -114,17 +114,16 @@
 {
     [super loadView];
     
-    self.textView = [[[UITextView alloc] initWithFrame:self.view.bounds] autorelease];
-    self.textView.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.textView = [UIFactory textView];
+    self.textView.frame = self.view.bounds;
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.textView.delegate = self;
     self.textView.backgroundColor = [UIColor clearColor];
     self.textView.font = [UIFont systemFontOfSize:16.0f];
-    self.textView.contentSize = CGSizeMake(2000, self.textView.frame.size.height);
     [self.view addSubview:self.textView];
     
-    self.topToolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, -44, self.view.frame.size.width, 44)] autorelease];
+    self.topToolbar = [UIFactory toolbar];
+    self.topToolbar.frame = CGRectMake(0, -44, self.view.frame.size.width, 44);
     self.topToolbar.barStyle = UIBarStyleBlack;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         self.topToolbar.barStyle = UIBarStyleDefault;
@@ -143,13 +142,15 @@
         self.textView.font = [UIFont systemFontOfSize:10.0f];
         keyboardToolsViewHeight *= 2;
     }
-    self.keyboardToolsView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, keyboardToolsViewHeight)] autorelease];
+    self.keyboardToolsView = [UIFactory view];
+    self.keyboardToolsView.frame = CGRectMake(0, 0, self.view.frame.size.width, keyboardToolsViewHeight);
     self.keyboardToolsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     self.keyboardToolsView.hidden = YES;
     self.keyboardToolsView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.keyboardToolsView];
     
-    UIToolbar *keyboardToolbar = [[[UIToolbar alloc] initWithFrame:self.keyboardToolsView.bounds] autorelease];
+    UIToolbar *keyboardToolbar = [UIFactory toolbar];
+    keyboardToolbar.frame = self.keyboardToolsView.bounds;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
         keyboardToolbar.frame = CGRectMake(0, 0, self.keyboardToolsView.frame.size.width, self.keyboardToolsView.frame.size.height / 2);
     }
@@ -157,60 +158,20 @@
     keyboardToolbar.barStyle = UIBarStyleBlackOpaque;
     [self.keyboardToolsView addSubview:keyboardToolbar];
     
-    UIBarButtonItem *tabBtn = [[[UIBarButtonItem alloc] initWithTitle:@"Tab"
-                                                                style:UIBarButtonItemStyleBordered
-                                                               target:self
-                                                               action:@selector(tabButtonTapped)] autorelease];
-    UIBarButtonItem *bracketBtn = [[[UIBarButtonItem alloc] initWithTitle:@" ( ) "
-                                                                    style:UIBarButtonItemStyleBordered
-                                                                   target:self
-                                                                   action:@selector(bracketButtonTapped)] autorelease];
-    UIBarButtonItem *bigBracketBtn = [[[UIBarButtonItem alloc] initWithTitle:@" { } "
-                                                                       style:UIBarButtonItemStyleBordered
-                                                                      target:self
-                                                                      action:@selector(bigBracketButtonTapped)] autorelease];
-    UIBarButtonItem *semicolonBtn = [[[UIBarButtonItem alloc] initWithTitle:@"  ;  "
-                                                                      style:UIBarButtonItemStyleBordered
-                                                                     target:self
-                                                                     action:@selector(semicolonButtonTapped)] autorelease];
-    UIBarButtonItem *assignBtn = [[[UIBarButtonItem alloc] initWithTitle:@"  =  "
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(assignButtonTapped)] autorelease];
-    UIBarButtonItem *negateBtn = [[[UIBarButtonItem alloc] initWithTitle:@" ~= "
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(negateButtonTapped)] autorelease];
-    UIBarButtonItem *quotesBtn = [[[UIBarButtonItem alloc] initWithTitle:@" \"\" "
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(quotesButtonTapped)] autorelease];
-    UIBarButtonItem *colonBtn = [[[UIBarButtonItem alloc] initWithTitle:@"  :  "
-                                                                  style:UIBarButtonItemStyleBordered
-                                                                 target:self
-                                                                 action:@selector(colonButtonTapped)] autorelease];
-    UIBarButtonItem *logBtn = [[[UIBarButtonItem alloc] initWithTitle:@"log"
-                                                                style:UIBarButtonItemStyleBordered
-                                                               target:self
-                                                               action:@selector(logButtonTapped)] autorelease];
-    UIBarButtonItem *pasteBtn = [[[UIBarButtonItem alloc] initWithTitle:@"Paste"
-                                                                  style:UIBarButtonItemStyleBordered
-                                                                 target:self
-                                                                 action:@selector(pasteButtonTapped)] autorelease];
-    UIBarButtonItem *delLineBtn = [[[UIBarButtonItem alloc] initWithTitle:@"Del"
-                                                                    style:UIBarButtonItemStyleBordered
-                                                                   target:self
-                                                                   action:@selector(deleteLineButtonTapped)] autorelease];
-    UIBarButtonItem *gotoLineBeginBtn = [[[UIBarButtonItem alloc] initWithTitle:@"<-"
-                                                                          style:UIBarButtonItemStyleBordered
-                                                                         target:self
-                                                                         action:@selector(gotoLineBeginButtonTapped)] autorelease];
-    UIBarButtonItem *gotoLineEndBtn = [[[UIBarButtonItem alloc] initWithTitle:@"->"
-                                                                          style:UIBarButtonItemStyleBordered
-                                                                         target:self
-                                                                         action:@selector(gotoLineEndButtonTapped)] autorelease];
-    UIBarButtonItem *closeKeyboardBtn = [[[UIBarButtonItem alloc]
-                                          initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeKeyboardButtonTapped)] autorelease];
+    UIBarButtonItem *tabBtn = [UIFactory borderedBarButtonItemWithTitle:@"Tab" target:self action:@selector(tabButtonTapped)];
+    UIBarButtonItem *bracketBtn = [UIFactory borderedBarButtonItemWithTitle:@" ( ) " target:self action:@selector(bracketButtonTapped)];
+    UIBarButtonItem *bigBracketBtn = [UIFactory borderedBarButtonItemWithTitle:@" { } " target:self action:@selector(bigBracketButtonTapped)];
+    UIBarButtonItem *semicolonBtn = [UIFactory borderedBarButtonItemWithTitle:@"  ;  " target:self action:@selector(semicolonButtonTapped)];
+    UIBarButtonItem *assignBtn = [UIFactory borderedBarButtonItemWithTitle:@"  =  " target:self action:@selector(assignButtonTapped)];
+    UIBarButtonItem *negateBtn = [UIFactory borderedBarButtonItemWithTitle:@" ~= " target:self action:@selector(negateButtonTapped)];
+    UIBarButtonItem *quotesBtn = [UIFactory borderedBarButtonItemWithTitle:@" \"\" " target:self action:@selector(quotesButtonTapped)];
+    UIBarButtonItem *colonBtn = [UIFactory borderedBarButtonItemWithTitle:@"  :  " target:self action:@selector(colonButtonTapped)];
+    UIBarButtonItem *logBtn = [UIFactory borderedBarButtonItemWithTitle:@"log" target:self action:@selector(logButtonTapped)];
+    UIBarButtonItem *pasteBtn = [UIFactory borderedBarButtonItemWithTitle:@"Paste" target:self action:@selector(pasteButtonTapped)];
+    UIBarButtonItem *delLineBtn = [UIFactory borderedBarButtonItemWithTitle:@"Del" target:self action:@selector(deleteLineButtonTapped)];
+    UIBarButtonItem *gotoLineBeginBtn = [UIFactory borderedBarButtonItemWithTitle:@"<-" target:self action:@selector(gotoLineBeginButtonTapped)];
+    UIBarButtonItem *gotoLineEndBtn = [UIFactory borderedBarButtonItemWithTitle:@"->" target:self action:@selector(gotoLineEndButtonTapped)];
+    UIBarButtonItem *closeKeyboardBtn = [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeKeyboardButtonTapped)];
     if(UIUserInterfaceIdiomPad == UI_USER_INTERFACE_IDIOM()){
         keyboardToolbar.items = @[tabBtn,
                           bracketBtn,
@@ -220,7 +181,7 @@
                           negateBtn,
                           colonBtn,
                           logBtn,
-                          [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+                          [UIFactory barButtonItemSystemItemFlexibleSpace],
                           pasteBtn,
                           delLineBtn, 
                           gotoLineBeginBtn,
@@ -234,50 +195,43 @@
                           quotesBtn,
                           assignBtn,
                           semicolonBtn,
-                          [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease],
+                          [UIFactory barButtonItemSystemItemFlexibleSpace],
                           closeKeyboardBtn
                           ];
-        UIToolbar *secToolbar = [[UIToolbar new] autorelease];
+        UIToolbar *secToolbar = [UIFactory toolbar];
         secToolbar.barStyle = keyboardToolbar.barStyle;
         secToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secToolbar.frame = CGRectMake(0, keyboardToolbar.frame.size.height, keyboardToolbar.frame.size.width, keyboardToolbar.frame.size.height);
-        UIBarButtonItem *dotBtn = [[[UIBarButtonItem alloc] initWithTitle:@"."
-                                                                    style:UIBarButtonItemStyleBordered
-                                                                   target:self
-                                                                   action:@selector(dotButtonTapped)] autorelease];
+        UIBarButtonItem *dotBtn = [UIFactory borderedBarButtonItemWithTitle:@"." target:self action:@selector(dotButtonTapped)];
         secToolbar.items = @[colonBtn, dotBtn, logBtn, pasteBtn, delLineBtn, gotoLineBeginBtn, gotoLineEndBtn];
         [self.keyboardToolsView addSubview:secToolbar];
     }
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
-                                               initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(runButtonTapped)] autorelease];
-    self.bottomToolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44)] autorelease];
+    self.navigationItem.rightBarButtonItem = [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(runButtonTapped)];
+    self.bottomToolbar = [UIFactory toolbar];
+    self.bottomToolbar.frame = CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44);
     self.bottomToolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.bottomToolbar];
     self.bottomToolbar.barStyle = self.navigationController.navigationBar.barStyle;
-    self.showTopBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Find & Replace", nil)
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self
-                                                             action:@selector(showTopBarButtonTapped)] autorelease];
-    self.showFunctionIndexButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Functions", nil)
-                                                                     style:UIBarButtonItemStyleBordered
-                                                                    target:self
-                                                                    action:@selector(showFunctionIndexButtonTapped)] autorelease];
-    self.bottomToolbar.items = @[[[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Console", nil)
-                                                                   style:UIBarButtonItemStyleBordered
+    self.showTopBarButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Find & Replace", nil)
+                                                               target:self
+                                                               action:@selector(showTopBarButtonTapped)];
+    self.showFunctionIndexButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Functions", nil)
+                                                                      target:self
+                                                                      action:@selector(showFunctionIndexButtonTapped)];
+    self.bottomToolbar.items = @[[UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Console", nil)
                                                                   target:self
-                                                                  action:@selector(consoleButtonTapped)] autorelease],
+                                                                  action:@selector(consoleButtonTapped)],
                                  self.showTopBarButton,
+                                 [UIFactory barButtonItemSystemItemFlexibleSpace],
                                  self.showFunctionIndexButton,
-                                 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                target:nil
-                                                                                action:nil] autorelease],
-                                 [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+                                 [UIFactory barButtonItemSystemItemFlexibleSpace],
+                                 [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemBookmarks
                                                                                 target:self
-                                                                                action:@selector(viewAPIButtonTapped:)] autorelease]];
+                                                                                action:@selector(viewAPIButtonTapped:)]];
     self.textView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.bounds.size.height - 44);
     
-    self.pretypeSelectionListTableView = [[UITableView new] autorelease];
+    self.pretypeSelectionListTableView = [UIFactory tableView];
     self.pretypeSelectionListTableView.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width / 2, 180);
     self.pretypeSelectionListTableView.delegate = self;
     self.pretypeSelectionListTableView.dataSource = self;
@@ -298,7 +252,7 @@
     [self.view addSubview:self.pretypeSelectionListTableView];
     [self setPretypeSelectionListTableViewHidden:YES];
     
-    self.functionPositionListTableView = [[UITableView new] autorelease];
+    self.functionPositionListTableView = [UIFactory tableView];
     self.functionPositionListTableView.frame = CGRectMake(0,
                                                           0,
                                                           self.view.frame.size.width / 2,
