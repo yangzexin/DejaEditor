@@ -8,7 +8,7 @@
 
 #import "DELinkProjectViewController.h"
 #import "DEProjectManager.h"
-#import "AlertDialog.h"
+#import "SVAlertDialog.h"
 
 @interface DELinkProjectViewController ()
 
@@ -83,7 +83,7 @@
 - (void)removeButtonTapped:(UIButton *)removeButton
 {
     NSInteger index = removeButton.tag;
-    [AlertDialog showWithTitle:@"确定要解除该项目吗?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [SVAlertDialog showWithTitle:@"确定要解除该项目吗?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if(buttonIndex == 1){
             if(self.removeProjectBlock){
                 self.removeProjectBlock([self.linkedProjectNameList objectAtIndex:index], index);

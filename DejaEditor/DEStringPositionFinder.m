@@ -7,7 +7,7 @@
 //
 
 #import "DEStringPositionFinder.h"
-#import "NSString+Substring.h"
+#import "NSString+JavaLikeStringHandle.h"
 #import "DEStringPosition.h"
 
 @interface StringPositionFinder ()

@@ -8,7 +8,7 @@
 
 #import "DESourceAPIDocument.h"
 #import "SVFileUtils.h"
-#import "NSString+Substring.h"
+#import "NSString+JavaLikeStringHandle.h"
 
 @interface DESourceAPIDocument ()
 

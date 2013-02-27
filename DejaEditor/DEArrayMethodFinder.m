@@ -10,7 +10,7 @@
 #import "DEScriptAPIDocument.h"
 #import "DEScriptAPIDocumentFactory.h"
 #import "DEPretype.h"
-#import "NSString+Substring.h"
+#import "NSString+JavaLikeStringHandle.h"
 #import "SVLuaCommonUtils.h"
 #import "DEProject.h"
 #import "SVClassDefineReplaceChecker.h"

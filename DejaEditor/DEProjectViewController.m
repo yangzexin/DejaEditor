@@ -11,8 +11,8 @@
 #import "SVApp.h"
 #import "SVAppManager.h"
 #import "DEProjectBundle.h"
-#import "AlertDialog.h"
-#import "InputDialog.h"
+#import "SVAlertDialog.h"
+#import "SVInputDialog.h"
 #import "LogView.h"
 #import "SVImagePicker.h"
 #import "DELinkProjectViewController.h"
@@ -165,7 +165,7 @@
     DEProjectBundle *bundle = [[[DEProjectBundle alloc] initWithProject:self.project] autorelease];
     bundle.mainScriptName = mainScriptName;
     if([bundle mainScript].length == 0){
-        [AlertDialog showWithTitle:@"没有找到程序入口函数main，是否创建?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        [SVAlertDialog showWithTitle:@"没有找到程序入口函数main，是否创建?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
             if(buttonIndex == 1){
                 NSMutableArray *viewControllers = [NSMutableArray array];
                 for(UIViewController *viewController in self.navigationController.viewControllers){
@@ -221,10 +221,10 @@
 
 - (void)createScript
 {
-    [InputDialog showWithTitle:@"输入脚本名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [SVInputDialog showWithTitle:@"输入脚本名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0){
             if([self.project scriptExistsWithName:input]){
-                [AlertDialog showWithTitle:nil message:@"文件已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [SVAlertDialog showWithTitle:nil message:@"文件已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
             }else{
                 [self createScriptWithName:input];
             }
@@ -248,7 +248,7 @@
 
 - (void)addImageToProject:(UIImage *)image
 {
-    [InputDialog showWithTitle:@"添加图片" message:@"请输入图片名" cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [SVInputDialog showWithTitle:@"添加图片" message:@"请输入图片名" cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0){
             if(![[input lowercaseString] hasSuffix:@".png"]){
                 input = [NSString stringWithFormat:@"%@.png", input];
@@ -256,7 +256,7 @@
             NSData *imgData = UIImagePNGRepresentation(image);
             
             if([self.project resourceDataExistsWithName:input]){
-                [AlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"文件%@已存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"文件%@已存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                     if(buttonIndex == 1){
                         [self saveImageWithName:input data:imgData];
                     }else if(buttonIndex == 2){
@@ -315,7 +315,7 @@
 
 - (void)addButtonTapped
 {
-    [AlertDialog showWithTitle:@"新建文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [SVAlertDialog showWithTitle:@"新建文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if(buttonIndex == 1){
             [self createScript];
         }else if(buttonIndex == 2){
@@ -348,7 +348,7 @@
             [self.project setLinkedProjectNameList:newLinkProjectNameList];
             [self.project sychronizeProjectConfiguration];
         }else{
-            [AlertDialog showWithTitle:@"链接项目失败，该项目已经链接" message:nil completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+            [SVAlertDialog showWithTitle:@"链接项目失败，该项目已经链接" message:nil completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
         }
     }];
     [selectProjectVC setRemoveProjectBlock:^(NSString *projectName, NSInteger index) {
@@ -375,7 +375,7 @@
         [self.project setMainScriptName:scriptName];
         [self.tableView reloadData];
     }else{
-        [AlertDialog showWithTitle:NSLocalizedString(@"error", nil)
+        [SVAlertDialog showWithTitle:NSLocalizedString(@"error", nil)
                            message:[NSString stringWithFormat:@"Cannot find main function in script:%@", scriptName]
                         completion:nil
                  cancelButtonTitle:@"确定"
@@ -412,7 +412,7 @@
             NSString *resName = [self.resourceNameList objectAtIndex:indexPath.row];
             NSData *resData = [self.project resourceDataWithName:resName];
             NSArray *projectNameList = [self.projectManager projectNameList];
-            [AlertDialog showWithTitle:@"选择已有项目打开文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [SVAlertDialog showWithTitle:@"选择已有项目打开文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex != 0){
                     [[LogView sharedInstance] clear];
                     id<DEProject> selectedProject = [self.projectManager projectWithName:[projectNameList objectAtIndex:buttonIndex - 1]];
@@ -466,7 +466,7 @@
 {
     if(editingStyle == UITableViewCellEditingStyleDelete){
         NSString *fileName = indexPath.section == 0 ? [self.scriptNameList objectAtIndex:indexPath.row] : [self.resourceNameList objectAtIndex:indexPath.row];
-        [AlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"删除%@?", fileName] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"删除%@?", fileName] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
             if(buttonIndex == 1){
                 if(indexPath.section == 0){
                     [self.project removeScriptWithName:fileName];

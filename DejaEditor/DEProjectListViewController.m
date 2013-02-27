@@ -9,11 +9,11 @@
 #import "DEProjectListViewController.h"
 #import "DEProjectManager.h"
 #import "DEProjectManagerFactory.h"
-#import "InputDialog.h"
+#import "SVInputDialog.h"
 #import "DEProjectViewController.h"
-#import "AlertDialog.h"
+#import "SVAlertDialog.h"
 #import "DEZipProjectManager.h"
-#import "Waiting.h"
+#import "SVWaiting.h"
 #import "SVLocalAppBundle.h"
 #import "SVApp.h"
 #import "SVAppManager.h"
@@ -87,7 +87,7 @@
                                                object:nil];
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"projectImported"] == nil){
-        [Waiting showWaiting:YES inView:self.view];
+        [SVWaiting showWaiting:YES inView:self.view];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray *demoProjectNameList = @[@"ImageViewer.zip", @"Queries.zip", @"TextViewer.zip", @"WebBrowser.zip", @"commlib.zip"];
             for(NSString *demoProjectName in demoProjectNameList){
@@ -113,8 +113,8 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self reloadProjectList];
-                [Waiting showWaiting:NO inView:self.view];
-                [AlertDialog showWithTitle:@""
+                [SVWaiting showWaiting:NO inView:self.view];
+                [SVAlertDialog showWithTitle:@""
                                    message:@"zip包为源代码包，pkg包为可以直接点击运行的程序"
                                 completion:nil
                          cancelButtonTitle:@"我知道了"
@@ -200,10 +200,10 @@
 #pragma mark - events
 - (void)addNewProjectButtonTapped
 {
-    [InputDialog showWithTitle:@"请输入项目的名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [SVInputDialog showWithTitle:@"请输入项目的名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0 && [self validateProjectName:input]){
             if([self.projectManager projectExistsWithName:input]){
-                [AlertDialog showWithTitle:@"" message:@"项目已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [SVAlertDialog showWithTitle:@"" message:@"项目已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 return;
             }
             [self.projectManager projectWithName:input];
@@ -241,7 +241,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if(indexPath.section == 0){
         NSString *projectName = [self.projectList objectAtIndex:indexPath.row];
-        [InputDialog showWithTitle:@"请输入新名称" message:nil initText:projectName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+        [SVInputDialog showWithTitle:@"请输入新名称" message:nil initText:projectName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
             if(input.length != 0 && [self validateProjectName:input]){
                 [self.projectManager renameProjectWithName:projectName newName:input];
                 [self reloadProjectList];
@@ -304,7 +304,7 @@
         NSString *zipProjectName = [self.projectArchiveList objectAtIndex:indexPath.row];
         NSString *lowerZipProjectName = [zipProjectName lowercaseString];
         if([lowerZipProjectName hasSuffix:@".zip"]){
-            [AlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"是否要解压项目%@", zipProjectName]
+            [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"是否要解压项目%@", zipProjectName]
                             completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
@@ -313,23 +313,23 @@
                         if(success){
                             [self reloadProjectList];
                         }else{
-                            [AlertDialog showWithTitle:nil
+                            [SVAlertDialog showWithTitle:nil
                                                message:[NSString stringWithFormat:@"项目%@已经存在", zipProjectName]
                                             completion:nil
                                      cancelButtonTitle:@"确定"
                                   otherButtonTitleList:nil];
                         }
                     }else{
-                        [AlertDialog showWithTitle:nil message:@"解压失败，不是有效的项目文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+                        [SVAlertDialog showWithTitle:nil message:@"解压失败，不是有效的项目文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
                     }
                 }
             } cancelButtonTitle:@"取消" otherButtonTitles:@"解压", nil];
         }else if([lowerZipProjectName hasSuffix:kPackageFileExtenstion]){
-            [Waiting showWaiting:YES inView:self.view];
+            [SVWaiting showWaiting:YES inView:self.view];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [Waiting showWaiting:NO inView:self.view];
+                    [SVWaiting showWaiting:NO inView:self.view];
                     if(unzipedProjectPath){
                         id<SVScriptBundle> sb = [[[SVLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
                         LINavigationController *nc = [[LINavigationController new] autorelease];
@@ -341,7 +341,7 @@
                         SVApp *app = [[[SVApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
                         [SVAppManager runApp:app];
                     }else{
-                        [AlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+                        [SVAlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
                     }
                 });
             });
@@ -367,7 +367,7 @@
     if(editingStyle == UITableViewCellEditingStyleDelete){
         if(indexPath.section == 0){
             NSString *projectName = [self.projectList objectAtIndex:indexPath.row];
-            [AlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", projectName] message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [SVAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", projectName] message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [self.projectManager removeProjectWithName:projectName];
                     self.projectList = [self.projectManager projectNameList];
@@ -378,7 +378,7 @@
             } cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         }else if(indexPath.section == 1){
             NSString *zipProjectName = [self.projectArchiveList objectAtIndex:indexPath.row];
-            [AlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", zipProjectName]  message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [SVAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", zipProjectName]  message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [DEZipProjectManager removeZipProjecWithName:zipProjectName];
                     self.projectArchiveList = [DEZipProjectManager zipProjectNameList];

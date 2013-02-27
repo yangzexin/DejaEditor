@@ -8,7 +8,7 @@
 
 #import "DEEditorViewController.h"
 #import "SVLuaCommonUtils.h"
-#import "AlertDialog.h"
+#import "SVAlertDialog.h"
 #import "DEAPIDocumentViewController.h"
 #import "DEMethodFinder.h"
 #import "DEMethodFinderFactory.h"
@@ -16,10 +16,10 @@
 #import "SVLuaCommonUtils.h"
 #import "SVDelayControl.h"
 #import "DEPretype.h"
-#import "NSString+Substring.h"
+#import "NSString+JavaLikeStringHandle.h"
 #import "DEStringPosition.h"
 #import "LogView.h"
-#import "UITools.h"
+#import "SVUITools.h"
 #import "DEFunctionPosition.h"
 #import <QuartzCore/QuartzCore.h>
 #import "QRFindReplaceView.h"
