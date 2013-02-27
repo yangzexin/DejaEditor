@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ProjectListViewController.h"
+#import "DEProjectListViewController.h"
 
 @implementation AppDelegate
 
@@ -24,7 +24,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    ProjectListViewController *projectListVC = [[ProjectListViewController new] autorelease];
+    DEProjectListViewController *projectListVC = [[DEProjectListViewController new] autorelease];
     self.window.rootViewController = [[[UINavigationController alloc] initWithRootViewController:projectListVC] autorelease];
     
     return YES;
