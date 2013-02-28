@@ -1041,6 +1041,11 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [scrollView setNeedsDisplay];
+}
+
 #pragma mark - QRFindReplaceViewDelegate
 - (void)findText:(NSString *)text findReplaceView:(QRFindReplaceView *)view
 {

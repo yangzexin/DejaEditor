@@ -71,6 +71,8 @@
 + (UITextView *)textView
 {
     UITextView *textView = [[UITextView new] autorelease];
+    textView.autocorrectionType = UITextAutocorrectionTypeNo;
+    textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     return textView;
 }
