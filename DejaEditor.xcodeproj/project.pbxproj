@@ -297,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				3E65415016DCE1B200368931 /* Project */,
-				3E65414F16DCE1AB00368931 /* Project Bundle */,
 				3E65415216DCE1C000368931 /* Script API Document */,
 				3E65415316DCE1C600368931 /* String Handle */,
 				3E65415116DCE1B800368931 /* Zip Project Manager */,
@@ -305,18 +304,11 @@
 			name = SubModules;
 			sourceTree = "<group>";
 		};
-		3E65414F16DCE1AB00368931 /* Project Bundle */ = {
+		3E65415016DCE1B200368931 /* Project */ = {
 			isa = PBXGroup;
 			children = (
 				3E65417F16DCE20600368931 /* DEProjectBundle.h */,
 				3E65418016DCE20600368931 /* DEProjectBundle.m */,
-			);
-			name = "Project Bundle";
-			sourceTree = "<group>";
-		};
-		3E65415016DCE1B200368931 /* Project */ = {
-			isa = PBXGroup;
-			children = (
 				3E65417216DCE1F900368931 /* DEFileProject.h */,
 				3E65417316DCE1F900368931 /* DEFileProject.m */,
 				3E65417416DCE1F900368931 /* DEFileProjectManager.h */,
