@@ -438,7 +438,7 @@
                     NSArray *varNameList = [varName componentsSeparatedByString:@","];
                     for(NSString *tmpVarName in varNameList){
                         tmpVarName = [tmpVarName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                        if(![tmpLocalVarNameList containsObject:tmpVarName]){
+                        if([SVLuaCommonUtils isAlphbelts:tmpVarName] && ![tmpLocalVarNameList containsObject:tmpVarName]){
                             [tmpLocalVarNameList addObject:tmpVarName];
                         }
                     }
