@@ -369,7 +369,7 @@
     if(caretLocation == 0){
         return kMethodInvokeViaNone;
     }
-    NSArray *blockLeftEdgeList = @[@" ", @"\"", @",", @"(", @";", @"\t", @"\n"];
+    NSArray *blockLeftEdgeList = @[@" ", @"=", @"\"", @",", @"(", @";", @"\t", @"\n"];
 //    NSUInteger *edgePositionList = malloc(blockLeftEdgeList.count * sizeof(NSUInteger));
     NSInteger maxPosition = 0;
     NSInteger maxPositionIndex = 0;

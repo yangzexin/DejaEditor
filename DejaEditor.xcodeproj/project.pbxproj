@@ -297,9 +297,9 @@
 			isa = PBXGroup;
 			children = (
 				3E65415016DCE1B200368931 /* Project */,
-				3E65415216DCE1C000368931 /* Script API Document */,
+				3E65415216DCE1C000368931 /* Script APIDocument */,
 				3E65415316DCE1C600368931 /* String Handle */,
-				3E65415116DCE1B800368931 /* Zip Project Manager */,
+				3E65415116DCE1B800368931 /* ZipProject Manager */,
 			);
 			name = SubModules;
 			sourceTree = "<group>";
@@ -322,16 +322,16 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
-		3E65415116DCE1B800368931 /* Zip Project Manager */ = {
+		3E65415116DCE1B800368931 /* ZipProject Manager */ = {
 			isa = PBXGroup;
 			children = (
 				3E65416F16DCE1F000368931 /* DEZipProjectManager.h */,
 				3E65417016DCE1F000368931 /* DEZipProjectManager.m */,
 			);
-			name = "Zip Project Manager";
+			name = "ZipProject Manager";
 			sourceTree = "<group>";
 		};
-		3E65415216DCE1C000368931 /* Script API Document */ = {
+		3E65415216DCE1C000368931 /* Script APIDocument */ = {
 			isa = PBXGroup;
 			children = (
 				3E65416816DCE1E400368931 /* DEScriptAPIDocument.h */,
@@ -340,7 +340,7 @@
 				3E65416B16DCE1E400368931 /* DESourceAPIDocument.h */,
 				3E65416C16DCE1E400368931 /* DESourceAPIDocument.m */,
 			);
-			name = "Script API Document";
+			name = "Script APIDocument";
 			sourceTree = "<group>";
 		};
 		3E65415316DCE1C600368931 /* String Handle */ = {

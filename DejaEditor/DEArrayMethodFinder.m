@@ -87,9 +87,9 @@
                               [DEPretype createWithText:@"false"],
                               [DEPretype createWithText:@"return ;"],
                               [DEPretype createWithText:@"tonumber(str)"],
-                              [DEPretype createWithText:@"runtime::invokeMethod(objId, methodName, --[[params]]...)"],
-                              [DEPretype createWithText:@"runtime::invokeClassMethod(className, methodName, --[[params]]...)"],
-                              [DEPretype createWithText:@"string::invokeMethod(objId, methodName, --[[params]]...)"],
+                              [DEPretype createWithText:@"runtime::invokeMethod(objId, methodName, ...--[[params]])"],
+                              [DEPretype createWithText:@"runtime::invokeClassMethod(className, methodName, ...--[[params]])"],
+                              [DEPretype createWithText:@"string::invokeMethod(objId, methodName, ...--[[params]])"],
                               [DEPretype createWithText:@"class(class, baseClass--[[option]])" additionalText:@"define new class"],
                               [DEPretype createWithText:@"toCStruct(...)"]
                               ]];
