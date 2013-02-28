@@ -62,6 +62,7 @@
 @property(nonatomic, retain)StringPositionFinder *stringPositionFinder;
 @property(nonatomic, retain)DETextInputCatcher *findTextInputCatcher;
 @property(nonatomic, retain)NSString *lastReplacedText;
+@property(nonatomic, retain)UIBarButtonItem *lineNumberLabel;
 
 @end
 
@@ -96,6 +97,7 @@
     self.findReplaceView = nil;
     self.stringPositionFinder = nil;
     self.findTextInputCatcher = nil;
+    self.lineNumberLabel = nil;
     [super dealloc];
 }
 
@@ -172,6 +174,7 @@
     UIBarButtonItem *gotoLineBeginBtn = [UIFactory borderedBarButtonItemWithTitle:@"<-" target:self action:@selector(gotoLineBeginButtonTapped)];
     UIBarButtonItem *gotoLineEndBtn = [UIFactory borderedBarButtonItemWithTitle:@"->" target:self action:@selector(gotoLineEndButtonTapped)];
     UIBarButtonItem *closeKeyboardBtn = [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeKeyboardButtonTapped)];
+    self.lineNumberLabel = [UIFactory barButtonItemWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     if(UIUserInterfaceIdiomPad == UI_USER_INTERFACE_IDIOM()){
         keyboardToolbar.items = @[tabBtn,
                           bracketBtn,
@@ -181,6 +184,8 @@
                           negateBtn,
                           colonBtn,
                           logBtn,
+                          [UIFactory barButtonItemSystemItemFlexibleSpace],
+                          self.lineNumberLabel,
                           [UIFactory barButtonItemSystemItemFlexibleSpace],
                           pasteBtn,
                           delLineBtn, 
@@ -960,11 +965,31 @@
 }
 
 #pragma mark - UITextViewDelegate
+- (NSInteger)lineNumber
+{
+    NSString *subText = [self.textView.text substringToIndex:self.textView.selectedRange.location];
+    NSInteger beginIndex = 0;
+    NSInteger endIndex = 0;
+    NSInteger count = 1;
+    while((beginIndex = [subText find:@"\n" fromIndex:endIndex]) != -1){
+        endIndex = beginIndex + 1;
+        ++count;
+    }
+    
+    return count;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+}
+
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
     if(self.pretypeSelectionList.count != 0){
         [self setPretypeSelectionListTableViewHidden:self.textView.selectedRange.location != self.currentInvokeCaretLocation];
     }
+    self.lineNumberLabel.title = [NSString stringWithFormat:@"%d", [self lineNumber]];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
