@@ -7,6 +7,7 @@
 //
 
 #import "LogView.h"
+#import "SVCommonUtils.h"
 
 @interface LogView ()
 
@@ -59,7 +60,7 @@
     self.textView.backgroundColor = [UIColor clearColor];  
     self.textView.textColor = [UIColor whiteColor];
     self.textView.userInteractionEnabled = YES;
-    self.textView.text = @"";
+    self.textView.text = [self lastLog];
     [self.textView addGestureRecognizer:[[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(textViewTapped)] autorelease]];
     return self;
 }
@@ -70,9 +71,22 @@
     [super dealloc];
 }
 
+- (void)saveToLastLog:(NSString *)log
+{
+    NSString *filePath = [[SVCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
+    [log writeToFile:filePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (NSString *)lastLog
+{
+    NSString *filePath = [[SVCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
+    return [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+}
+
 - (void)log:(NSString *)log
 {
     NSLog(@"%@", log);
+    [self saveToLastLog:log];
     if(self.textView.text.length == 0){
         self.textView.text = [NSString stringWithFormat:@"%@\n", log];
     }else{
