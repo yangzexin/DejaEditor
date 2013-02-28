@@ -247,6 +247,7 @@
     self.pretypeSelectionListTableViewShadowView.layer.shadowOpacity = 1.0f;
     self.pretypeSelectionListTableViewShadowView.layer.shadowRadius = 5.0f;
     self.pretypeSelectionListTableViewShadowView.layer.shadowOffset = CGSizeMake(-1, 1.0f);
+    self.pretypeSelectionListTableViewShadowView.layer.shouldRasterize = YES;
     self.pretypeSelectionListTableViewShadowView.frame = self.pretypeSelectionListTableView.frame;
     [self.view addSubview:self.pretypeSelectionListTableViewShadowView];
     [self.view addSubview:self.pretypeSelectionListTableView];
@@ -275,6 +276,7 @@
     self.functionPositionListTableViewShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.functionPositionListTableViewShadowView.layer.shadowOpacity = 1.0f;
     self.functionPositionListTableViewShadowView.layer.shadowRadius = 5.0f;
+    self.functionPositionListTableViewShadowView.layer.shouldRasterize = YES;
     [self.view addSubview:self.functionPositionListTableViewShadowView];
     [self.view addSubview:self.functionPositionListTableView];
     [self setFunctionPositionListTableViewHidden:YES];
@@ -946,7 +948,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if(!cell){
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
-            cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0f];
             cell.textLabel.numberOfLines = 0;
         }
         DEFunctionPosition *fp = [self.functionPositionList objectAtIndex:indexPath.row];

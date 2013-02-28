@@ -20,6 +20,7 @@
 + (UITableView *)tableViewWithStyle:(UITableViewStyle)style
 {
     UITableView *tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:style] autorelease];
+    tableView.rowHeight = 60.0f;
     return tableView;
 }
 
