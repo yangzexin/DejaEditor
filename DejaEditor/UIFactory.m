@@ -8,6 +8,7 @@
 
 #import "UIFactory.h"
 #import "UIWebViewAdditions.h"
+#import "CUITextViewHighlighting.h"
 
 @implementation UIFactory
 
@@ -73,6 +74,7 @@
     UITextView *textView = [[UITextView new] autorelease];
     textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+//    [textView setDraw:YES];
     
     return textView;
 }

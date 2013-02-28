@@ -35,9 +35,6 @@
 
 - (NSString *)bundleId
 {
-//    if(_mainScriptName.length != 0){
-//        return [NSString stringWithFormat:@"%@_%@", [self.project name],  _mainScriptName];
-//    }
     return [self.project name];
 }
 

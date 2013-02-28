@@ -1018,6 +1018,8 @@
 {
     [self.textInputCatcher mark];
     
+//    [self.textView resetAttributedText];
+    
     NSUInteger caretLocation = textView.selectedRange.location;
     NSString *text = textView.text;
     if(self.textViewLastAction == kTextViewActionInsert && caretLocation != 0){
@@ -1043,7 +1045,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [scrollView setNeedsDisplay];
+//    [scrollView setNeedsDisplay];
 }
 
 #pragma mark - QRFindReplaceViewDelegate

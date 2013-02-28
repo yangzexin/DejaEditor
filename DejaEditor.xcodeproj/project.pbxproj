@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
+		3E262FA216DEF4D50037AA98 /* CUITextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262F9F16DEF4D50037AA98 /* CUITextView.m */; };
+		3E262FA316DEF4D50037AA98 /* CUITextViewHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
 		3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412A16DCE0E900368931 /* CoreGraphics.framework */; };
@@ -81,6 +83,10 @@
 		3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
 		3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3E262F9E16DEF4D50037AA98 /* CUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextView.h; sourceTree = "<group>"; };
+		3E262F9F16DEF4D50037AA98 /* CUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextView.m; sourceTree = "<group>"; };
+		3E262FA016DEF4D50037AA98 /* CUITextViewHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextViewHighlighting.h; sourceTree = "<group>"; };
+		3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextViewHighlighting.m; sourceTree = "<group>"; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E65412816DCE0E900368931 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -234,7 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				3E65414316DCE10100368931 /* Utils */,
-				3E65414716DCE18E00368931 /* UIComponents */,
+				3E65414716DCE18E00368931 /* UI Components */,
 				3E65414E16DCE1A100368931 /* SubModules */,
 				3E65418216DCE21B00368931 /* ViewControllers */,
 				3E65419E16DCE23700368931 /* Resources */,
@@ -268,9 +274,13 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		3E65414716DCE18E00368931 /* UIComponents */ = {
+		3E65414716DCE18E00368931 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				3E262F9E16DEF4D50037AA98 /* CUITextView.h */,
+				3E262F9F16DEF4D50037AA98 /* CUITextView.m */,
+				3E262FA016DEF4D50037AA98 /* CUITextViewHighlighting.h */,
+				3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */,
 				3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */,
 				3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */,
 				3E65414A16DCE19600368931 /* LogView.h */,
@@ -280,28 +290,28 @@
 				3E934B1E16DDD91600458E83 /* UIFactory.h */,
 				3E934B1F16DDD91600458E83 /* UIFactory.m */,
 			);
-			name = UIComponents;
+			name = "UI Components";
 			sourceTree = "<group>";
 		};
 		3E65414E16DCE1A100368931 /* SubModules */ = {
 			isa = PBXGroup;
 			children = (
 				3E65415016DCE1B200368931 /* Project */,
-				3E65414F16DCE1AB00368931 /* ProjectBundle */,
-				3E65415216DCE1C000368931 /* ScriptAPIDocument */,
-				3E65415316DCE1C600368931 /* StringHandle */,
-				3E65415116DCE1B800368931 /* ZipProjectManager */,
+				3E65414F16DCE1AB00368931 /* Project Bundle */,
+				3E65415216DCE1C000368931 /* Script API Document */,
+				3E65415316DCE1C600368931 /* String Handle */,
+				3E65415116DCE1B800368931 /* Zip Project Manager */,
 			);
 			name = SubModules;
 			sourceTree = "<group>";
 		};
-		3E65414F16DCE1AB00368931 /* ProjectBundle */ = {
+		3E65414F16DCE1AB00368931 /* Project Bundle */ = {
 			isa = PBXGroup;
 			children = (
 				3E65417F16DCE20600368931 /* DEProjectBundle.h */,
 				3E65418016DCE20600368931 /* DEProjectBundle.m */,
 			);
-			name = ProjectBundle;
+			name = "Project Bundle";
 			sourceTree = "<group>";
 		};
 		3E65415016DCE1B200368931 /* Project */ = {
@@ -320,16 +330,16 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
-		3E65415116DCE1B800368931 /* ZipProjectManager */ = {
+		3E65415116DCE1B800368931 /* Zip Project Manager */ = {
 			isa = PBXGroup;
 			children = (
 				3E65416F16DCE1F000368931 /* DEZipProjectManager.h */,
 				3E65417016DCE1F000368931 /* DEZipProjectManager.m */,
 			);
-			name = ZipProjectManager;
+			name = "Zip Project Manager";
 			sourceTree = "<group>";
 		};
-		3E65415216DCE1C000368931 /* ScriptAPIDocument */ = {
+		3E65415216DCE1C000368931 /* Script API Document */ = {
 			isa = PBXGroup;
 			children = (
 				3E65416816DCE1E400368931 /* DEScriptAPIDocument.h */,
@@ -338,10 +348,10 @@
 				3E65416B16DCE1E400368931 /* DESourceAPIDocument.h */,
 				3E65416C16DCE1E400368931 /* DESourceAPIDocument.m */,
 			);
-			name = ScriptAPIDocument;
+			name = "Script API Document";
 			sourceTree = "<group>";
 		};
-		3E65415316DCE1C600368931 /* StringHandle */ = {
+		3E65415316DCE1C600368931 /* String Handle */ = {
 			isa = PBXGroup;
 			children = (
 				3E65415416DCE1D500368931 /* DEStringPosition.h */,
@@ -359,7 +369,7 @@
 				3E65416016DCE1D500368931 /* DEStringPositionFinder.h */,
 				3E65416116DCE1D500368931 /* DEStringPositionFinder.m */,
 			);
-			name = StringHandle;
+			name = "String Handle";
 			sourceTree = "<group>";
 		};
 		3E65418216DCE21B00368931 /* ViewControllers */ = {
@@ -564,6 +574,8 @@
 				3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */,
 				3E934B2016DDD91600458E83 /* UIFactory.m in Sources */,
 				3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */,
+				3E262FA216DEF4D50037AA98 /* CUITextView.m in Sources */,
+				3E262FA316DEF4D50037AA98 /* CUITextViewHighlighting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
