@@ -374,7 +374,7 @@
     if(caretLocation == 0){
         return kMethodInvokeViaNone;
     }
-    NSArray *blockLeftEdgeList = @[@" ", @"#", @"=", @"\"", @",", @"(", @";", @"\t", @"\n"];
+    NSArray *blockLeftEdgeList = @[@" ", @"[", @"#", @"=", @"\"", @",", @"(", @";", @"\t", @"\n"];
 //    NSUInteger *edgePositionList = malloc(blockLeftEdgeList.count * sizeof(NSUInteger));
     NSInteger maxPosition = 0;
     NSInteger maxPositionIndex = 0;
@@ -668,7 +668,7 @@
         lastNewLineLocation = 0;
     }else{
         ++lastNewLineLocation;
-        if(lastNewLineLocation + 1 == caretLocation){
+        if(lastNewLineLocation == caretLocation){
             return;
         }
     }
@@ -678,6 +678,7 @@
     if(nextNewLineLocation == NSNotFound){
         nextNewLineLocation = self.textView.text.length;
     }
+    nextNewLineLocation = caretLocation;
     NSString *blockText = [self.textView.text substringWithRange:NSMakeRange(lastNewLineLocation, caretLocation - lastNewLineLocation)];
     NSInteger numberOfTabs = [self numberOftabsForBlockText:blockText];
     NSString *text = self.textView.text;
