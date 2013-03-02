@@ -86,12 +86,12 @@
         }
         NSString *methodName = [script substringWithBeginIndex:beginIndex endIndex:endIndex + 1];
         methodName = [methodName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        NSInteger separatorIndex = [methodName find:@"." fromIndex:0];
+        NSInteger separatorIndex = [methodName find:@":" fromIndex:0];
         if(separatorIndex == -1){
-            separatorIndex = [methodName find:@":" fromIndex:0];
+            separatorIndex = [methodName find:@"." fromIndex:0];
         }
         if([methodName hasPrefix:className] && separatorIndex != -1){
-            methodName = [methodName substringWithBeginIndex:separatorIndex + 1 endIndex:methodName.length];
+            methodName = [methodName substringWithBeginIndex:separatorIndex endIndex:methodName.length];
             [methodList addObject:methodName];
         }
     }
