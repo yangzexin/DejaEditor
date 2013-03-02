@@ -78,6 +78,7 @@
                               [DEPretype createWithText:@"stringSplit(str, split_str)"],
                               [DEPretype createWithText:@"stringTableToNumberTable(tbl)"],
                               [DEPretype createWithText:@"safety_release(obj)"],
+                              [DEPretype createWithText:@"safety_release_list(list)"],
                               [DEPretype createWithText:@"isObjCObject()"],
                               [DEPretype createWithText:@"object_type_covert(obj, desClass)"],
                               [DEPretype createWithText:@"and "],

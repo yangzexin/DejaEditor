@@ -9,11 +9,12 @@
 #import "DESourceAPIDocument.h"
 #import "SVFileUtils.h"
 #import "NSString+JavaLikeStringHandle.h"
+#import "SVClassDefineReplaceChecker.h"
 
 @interface DESourceAPIDocument ()
 
 @property(nonatomic, retain)NSArray *classNameList;
-@property(nonatomic, retain)NSArray *classFilePathList;
+@property(nonatomic, retain)NSDictionary *classFilePathDictionary;
 
 @end
 
@@ -22,7 +23,7 @@
 - (void)dealloc
 {
     self.classNameList = nil;
-    self.classFilePathList = nil;
+    self.classFilePathDictionary = nil;
     [super dealloc];
 }
 
@@ -32,18 +33,31 @@
     
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"BaseScripts" ofType:@"bundle"]];
     NSString *bundlePath = [bundle bundlePath];
-    NSMutableArray *tmpClassFilePathList = [NSMutableArray array];
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
+    NSMutableDictionary *tmpClassFilePathDictionary = [NSMutableDictionary dictionary];
     [SVFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
         if(!isDirectory){
-            [tmpClassFilePathList addObject:filePath];
-            [tmpClassNameList addObject:[[filePath lastPathComponent] stringByDeletingPathExtension]];
+            NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+            NSArray *scriptClassNameList = [self classNameListForScript:script];
+            for(NSString *className in scriptClassNameList){
+                [tmpClassNameList addObject:className];
+                [tmpClassFilePathDictionary setObject:filePath forKey:className];
+            }
         }
     }];
-    self.classFilePathList = tmpClassFilePathList;
     self.classNameList = tmpClassNameList;
+    self.classFilePathDictionary = tmpClassFilePathDictionary;
     
     return self;
+}
+
+- (NSArray *)classNameListForScript:(NSString *)script
+{
+    NSMutableArray *tmpClassNameList = [NSMutableArray array];
+    [SVClassDefineReplaceChecker handleScript:script classNameBlock:^(NSString *className) {
+        [tmpClassNameList addObject:className];
+    }];
+    return tmpClassNameList;
 }
 
 - (NSArray *)classList
@@ -53,12 +67,8 @@
 
 - (NSArray *)methodListWithClassName:(NSString *)className
 {
-    NSInteger index = [self.classNameList indexOfObject:className];
-    if(index != NSNotFound){
-        NSString *classFilePath = [self.classFilePathList objectAtIndex:index];
-        return [self methodListWithClassFilePath:classFilePath className:className];
-    }
-    return nil;
+    NSString *classFilePath = [self.classFilePathDictionary objectForKey:className];
+    return [self methodListWithClassFilePath:classFilePath className:className];
 }
 
 - (NSArray *)methodListWithClassFilePath:(NSString *)classFilePath className:(NSString *)className
@@ -76,8 +86,12 @@
         }
         NSString *methodName = [script substringWithBeginIndex:beginIndex endIndex:endIndex + 1];
         methodName = [methodName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if([methodName hasPrefix:className] && ([methodName find:@"." fromIndex:0] != -1 || [methodName find:@":" fromIndex:0] != -1)){
-            methodName = [methodName substringWithBeginIndex:className.length endIndex:methodName.length];
+        NSInteger separatorIndex = [methodName find:@"." fromIndex:0];
+        if(separatorIndex == -1){
+            separatorIndex = [methodName find:@":" fromIndex:0];
+        }
+        if([methodName hasPrefix:className] && separatorIndex != -1){
+            methodName = [methodName substringWithBeginIndex:separatorIndex + 1 endIndex:methodName.length];
             [methodList addObject:methodName];
         }
     }
