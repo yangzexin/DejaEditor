@@ -968,6 +968,9 @@
 #pragma mark - UITextViewDelegate
 - (NSInteger)lineNumber
 {
+    if(self.textView.text.length == 0){
+        return 1;
+    }
     NSString *subText = [self.textView.text substringToIndex:self.textView.selectedRange.location];
     NSInteger beginIndex = 0;
     NSInteger endIndex = 0;
