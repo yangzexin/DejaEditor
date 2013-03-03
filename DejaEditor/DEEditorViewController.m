@@ -861,7 +861,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{// *** function edge
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(tableView == self.pretypeSelectionListTableView){
         NSString *text = self.textView.text;
@@ -884,7 +884,23 @@
         }
         NSInteger leftBracketPosition = 0;
         NSString *replaceMethodName = nil;
-        BOOL originalParams = [tmpPretype.additionalText hasSuffix:@"Delegate"] || [tmpPretype.additionalText hasSuffix:@"DataSource"];
+        BOOL originalParams = NO;
+        if(!originalParams){
+            NSInteger leftEdge = [text find:@"\n" fromIndex:self.currentInvokePosition reverse:YES];
+            if(leftEdge == -1){
+                leftEdge = 0;
+            }else{
+                ++leftEdge;
+            }
+            NSInteger lastWhitespace = [text find:@" " fromIndex:self.currentInvokePosition reverse:YES];
+            if(leftEdge < lastWhitespace){
+                NSString *innerText = [text substringWithBeginIndex:leftEdge endIndex:lastWhitespace];
+                innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                if([innerText isEqualToString:@"function"]){
+                    originalParams = YES;
+                }
+            }
+        }
         if(originalParams){
             replaceMethodName = tmpPretype.text;
             leftBracketPosition = replaceMethodName.length;
