@@ -861,7 +861,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{// *** function edge
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(tableView == self.pretypeSelectionListTableView){
         NSString *text = self.textView.text;
