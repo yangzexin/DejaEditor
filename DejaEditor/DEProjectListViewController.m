@@ -84,7 +84,8 @@
             NSArray *demoProjectNameList = @[@"ImageViewer.zip", @"Queries.zip", @"TextViewer.zip", @"WebBrowser.zip", @"commlib.zip"];
             for(NSString *demoProjectName in demoProjectNameList){
                 NSString *tmpPath = [[NSBundle mainBundle] pathForResource:demoProjectName ofType:nil];
-                if(![DEZipProjectManager zipProjectExistsWithName:demoProjectName]){
+                if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]
+                   && ![DEZipProjectManager zipProjectExistsWithName:demoProjectName]){
                     [DEZipProjectManager importZipWithContentOfFile:tmpPath];
                     if(![self.projectManager projectExistsWithName:demoProjectName]){
                         NSString *tmpProjectPath = [self unzipProjectWithName:demoProjectName];

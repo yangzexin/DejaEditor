@@ -47,10 +47,6 @@
 		3E65419C16DCE22800368931 /* DEBaseSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419216DCE22800368931 /* DEBaseSearchViewController.m */; };
 		3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419416DCE22800368931 /* DELinkProjectViewController.m */; };
 		3E6541A716DCE27400368931 /* commlib.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A016DCE27400368931 /* commlib.zip */; };
-		3E6541A816DCE27400368931 /* ImageViewer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A116DCE27400368931 /* ImageViewer.zip */; };
-		3E6541A916DCE27400368931 /* Queries.pkg in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A216DCE27400368931 /* Queries.pkg */; };
-		3E6541AA16DCE27400368931 /* Queries.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A316DCE27400368931 /* Queries.zip */; };
-		3E6541AB16DCE27400368931 /* TextViewer.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A416DCE27400368931 /* TextViewer.zip */; };
 		3E6541AC16DCE27400368931 /* WebBrowser.pkg in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A516DCE27400368931 /* WebBrowser.pkg */; };
 		3E6541AD16DCE27400368931 /* WebBrowser.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A616DCE27400368931 /* WebBrowser.zip */; };
 		3E6541B916DCE35900368931 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541B416DCE2E100368931 /* libSavanna.a */; };
@@ -157,10 +153,6 @@
 		3E65419316DCE22800368931 /* DELinkProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELinkProjectViewController.h; sourceTree = "<group>"; };
 		3E65419416DCE22800368931 /* DELinkProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELinkProjectViewController.m; sourceTree = "<group>"; };
 		3E6541A016DCE27400368931 /* commlib.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = commlib.zip; sourceTree = "<group>"; };
-		3E6541A116DCE27400368931 /* ImageViewer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ImageViewer.zip; sourceTree = "<group>"; };
-		3E6541A216DCE27400368931 /* Queries.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Queries.pkg; sourceTree = "<group>"; };
-		3E6541A316DCE27400368931 /* Queries.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Queries.zip; sourceTree = "<group>"; };
-		3E6541A416DCE27400368931 /* TextViewer.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = TextViewer.zip; sourceTree = "<group>"; };
 		3E6541A516DCE27400368931 /* WebBrowser.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = WebBrowser.pkg; sourceTree = "<group>"; };
 		3E6541A616DCE27400368931 /* WebBrowser.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WebBrowser.zip; sourceTree = "<group>"; };
 		3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
@@ -402,10 +394,6 @@
 			isa = PBXGroup;
 			children = (
 				3E6541A016DCE27400368931 /* commlib.zip */,
-				3E6541A116DCE27400368931 /* ImageViewer.zip */,
-				3E6541A216DCE27400368931 /* Queries.pkg */,
-				3E6541A316DCE27400368931 /* Queries.zip */,
-				3E6541A416DCE27400368931 /* TextViewer.zip */,
 				3E6541A516DCE27400368931 /* WebBrowser.pkg */,
 				3E6541A616DCE27400368931 /* WebBrowser.zip */,
 			);
@@ -520,10 +508,6 @@
 				3E65413B16DCE0E900368931 /* Default@2x.png in Resources */,
 				3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */,
 				3E6541A716DCE27400368931 /* commlib.zip in Resources */,
-				3E6541A816DCE27400368931 /* ImageViewer.zip in Resources */,
-				3E6541A916DCE27400368931 /* Queries.pkg in Resources */,
-				3E6541AA16DCE27400368931 /* Queries.zip in Resources */,
-				3E6541AB16DCE27400368931 /* TextViewer.zip in Resources */,
 				3E6541AC16DCE27400368931 /* WebBrowser.pkg in Resources */,
 				3E6541AD16DCE27400368931 /* WebBrowser.zip in Resources */,
 			);
