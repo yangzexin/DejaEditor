@@ -1010,6 +1010,9 @@
         [self setPretypeSelectionListTableViewHidden:self.textView.selectedRange.location != self.currentInvokeCaretLocation];
     }
     self.lineNumberLabel.title = [NSString stringWithFormat:@"%d", [self lineNumber]];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        NSLog(@"%@", self.lineNumberLabel.title);
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
