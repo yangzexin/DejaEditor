@@ -560,7 +560,42 @@
 
 - (void)tabButtonTapped
 {
-    [self.textView insertText:@"\t"];
+    if(self.textView.selectedRange.length == 0){
+        [self.textView insertText:@"\t"];
+    }else{
+        NSInteger caretLocation = self.textView.selectedRange.location;
+        NSInteger lastNewLineLocation = [self.textView.text find:@"\n" fromIndex:caretLocation reverse:YES];
+        if(lastNewLineLocation == -1){
+            lastNewLineLocation = 0;
+        }
+        NSInteger endNewLineLocation = [self.textView.text find:@"\n" fromIndex:caretLocation + self.textView.selectedRange.length];
+        if(endNewLineLocation == -1){
+            endNewLineLocation = self.textView.text.length;
+        }
+        NSString *selectedLinesText = [self.textView.text substringWithBeginIndex:lastNewLineLocation + 1 endIndex:endNewLineLocation];
+        NSMutableString *resultString = [NSMutableString stringWithString:@"\t"];
+        NSInteger beginIndex = 0;
+        NSInteger endIndex = 0;
+        while((beginIndex = [selectedLinesText find:@"\n" fromIndex:endIndex]) != -1){
+            [resultString appendFormat:@"%@\n\t", [selectedLinesText substringWithBeginIndex:endIndex endIndex:beginIndex]];
+            endIndex = beginIndex + 1;
+        }
+        if(endIndex != selectedLinesText.length){
+            [resultString appendString:[selectedLinesText substringWithBeginIndex:endIndex endIndex:selectedLinesText.length]];
+        }
+        NSString *leftString = [self.textView.text substringWithBeginIndex:0 endIndex:lastNewLineLocation + 1];
+        NSString *rightString = @"";
+        if(endNewLineLocation != self.textView.text.length){
+            rightString = [self.textView.text substringWithBeginIndex:endNewLineLocation endIndex:self.textView.text.length];
+        }
+        self.textView.text = [NSString stringWithFormat:@"%@%@%@", leftString, resultString, rightString];
+        self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, 0);
+        if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
+            [self.textView insertText:@" "];
+            [self.textView deleteBackward];
+        }
+        self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, endNewLineLocation - lastNewLineLocation - 1);
+    }
 }
 
 - (void)bracketButtonTapped
