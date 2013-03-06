@@ -72,7 +72,7 @@
 
 + (UITextView *)textView
 {
-    UITextView *textView = [[DEColorfulTextView new] autorelease];
+    UITextView *textView = [[UITextView new] autorelease];
     textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //    [textView setDraw:YES];

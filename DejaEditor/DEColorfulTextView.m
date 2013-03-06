@@ -112,11 +112,6 @@
     if(self.attributedTextBlock){
         self.attributedText = self.attributedTextBlock(content, text);
     }
-    NSRange selectedRange = self.selectedRange;
-    self.selectedRange = NSMakeRange(selectedRange.location, 0);
-    [self insertText:@" "];
-    [self deleteBackward];
-    self.selectedRange = selectedRange;
 }
 
 - (void)setText:(NSString *)text
