@@ -8,7 +8,6 @@
 
 #import "UIFactory.h"
 #import "UIWebViewAdditions.h"
-#import "CUITextViewHighlighting.h"
 
 @implementation UIFactory
 

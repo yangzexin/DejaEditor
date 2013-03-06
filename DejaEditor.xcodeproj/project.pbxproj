@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
-		3E262FA216DEF4D50037AA98 /* CUITextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262F9F16DEF4D50037AA98 /* CUITextView.m */; };
-		3E262FA316DEF4D50037AA98 /* CUITextViewHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
 		3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412A16DCE0E900368931 /* CoreGraphics.framework */; };
@@ -79,10 +77,6 @@
 		3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
 		3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		3E262F9E16DEF4D50037AA98 /* CUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextView.h; sourceTree = "<group>"; };
-		3E262F9F16DEF4D50037AA98 /* CUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextView.m; sourceTree = "<group>"; };
-		3E262FA016DEF4D50037AA98 /* CUITextViewHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUITextViewHighlighting.h; sourceTree = "<group>"; };
-		3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUITextViewHighlighting.m; sourceTree = "<group>"; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E65412816DCE0E900368931 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -269,10 +263,6 @@
 		3E65414716DCE18E00368931 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				3E262F9E16DEF4D50037AA98 /* CUITextView.h */,
-				3E262F9F16DEF4D50037AA98 /* CUITextView.m */,
-				3E262FA016DEF4D50037AA98 /* CUITextViewHighlighting.h */,
-				3E262FA116DEF4D50037AA98 /* CUITextViewHighlighting.m */,
 				3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */,
 				3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */,
 				3E65414A16DCE19600368931 /* LogView.h */,
@@ -550,8 +540,6 @@
 				3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */,
 				3E934B2016DDD91600458E83 /* UIFactory.m in Sources */,
 				3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */,
-				3E262FA216DEF4D50037AA98 /* CUITextView.m in Sources */,
-				3E262FA316DEF4D50037AA98 /* CUITextViewHighlighting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
