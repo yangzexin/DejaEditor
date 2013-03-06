@@ -24,6 +24,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "QRFindReplaceView.h"
 #import "DEStringPositionFinder.h"
+#import "DEColorfulTextView.h"
 
 #define kTextViewActionInsert   1
 #define kTextViewActionRemove   2
@@ -332,6 +333,22 @@
             }
         }
     }];
+    
+    [((DEColorfulTextView *)self.textView) setAttributedTextBlock:^NSAttributedString *(NSMutableAttributedString *attributedText, NSString *originalText) {
+        NSArray *pretypeList = [self.methodFinder commonPretypes];
+        
+        attributedText = [DEColorfulTextView setColor:[UIColor colorWithRed:110.f/255.f green:50.f/255.f blue:170.f/255.f alpha:1] words:pretypeList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
+            return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
+        }];
+        
+        NSArray *localVarNameList = [self.methodFinder localVarNameList];
+        attributedText = [DEColorfulTextView setColor:[UIColor colorWithRed:96.f/255.f green:127.f/255.f blue:134.f/255.f alpha:1] words:localVarNameList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
+            return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
+        }];
+        
+        attributedText = [DEColorfulTextView setColor:[UIColor redColor] words:@[@":", @"."] inText:attributedText decideBlock:nil];
+        return attributedText;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -355,6 +372,7 @@
 - (void)startAnalyse
 {
     [self.methodFinder analyzeWithScriptName:self.scriptName script:self.textView.text project:self.project];
+    [((DEColorfulTextView *)self.textView) updateColor];
     self.delayControlForAnalyzer = [[[SVDelayControl alloc] initWithInterval:5.0f completion:^{
         [self startAnalyse];
     }] autorelease];

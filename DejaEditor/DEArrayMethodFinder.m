@@ -28,6 +28,9 @@
 @property(nonatomic, retain)NSMutableArray *instanceMethodListRaw;
 @property(nonatomic, retain)NSMutableArray *classMethodListRaw;
 @property(nonatomic, retain)NSMutableArray *commonPretypeListRaw;
+@property(nonatomic, retain)NSMutableArray *highlightPretypeTextListRaw;
+@property(nonatomic, retain)NSMutableArray *highlightPretypeText;
+@property(nonatomic, retain)NSMutableArray *localVarNameList;
 @property(nonatomic, assign)BOOL analyzing;
 
 @property(nonatomic, retain)NSArray *cachedFunctionPositionList;
@@ -45,6 +48,9 @@
     self.classMethodListRaw = nil;
     self.commonPretypeListRaw = nil;
     self.cachedFunctionPositionList = nil;
+    self.highlightPretypeTextListRaw = nil;
+    self.highlightPretypeText = nil;
+    self.localVarNameList = nil;
     [super dealloc];
 }
 
@@ -104,8 +110,12 @@
     NSMutableArray *tmpInstanceMethodList = [NSMutableArray array];
     NSMutableArray *tmpClassMethodList = [NSMutableArray array];
     [tmpClassMethodList addObject:[DEPretype createWithText:@"__index"]];
+    
+    self.highlightPretypeTextListRaw = [NSMutableArray array];
+    
     for(NSString *className in [scriptDoc classList]){
         [self.commonPretypeListRaw addObject:[DEPretype createWithText:className]];
+        [self.highlightPretypeTextListRaw addObject:className];
         for(NSString *methodName in [scriptDoc methodListWithClassName:className]){
             if([methodName hasPrefix:@"."]){
                 methodName = [methodName substringFromIndex:1];
@@ -205,6 +215,24 @@
         });
         self.analyzing = NO;
     });
+}
+
+- (NSArray *)instanceMethods
+{
+    return self.instanceMethodList;
+}
+
+- (NSArray *)classMethods
+{
+    return self.classMethodList;
+}
+
+- (NSArray *)commonPretypes
+{
+    NSMutableArray *tmpArray = [NSMutableArray array];
+    [tmpArray addObjectsFromArray:self.highlightPretypeTextListRaw];
+    [tmpArray addObjectsFromArray:self.highlightPretypeText];
+    return tmpArray;
 }
 
 - (void)analyzeFunctionRelatedWithScript:(NSString *)script
@@ -406,6 +434,8 @@
     self.instanceMethodList = [NSMutableArray array];
     self.classMethodList = [NSMutableArray array];
     self.commonPretypeList = [NSMutableArray array];
+    self.highlightPretypeText = [NSMutableArray array];
+    self.localVarNameList = [NSMutableArray array];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSMutableArray *tmpClassMethodNameList = nil;
         NSMutableArray *tmpFuncParamList = nil;
@@ -457,14 +487,17 @@
         if(tmpFuncParamList.count != 0){
             [tmpLocalVarNameList addObjectsFromArray:tmpFuncParamList];
         }
+        [self.localVarNameList addObjectsFromArray:tmpLocalVarNameList];
         if(tmpClassNameList.count != 0){
             [tmpLocalVarNameList addObjectsFromArray:tmpClassNameList];
+            [self.highlightPretypeText addObjectsFromArray:tmpClassNameList];
         }
         // add all local var as common pretype
         [self.class addPretypeTextList:tmpLocalVarNameList toList:self.commonPretypeList additionText:@"local variable"];
         
         if(tmpFunctionNameList.count != 0){
             [self.class addPretypeTextList:tmpFunctionNameList toList:self.commonPretypeList additionText:@"local function"];
+            [self.highlightPretypeText addObjectsFromArray:tmpFunctionNameList];
         }
         if(tmpClassMethodNameList.count != 0){
             [self.class addPretypeTextList:tmpClassMethodNameList toList:self.classMethodList additionText:@"local class method"];

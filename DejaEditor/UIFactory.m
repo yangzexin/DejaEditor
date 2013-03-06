@@ -8,6 +8,7 @@
 
 #import "UIFactory.h"
 #import "UIWebViewAdditions.h"
+#import "DEColorfulTextView.h"
 
 @implementation UIFactory
 
@@ -71,7 +72,7 @@
 
 + (UITextView *)textView
 {
-    UITextView *textView = [[UITextView new] autorelease];
+    UITextView *textView = [[DEColorfulTextView new] autorelease];
     textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //    [textView setDraw:YES];

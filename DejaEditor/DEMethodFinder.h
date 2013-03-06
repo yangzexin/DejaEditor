@@ -19,4 +19,9 @@
 - (void)findClassMethodListWithPrefix:(NSString *)textPrefix completion:(void(^)(NSArray *))completion;
 - (void)findCommonPretypeListWithPrefix:(NSString *)textPrefix completion:(void(^)(NSArray *))completion;
 
+- (NSArray *)instanceMethods;
+- (NSArray *)classMethods;
+- (NSArray *)commonPretypes;
+- (NSArray *)localVarNameList;
+
 @end

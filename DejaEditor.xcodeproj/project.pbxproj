@@ -61,6 +61,7 @@
 		3E6541CF16DCE35900368931 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C416DCE35900368931 /* SystemConfiguration.framework */; };
 		3E6541D116DCE41200368931 /* BaseScripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541D016DCE41200368931 /* BaseScripts.bundle */; };
 		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
+		3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,8 @@
 		3E6541D016DCE41200368931 /* BaseScripts.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BaseScripts.bundle; path = ../../Savanna/Resources/BaseScripts.bundle; sourceTree = "<group>"; };
 		3E934B1E16DDD91600458E83 /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
 		3E934B1F16DDD91600458E83 /* UIFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFactory.m; sourceTree = "<group>"; };
+		3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEColorfulTextView.h; sourceTree = "<group>"; };
+		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +274,8 @@
 				3E65414916DCE19600368931 /* QRFindReplaceView.m */,
 				3E934B1E16DDD91600458E83 /* UIFactory.h */,
 				3E934B1F16DDD91600458E83 /* UIFactory.m */,
+				3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */,
+				3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */,
 				3E934B2016DDD91600458E83 /* UIFactory.m in Sources */,
 				3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */,
+				3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
