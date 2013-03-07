@@ -11,5 +11,7 @@
 @interface DESimpleColorfulTextView : UITextView
 
 @property(nonatomic, copy)NSArray *keywordList;
+@property(nonatomic, copy)void(^textWillResetBlock)();
+@property(nonatomic, copy)void(^textDidResetBlock)();
 
 @end

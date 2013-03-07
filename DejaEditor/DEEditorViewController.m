@@ -26,6 +26,7 @@
 #import "DEStringPositionFinder.h"
 #import "DEColorfulTextView.h"
 #import "NSAttributedString+TextColor.h"
+#import "DESimpleColorfulTextView.h"
 
 #define kTextViewActionInsert   1
 #define kTextViewActionRemove   2
@@ -66,6 +67,7 @@
 @property(nonatomic, retain)DETextInputCatcher *highlightInputCatcher;
 @property(nonatomic, retain)NSString *lastReplacedText;
 @property(nonatomic, retain)UIBarButtonItem *lineNumberLabel;
+@property(nonatomic, assign)BOOL blockPretypeAnalyse;
 
 @end
 
@@ -311,6 +313,9 @@
     [self startAnalyse];
     self.textInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:0.50f] autorelease];
     [self.textInputCatcher start:^{
+        if(self.blockPretypeAnalyse){
+            return ;
+        }
         NSString *prefix = nil;
         NSInteger invokePosition = 0;
         NSInteger methodInvokeVia = [self findMethodInvokeAtCaretLocation:self.textView.selectedRange.location
@@ -368,6 +373,29 @@
 //            return attributedText;
 //        }];
 //    }
+    if([self.textView respondsToSelector:@selector(setTextDidResetBlock:)]){
+        self.highlightInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:4.0f] autorelease];
+        [self.highlightInputCatcher start:^{
+            NSRange tmpRange = self.textView.selectedRange;
+            self.textView.text = self.textView.text;
+            if(self.textView.isFirstResponder){
+                BOOL functionTableHidden = self.pretypeSelectionListTableView.hidden;
+                self.textView.selectedRange = NSMakeRange(tmpRange.location, 0);
+                [self.textView insertText:@" "];
+                [self.textView deleteBackward];
+                self.textView.selectedRange = tmpRange;
+                if(functionTableHidden){
+                    [self setPretypeSelectionListTableViewHidden:YES];
+                }
+            }
+        }];
+        [((DESimpleColorfulTextView *)self.textView) setTextDidResetBlock:^{
+            self.blockPretypeAnalyse = YES;
+            [[[[SVDelayControl alloc] initWithInterval:1.0f completion:^{
+                self.blockPretypeAnalyse = NO;
+            }] autorelease] start];
+        }];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -982,6 +1010,7 @@
         }
         NSString *suffix = [text substringFromIndex:self.currentInvokeCaretLocation];
         self.currentInvokeCaretLocation = prefix.length + replaceMethodName.length;
+        [self setPretypeSelectionListTableViewHidden:YES];
         self.textView.text = [NSString stringWithFormat:@"%@%@%@", prefix, replaceMethodName, suffix];
         self.textView.selectedRange = NSMakeRange(prefix.length + leftBracketPosition, 0);
         
@@ -989,7 +1018,6 @@
             [self.textView insertText:@" "];
             [self.textView deleteBackward];
         }
-        [self setPretypeSelectionListTableViewHidden:YES];
     }else if(tableView == self.functionPositionListTableView){
         DEFunctionPosition *tmpFP = [self.functionPositionList objectAtIndex:indexPath.row];
         self.textView.selectedRange = NSMakeRange(tmpFP.location, tmpFP.functionName.length);
@@ -1078,6 +1106,9 @@
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
     if(self.pretypeSelectionList.count != 0){
+        if(self.blockPretypeAnalyse){
+            return;
+        }
         [self setPretypeSelectionListTableViewHidden:self.textView.selectedRange.location != self.currentInvokeCaretLocation];
     }
     self.lineNumberLabel.title = [NSString stringWithFormat:@"%d", [self lineNumber]];
