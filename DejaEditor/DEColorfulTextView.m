@@ -105,13 +105,14 @@
 - (void)updateColor
 {
     NSString *text = self.text;
+    NSAttributedString *attributedText = nil;
     NSMutableAttributedString *content = [self.class setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1] words:self.keywordList inText:[[[NSMutableAttributedString alloc] initWithString:text] autorelease] decideBlock:^BOOL(NSString *word, NSRange range) {
         return [self.class isStandonlyWord:word inText:text range:range];
     }];
-    self.attributedText = content;
     if(self.attributedTextBlock){
-        self.attributedText = self.attributedTextBlock(content, text);
+        attributedText = self.attributedTextBlock(content, text);
     }
+    self.attributedText = attributedText;
 }
 
 - (void)setText:(NSString *)text

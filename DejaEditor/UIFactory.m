@@ -72,7 +72,12 @@
 
 + (UITextView *)textView
 {
-    UITextView *textView = [[UITextView new] autorelease];
+    UITextView *textView = nil;
+    if([[UIDevice currentDevice].systemVersion floatValue] < 6.0){
+        textView = [[UITextView new] autorelease];
+    }else{
+        textView = [[DEColorfulTextView new] autorelease];
+    }
     textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
 //    [textView setDraw:YES];
