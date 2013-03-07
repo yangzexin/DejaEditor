@@ -73,7 +73,7 @@
 + (UITextView *)textView
 {
     UITextView *textView = nil;
-    if([[UIDevice currentDevice].systemVersion floatValue] < 6.0){
+    if(/**[[UIDevice currentDevice].systemVersion floatValue] < 6.0*/YES){
         textView = [[UITextView new] autorelease];
     }else{
         textView = [[DEColorfulTextView new] autorelease];

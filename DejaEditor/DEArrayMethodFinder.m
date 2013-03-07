@@ -229,9 +229,11 @@
 
 - (NSArray *)commonPretypes
 {
+    self.analyzing = YES;
     NSMutableArray *tmpArray = [NSMutableArray array];
     [tmpArray addObjectsFromArray:self.highlightPretypeTextListRaw];
     [tmpArray addObjectsFromArray:self.highlightPretypeText];
+    self.analyzing = NO;
     return tmpArray;
 }
 

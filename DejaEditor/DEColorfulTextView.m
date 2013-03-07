@@ -8,10 +8,12 @@
 
 #import "DEColorfulTextView.h"
 #import "SVCommonUtils.h"
+#import "SVTimeCostTracer.h"
 
 @interface DEColorfulTextView ()
 
 @property(nonatomic, copy)NSArray *keywordList;
+@property(nonatomic, assign)BOOL updatingColor;
 
 @end
 
@@ -59,7 +61,10 @@
     return self;
 }
 
-+ (NSMutableAttributedString*)setColor:(UIColor*)color words:(NSArray*)words inText:(NSMutableAttributedString*)mutableAttributedString decideBlock:(BOOL(^)(NSString *word, NSRange range))decideBlock
++ (NSMutableAttributedString*)setColor:(UIColor*)color
+                                 words:(NSArray*)words
+                                inText:(NSMutableAttributedString*)mutableAttributedString
+                           decideBlock:(BOOL(^)(NSString *word, NSRange range))decideBlock
 {
     
     NSUInteger count = 0, length = [mutableAttributedString length];
@@ -104,15 +109,39 @@
 
 - (void)updateColor
 {
-    NSString *text = self.text;
-    NSAttributedString *attributedText = nil;
-    NSMutableAttributedString *content = [self.class setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1] words:self.keywordList inText:[[[NSMutableAttributedString alloc] initWithString:text] autorelease] decideBlock:^BOOL(NSString *word, NSRange range) {
-        return [self.class isStandonlyWord:word inText:text range:range];
-    }];
-    if(self.attributedTextBlock){
-        attributedText = self.attributedTextBlock(content, text);
+    if(self.updatingColor){
+        return;
     }
-    self.attributedText = attributedText;
+    self.updatingColor = YES;
+    NSString *text = self.text;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [SVTimeCostTracer markWithIdentifier:@"updateColorCost"];
+        NSAttributedString *attributedText = nil;
+        NSMutableAttributedString *content = [self.class setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1]
+                                                            words:self.keywordList
+                                                           inText:[[[NSMutableAttributedString alloc] initWithString:text] autorelease]
+                                                      decideBlock:^BOOL(NSString *word, NSRange range) {
+            return [self.class isStandonlyWord:word inText:text range:range];
+        }];
+        if(self.attributedTextBlock){
+            attributedText = self.attributedTextBlock(content, text);
+        }else{
+            attributedText = content;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSRange tmpRange = self.selectedRange;
+            [super setText:self.text];
+            self.attributedText = attributedText;
+            if(self.isFirstResponder){
+                self.selectedRange = NSMakeRange(tmpRange.location, 0);
+                [self insertText:@" "];
+                [self deleteBackward];
+                self.selectedRange = tmpRange;
+            }
+            self.updatingColor = NO;
+            [SVTimeCostTracer timeCostWithIdentifier:@"updateColorCost" print:YES];
+        });
+    });
 }
 
 - (void)setText:(NSString *)text
