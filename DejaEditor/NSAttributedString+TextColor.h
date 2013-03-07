@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSAttributedString_TextColor : NSObject
+@interface NSMutableAttributedString (TextColor)
+
+- (NSMutableAttributedString*)setColor:(UIColor*)color
+                                 words:(NSArray*)words
+                                inText:(NSMutableAttributedString*)mutableAttributedString
+                           decideBlock:(BOOL(^)(NSString *word, NSRange range))decideBlock;
+- (void)setTextColor:(UIColor *)color range:(NSRange)range;
 
 @end

@@ -9,6 +9,7 @@
 #import "DEColorfulTextView.h"
 #import "SVCommonUtils.h"
 #import "SVTimeCostTracer.h"
+#import "NSAttributedString+TextColor.h"
 
 @interface DEColorfulTextView ()
 
@@ -61,37 +62,6 @@
     return self;
 }
 
-+ (NSMutableAttributedString*)setColor:(UIColor*)color
-                                 words:(NSArray*)words
-                                inText:(NSMutableAttributedString*)mutableAttributedString
-                           decideBlock:(BOOL(^)(NSString *word, NSRange range))decideBlock
-{
-    
-    NSUInteger count = 0, length = [mutableAttributedString length];
-    NSRange range = NSMakeRange(0, length);
-    
-    for (NSString *op in words) {
-        count = 0, length = [mutableAttributedString length];
-        range = NSMakeRange(0, length);
-        while(range.location != NSNotFound){
-            range = [[mutableAttributedString string] rangeOfString:op options:0 range:range];
-            if(range.location != NSNotFound) {
-                BOOL shouldSet = YES;
-                if(decideBlock){
-                    shouldSet = decideBlock(op, range);
-                }
-                if(shouldSet){
-                    [mutableAttributedString setAttributes:@{NSForegroundColorAttributeName : color} range:NSMakeRange(range.location, [op length])];
-                }
-                range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
-                count++;
-            }
-        }
-    }
-    
-    return mutableAttributedString;
-}
-
 + (BOOL)isStandonlyWord:(NSString *)word inText:(NSString *)text range:(NSRange )range
 {
     BOOL isPrechAlphat = NO;
@@ -117,12 +87,13 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [SVTimeCostTracer markWithIdentifier:@"updateColorCost"];
         NSAttributedString *attributedText = nil;
-        NSMutableAttributedString *content = [self.class setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1]
-                                                            words:self.keywordList
-                                                           inText:[[[NSMutableAttributedString alloc] initWithString:text] autorelease]
-                                                      decideBlock:^BOOL(NSString *word, NSRange range) {
-            return [self.class isStandonlyWord:word inText:text range:range];
-        }];
+        NSMutableAttributedString *content = [[[NSMutableAttributedString alloc] initWithString:text] autorelease];
+        content = [content setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1]
+                              words:self.keywordList
+                             inText:[[[NSMutableAttributedString alloc] initWithString:text] autorelease]
+                        decideBlock:^BOOL(NSString *word, NSRange range) {
+                            return [self.class isStandonlyWord:word inText:text range:range];
+                        }];
         if(self.attributedTextBlock){
             attributedText = self.attributedTextBlock(content, text);
         }else{

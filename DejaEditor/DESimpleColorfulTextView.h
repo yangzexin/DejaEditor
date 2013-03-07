@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DESimpleColorfulTextView : NSObject
+@interface DESimpleColorfulTextView : UITextView
+
+@property(nonatomic, copy)NSArray *keywordList;
 
 @end

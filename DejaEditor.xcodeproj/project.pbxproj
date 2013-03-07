@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */; };
+		3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */; };
+		3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
@@ -75,8 +76,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+Attributes.h"; sourceTree = "<group>"; };
-		3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+Attributes.m"; sourceTree = "<group>"; };
+		3E0ADFB616E82DA400685764 /* DESimpleColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESimpleColorfulTextView.h; sourceTree = "<group>"; };
+		3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESimpleColorfulTextView.m; sourceTree = "<group>"; };
+		3E0ADFBA16E82E4600685764 /* NSAttributedString+TextColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+TextColor.h"; sourceTree = "<group>"; };
+		3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+TextColor.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -266,8 +269,6 @@
 		3E65414716DCE18E00368931 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
-				3E262F9316DEEAD60037AA98 /* NSAttributedString+Attributes.h */,
-				3E262F9416DEEAD60037AA98 /* NSAttributedString+Attributes.m */,
 				3E65414A16DCE19600368931 /* LogView.h */,
 				3E65414B16DCE19600368931 /* LogView.m */,
 				3E65414816DCE19600368931 /* QRFindReplaceView.h */,
@@ -276,6 +277,10 @@
 				3E934B1F16DDD91600458E83 /* UIFactory.m */,
 				3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */,
 				3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */,
+				3E0ADFB616E82DA400685764 /* DESimpleColorfulTextView.h */,
+				3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */,
+				3E0ADFBA16E82E4600685764 /* NSAttributedString+TextColor.h */,
+				3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -544,8 +549,9 @@
 				3E65419C16DCE22800368931 /* DEBaseSearchViewController.m in Sources */,
 				3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */,
 				3E934B2016DDD91600458E83 /* UIFactory.m in Sources */,
-				3E262F9916DEEAD60037AA98 /* NSAttributedString+Attributes.m in Sources */,
 				3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */,
+				3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */,
+				3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

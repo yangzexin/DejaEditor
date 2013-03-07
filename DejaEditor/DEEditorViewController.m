@@ -25,6 +25,7 @@
 #import "QRFindReplaceView.h"
 #import "DEStringPositionFinder.h"
 #import "DEColorfulTextView.h"
+#import "NSAttributedString+TextColor.h"
 
 #define kTextViewActionInsert   1
 #define kTextViewActionRemove   2
@@ -335,38 +336,38 @@
             }
         }
     }];
-    if([self.textView respondsToSelector:@selector(setAttributedTextBlock:)]){
-        self.highlightInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:5.0f] autorelease];
-        [self.highlightInputCatcher start:^{
-            NSRange tmpRange = self.textView.selectedRange;
-            self.textView.text = self.textView.text;
-            if(self.textView.isFirstResponder){
-                BOOL functionTableHidden = self.functionPositionListTableView.hidden;
-                self.textView.selectedRange = NSMakeRange(tmpRange.location, 0);
-                [self.textView insertText:@" "];
-                [self.textView deleteBackward];
-                self.textView.selectedRange = tmpRange;
-                if(functionTableHidden){
-                    self.functionPositionListTableView.hidden = YES;
-                }
-            }
-        }];
-        [((DEColorfulTextView *)self.textView) setAttributedTextBlock:^NSAttributedString *(NSMutableAttributedString *attributedText, NSString *originalText) {
-            NSArray *pretypeList = [self.methodFinder commonPretypes];
-            
-            attributedText = [DEColorfulTextView setColor:[UIColor colorWithRed:110.f/255.f green:50.f/255.f blue:170.f/255.f alpha:1] words:pretypeList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
-                return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
-            }];
-            
-            NSArray *localVarNameList = [self.methodFinder localVarNameList];
-            attributedText = [DEColorfulTextView setColor:[UIColor colorWithRed:96.f/255.f green:127.f/255.f blue:134.f/255.f alpha:1] words:localVarNameList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
-                return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
-            }];
-            
-            attributedText = [DEColorfulTextView setColor:[UIColor redColor] words:@[@":", @"."] inText:attributedText decideBlock:nil];
-            return attributedText;
-        }];
-    }
+//    if([self.textView respondsToSelector:@selector(setAttributedTextBlock:)]){
+//        self.highlightInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:5.0f] autorelease];
+//        [self.highlightInputCatcher start:^{
+//            NSRange tmpRange = self.textView.selectedRange;
+//            self.textView.text = self.textView.text;
+//            if(self.textView.isFirstResponder){
+//                BOOL functionTableHidden = self.functionPositionListTableView.hidden;
+//                self.textView.selectedRange = NSMakeRange(tmpRange.location, 0);
+//                [self.textView insertText:@" "];
+//                [self.textView deleteBackward];
+//                self.textView.selectedRange = tmpRange;
+//                if(functionTableHidden){
+//                    self.functionPositionListTableView.hidden = YES;
+//                }
+//            }
+//        }];
+//        [((DEColorfulTextView *)self.textView) setAttributedTextBlock:^NSAttributedString *(NSMutableAttributedString *attributedText, NSString *originalText) {
+//            NSArray *pretypeList = [self.methodFinder commonPretypes];
+//            
+//            attributedText = [attributedText setColor:[UIColor colorWithRed:110.f/255.f green:50.f/255.f blue:170.f/255.f alpha:1] words:pretypeList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
+//                return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
+//            }];
+//            
+//            NSArray *localVarNameList = [self.methodFinder localVarNameList];
+//            attributedText = [attributedText setColor:[UIColor colorWithRed:96.f/255.f green:127.f/255.f blue:134.f/255.f alpha:1] words:localVarNameList inText:attributedText decideBlock:^BOOL(NSString *word, NSRange range) {
+//                return [DEColorfulTextView isStandonlyWord:word inText:originalText range:range];
+//            }];
+//            
+//            attributedText = [attributedText setColor:[UIColor redColor] words:@[@":", @"."] inText:attributedText decideBlock:nil];
+//            return attributedText;
+//        }];
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

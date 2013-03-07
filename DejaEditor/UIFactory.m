@@ -9,6 +9,7 @@
 #import "UIFactory.h"
 #import "UIWebViewAdditions.h"
 #import "DEColorfulTextView.h"
+#import "DESimpleColorfulTextView.h"
 
 @implementation UIFactory
 
@@ -74,7 +75,7 @@
 {
     UITextView *textView = nil;
     if(/**[[UIDevice currentDevice].systemVersion floatValue] < 6.0*/YES){
-        textView = [[UITextView new] autorelease];
+        textView = [[DESimpleColorfulTextView new] autorelease];
     }else{
         textView = [[DEColorfulTextView new] autorelease];
     }
