@@ -74,7 +74,8 @@
 + (UITextView *)textView
 {
     UITextView *textView = nil;
-    if([[UIDevice currentDevice].systemVersion floatValue] < 6.0){
+    BOOL forceNormalTextView = YES;
+    if([[UIDevice currentDevice].systemVersion floatValue] < 6.0 || forceNormalTextView){
         textView = [[UITextView new] autorelease];
     }else{
         textView = [[DESimpleColorfulTextView new] autorelease];

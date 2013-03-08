@@ -1010,13 +1010,18 @@
         }
         NSString *suffix = [text substringFromIndex:self.currentInvokeCaretLocation];
         self.currentInvokeCaretLocation = prefix.length + replaceMethodName.length;
-        [self setPretypeSelectionListTableViewHidden:YES];
+        if([self.textView respondsToSelector:@selector(setTextDidResetBlock:)]){
+            [self setPretypeSelectionListTableViewHidden:YES];
+        }
         self.textView.text = [NSString stringWithFormat:@"%@%@%@", prefix, replaceMethodName, suffix];
         self.textView.selectedRange = NSMakeRange(prefix.length + leftBracketPosition, 0);
         
         if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
             [self.textView insertText:@" "];
             [self.textView deleteBackward];
+        }
+        if(![self.textView respondsToSelector:@selector(setTextDidResetBlock:)]){
+            [self setPretypeSelectionListTableViewHidden:YES];
         }
     }else if(tableView == self.functionPositionListTableView){
         DEFunctionPosition *tmpFP = [self.functionPositionList objectAtIndex:indexPath.row];
