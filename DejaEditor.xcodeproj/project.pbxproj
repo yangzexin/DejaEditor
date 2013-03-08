@@ -232,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				3E65414316DCE10100368931 /* Utils */,
-				3E65414716DCE18E00368931 /* UI Components */,
+				3E65414716DCE18E00368931 /* UIComponents */,
 				3E65414E16DCE1A100368931 /* SubModules */,
 				3E65418216DCE21B00368931 /* ViewControllers */,
 				3E65419E16DCE23700368931 /* Resources */,
@@ -266,7 +266,7 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		3E65414716DCE18E00368931 /* UI Components */ = {
+		3E65414716DCE18E00368931 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				3E65414A16DCE19600368931 /* LogView.h */,
@@ -282,7 +282,7 @@
 				3E0ADFBA16E82E4600685764 /* NSAttributedString+TextColor.h */,
 				3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */,
 			);
-			name = "UI Components";
+			name = UIComponents;
 			sourceTree = "<group>";
 		};
 		3E65414E16DCE1A100368931 /* SubModules */ = {
