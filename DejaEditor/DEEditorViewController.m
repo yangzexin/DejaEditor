@@ -1114,6 +1114,11 @@
     
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self saveScript];
+}
+
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
     if(self.pretypeSelectionList.count != 0){
