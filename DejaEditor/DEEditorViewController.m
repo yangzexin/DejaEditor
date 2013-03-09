@@ -65,6 +65,7 @@
 @property(nonatomic, retain)StringPositionFinder *stringPositionFinder;
 @property(nonatomic, retain)DETextInputCatcher *findTextInputCatcher;
 @property(nonatomic, retain)DETextInputCatcher *highlightInputCatcher;
+@property(nonatomic, retain)DETextInputCatcher *saveInputCatcher;
 @property(nonatomic, retain)NSString *lastReplacedText;
 @property(nonatomic, retain)UIBarButtonItem *lineNumberLabel;
 @property(nonatomic, assign)BOOL blockPretypeAnalyse;
@@ -103,6 +104,7 @@
     self.stringPositionFinder = nil;
     self.findTextInputCatcher = nil;
     self.highlightInputCatcher = nil;
+    self.saveInputCatcher = nil;
     self.lineNumberLabel = nil;
     [super dealloc];
 }
@@ -340,6 +342,10 @@
                 }];
             }
         }
+    }];
+    self.saveInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:3.0f] autorelease];
+    [self.saveInputCatcher start:^{
+        [self saveScript];
     }];
 //    if([self.textView respondsToSelector:@selector(setAttributedTextBlock:)]){
 //        self.highlightInputCatcher = [[[DETextInputCatcher alloc] initWithWaitingInterval:5.0f] autorelease];
@@ -1175,6 +1181,7 @@
 {
     [self.textInputCatcher mark];
     [self.highlightInputCatcher mark];
+    [self.saveInputCatcher mark];
 //    [self.textView resetAttributedText];
     
     NSUInteger caretLocation = textView.selectedRange.location;
