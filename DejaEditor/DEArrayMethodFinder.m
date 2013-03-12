@@ -92,6 +92,7 @@
                               [DEPretype createWithText:@"not "],
                               [DEPretype createWithText:@"true"],
                               [DEPretype createWithText:@"false"],
+                              [DEPretype createWithText:@"break"],
                               [DEPretype createWithText:@"return ;"],
                               [DEPretype createWithText:@"tonumber(str)"],
                               [DEPretype createWithText:@"runtime::invokeMethod(objId, methodName, ...--[[params]])"],
