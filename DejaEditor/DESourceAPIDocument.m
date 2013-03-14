@@ -45,6 +45,9 @@
             }
         }
     }];
+    [tmpClassNameList sortUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        return [obj1 compare:obj2];
+    }];
     self.classNameList = tmpClassNameList;
     self.classFilePathDictionary = tmpClassFilePathDictionary;
     
@@ -95,6 +98,9 @@
             [methodList addObject:methodName];
         }
     }
+    [methodList sortUsingComparator:^NSComparisonResult(NSString *obj1, NSString *obj2) {
+        return [obj1 compare:obj2];
+    }];
     return methodList;
 }
 

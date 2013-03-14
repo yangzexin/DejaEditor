@@ -86,10 +86,11 @@
     if(searchText.length == 0){
         self.filteredMethodList = self.methodList;
     }else{
+        searchText = [searchText lowercaseString];
         NSMutableArray *tmpMethodList = [NSMutableArray array];
         for(NSString *methodName in self.methodList){
             methodName = [methodName substringFromIndex:1];
-            if([methodName hasPrefix:searchText]){
+            if([[methodName lowercaseString] hasPrefix:searchText]){
                 [tmpMethodList addObject:methodName];
             }
         }

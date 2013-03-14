@@ -122,6 +122,7 @@
     if(searchText.length == 0){
         self.filterClassNameList = self.classNameList;
     }else{
+        searchText = [searchText lowercaseString];
         NSMutableArray *tmpClassNameList = [NSMutableArray array];
         for(NSString *className in self.classNameList){
             if([[className lowercaseString] hasPrefix:searchText]){
