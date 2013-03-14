@@ -77,44 +77,6 @@
                                              selector:@selector(applicationDidBecomeActive:)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:@"projectImported"] == nil){
-        [SVWaiting showWaiting:YES inView:self.view];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray *demoProjectNameList = @[@"ImageViewer.zip", @"Queries.zip", @"TextViewer.zip", @"WebBrowser.zip", @"commlib.zip"];
-            for(NSString *demoProjectName in demoProjectNameList){
-                NSString *tmpPath = [[NSBundle mainBundle] pathForResource:demoProjectName ofType:nil];
-                if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]
-                   && ![DEZipProjectManager zipProjectExistsWithName:demoProjectName]){
-                    [DEZipProjectManager importZipWithContentOfFile:tmpPath];
-                    if(![self.projectManager projectExistsWithName:demoProjectName]){
-                        NSString *tmpProjectPath = [self unzipProjectWithName:demoProjectName];
-                        if(tmpProjectPath){
-                            [self copyZipProjectToProjectLibraryFromDirectoryPath:tmpProjectPath];
-                        }
-                    }
-                }
-            }
-            NSArray *pkgNameList = @[@"WebBrowser.pkg", @"Queries.pkg"];
-            for(NSString *pkgName in pkgNameList){
-                NSString *tmpPath = [[NSBundle mainBundle] pathForResource:pkgName ofType:nil];
-                if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]){
-                    [DEZipProjectManager importZipWithContentOfFile:tmpPath];
-                }
-            }
-            [[NSUserDefaults standardUserDefaults] setObject:@"imported" forKey:@"projectImported"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self reloadProjectList];
-                [SVWaiting showWaiting:NO inView:self.view];
-                [SVAlertDialog showWithTitle:@""
-                                   message:@"zip包为源代码包，pkg包为可以直接点击运行的程序"
-                                completion:nil
-                         cancelButtonTitle:@"我知道了"
-                      otherButtonTitleList:nil];
-            });
-        });
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated

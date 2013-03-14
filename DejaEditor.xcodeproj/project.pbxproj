@@ -45,9 +45,6 @@
 		3E65419B16DCE22800368931 /* DEAPIClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419016DCE22800368931 /* DEAPIClassViewController.m */; };
 		3E65419C16DCE22800368931 /* DEBaseSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419216DCE22800368931 /* DEBaseSearchViewController.m */; };
 		3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419416DCE22800368931 /* DELinkProjectViewController.m */; };
-		3E6541A716DCE27400368931 /* commlib.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A016DCE27400368931 /* commlib.zip */; };
-		3E6541AC16DCE27400368931 /* WebBrowser.pkg in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A516DCE27400368931 /* WebBrowser.pkg */; };
-		3E6541AD16DCE27400368931 /* WebBrowser.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541A616DCE27400368931 /* WebBrowser.zip */; };
 		3E6541B916DCE35900368931 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541B416DCE2E100368931 /* libSavanna.a */; };
 		3E6541C516DCE35900368931 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541BA16DCE35900368931 /* AudioToolbox.framework */; };
 		3E6541C616DCE35900368931 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541BB16DCE35900368931 /* AVFoundation.framework */; };
@@ -151,9 +148,6 @@
 		3E65419216DCE22800368931 /* DEBaseSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEBaseSearchViewController.m; sourceTree = "<group>"; };
 		3E65419316DCE22800368931 /* DELinkProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELinkProjectViewController.h; sourceTree = "<group>"; };
 		3E65419416DCE22800368931 /* DELinkProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELinkProjectViewController.m; sourceTree = "<group>"; };
-		3E6541A016DCE27400368931 /* commlib.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = commlib.zip; sourceTree = "<group>"; };
-		3E6541A516DCE27400368931 /* WebBrowser.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = WebBrowser.pkg; sourceTree = "<group>"; };
-		3E6541A616DCE27400368931 /* WebBrowser.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = WebBrowser.zip; sourceTree = "<group>"; };
 		3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
 		3E6541BA16DCE35900368931 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3E6541BB16DCE35900368931 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -390,19 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				3E6541D016DCE41200368931 /* BaseScripts.bundle */,
-				3E65419F16DCE24600368931 /* DemoProjects */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		3E65419F16DCE24600368931 /* DemoProjects */ = {
-			isa = PBXGroup;
-			children = (
-				3E6541A016DCE27400368931 /* commlib.zip */,
-				3E6541A516DCE27400368931 /* WebBrowser.pkg */,
-				3E6541A616DCE27400368931 /* WebBrowser.zip */,
-			);
-			name = DemoProjects;
 			sourceTree = "<group>";
 		};
 		3E6541AE16DCE2C700368931 /* SubProjects */ = {
@@ -512,9 +495,6 @@
 				3E65413916DCE0E900368931 /* Default.png in Resources */,
 				3E65413B16DCE0E900368931 /* Default@2x.png in Resources */,
 				3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */,
-				3E6541A716DCE27400368931 /* commlib.zip in Resources */,
-				3E6541AC16DCE27400368931 /* WebBrowser.pkg in Resources */,
-				3E6541AD16DCE27400368931 /* WebBrowser.zip in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
