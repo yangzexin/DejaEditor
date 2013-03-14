@@ -18,6 +18,7 @@
 #import "DELinkProjectViewController.h"
 #import "SVLuaCommonUtils.h"
 #import "LINavigationController.h"
+#import "SVActionDialog.h"
 
 @interface DEProjectViewController ()
 
@@ -396,10 +397,10 @@
             NSString *resName = [self.resourceNameList objectAtIndex:indexPath.row];
             NSData *resData = [self.project resourceDataWithName:resName];
             NSArray *projectNameList = [self.projectManager projectNameList];
-            [SVAlertDialog showWithTitle:@"选择已有项目打开文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
-                if(buttonIndex != 0){
+            [SVActionDialog showWithTitle:@"选择已有项目打开文件" completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                if(buttonIndex < projectNameList.count){
                     [[LogView sharedInstance] clear];
-                    id<DEProject> selectedProject = [self.projectManager projectWithName:[projectNameList objectAtIndex:buttonIndex - 1]];
+                    id<DEProject> selectedProject = [self.projectManager projectWithName:[projectNameList objectAtIndex:buttonIndex]];
                     DEProjectBundle *bundle = [[[DEProjectBundle alloc] initWithProject:selectedProject] autorelease];
                     LINavigationController *nc = [[LINavigationController new] autorelease];
                     [nc setStopButtonTapBlock:^{
@@ -413,7 +414,7 @@
                     [self.runningAppList addObject:app];
                     [SVAppManager runApp:app params:resData];
                 }
-            } cancelButtonTitle:@"取消" otherButtonTitleList:projectNameList];
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitleList:projectNameList];
         }
     }else{
         if(indexPath.section == 0){
