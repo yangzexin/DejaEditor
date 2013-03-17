@@ -76,6 +76,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *projectName = [self.projectNameList objectAtIndex:indexPath.row];
         self.selectProjectBlock(projectName, indexPath.row);
+        [self.linkedProjectNameList addObject:projectName];
     }
     [self dismissModalViewControllerAnimated:YES];
 }

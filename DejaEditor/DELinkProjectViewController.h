@@ -14,7 +14,7 @@
 
 @interface DELinkProjectViewController : DEBaseTableViewController
 
-@property(nonatomic, copy)void(^selectProjectBlock)(NSString *projectName, NSInteger index);
+@property(nonatomic, copy)BOOL(^selectProjectBlock)(NSString *projectName, NSInteger index);
 @property(nonatomic, copy)void(^removeProjectBlock)(NSString *projectName, NSInteger index);
 @property(nonatomic, retain)id<DEProjectManager>projectManager;
 

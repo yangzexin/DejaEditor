@@ -332,9 +332,11 @@
             [newLinkProjectNameList addObject:projectName];
             [self.project setLinkedProjectNameList:newLinkProjectNameList];
             [self.project sychronizeProjectConfiguration];
+            return YES;
         }else{
             [SVAlertDialog showWithTitle:@"链接项目失败，该项目已经链接" message:nil completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
         }
+        return NO;
     }];
     [selectProjectVC setRemoveProjectBlock:^(NSString *projectName, NSInteger index) {
         NSMutableArray *newLinkProjectNameList = [NSMutableArray arrayWithArray:[self.project linkedProjectNameList]];
