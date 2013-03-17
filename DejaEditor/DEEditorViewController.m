@@ -1021,7 +1021,6 @@
         }
         self.textView.text = [NSString stringWithFormat:@"%@%@%@", prefix, replaceMethodName, suffix];
         self.textView.selectedRange = NSMakeRange(prefix.length + leftBracketPosition, 0);
-        
         if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
             [self.textView insertText:@" "];
             [self.textView deleteBackward];

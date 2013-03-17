@@ -77,7 +77,7 @@
         NSString *projectName = [self.projectNameList objectAtIndex:indexPath.row];
         self.selectProjectBlock(projectName, indexPath.row);
     }
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)removeButtonTapped:(UIButton *)removeButton
