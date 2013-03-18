@@ -11,6 +11,7 @@
 OBJC_EXPORT NSString *kProjectLinkedProjectKey;
 OBJC_EXPORT NSString *kProjectCompileStateKey;
 OBJC_EXPORT NSString *kProjectMainScriptNameKey;
+OBJC_EXPORT NSString *kProjectInfoListFileName;
 
 @protocol DEProject <NSObject>
 

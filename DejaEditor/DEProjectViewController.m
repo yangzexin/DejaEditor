@@ -29,6 +29,7 @@
 @property(nonatomic, retain)NSArray *editToolbarItems;
 @property(nonatomic, retain)UIBarButtonItem *linkProjectButton;
 @property(nonatomic, retain)UIBarButtonItem *setMainScriptButton;
+@property(nonatomic, retain)UIBarButtonItem *renameButton;
 @property(nonatomic, retain)NSArray *normalToolbarItems;
 @property(nonatomic, retain)NSIndexPath *tableViewLastSelectedIndexPath;
 
@@ -48,6 +49,7 @@
     self.editToolbarItems = nil;
     self.linkProjectButton = nil;
     self.setMainScriptButton = nil;
+    self.renameButton = nil;
     self.normalToolbarItems = nil;
     self.tableViewLastSelectedIndexPath = nil;
     [super dealloc];
@@ -83,8 +85,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.scriptNameList = [self.project scriptNameList];
-    self.resourceNameList = [self.project resourceNameList];
+    [self reloadScriptAndResourceList];
     self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
     [self.navigationController setToolbarHidden:NO animated:YES];
 }
@@ -105,10 +106,12 @@
 {
     [super loadView];
     self.navigationItem.rightBarButtonItem = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Edit", nil) target:self action:@selector(editButtonTapped:)];
-    self.linkProjectButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Link Other Project", nil) target:self action:@selector(linkButtonTapped)];
+    self.linkProjectButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Link..", nil) target:self action:@selector(linkButtonTapped)];
     self.setMainScriptButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Set as Main", nil) target:self action:@selector(setAsMainButtonTapped)];
+    self.renameButton = [UIFactory borderedBarButtonItemWithTitle:NSLocalizedString(@"Rename", nil) target:self action:@selector(renameButtonTapped)];
     self.editToolbarItems = @[self.linkProjectButton,
                               self.setMainScriptButton,
+                              self.renameButton,
                               [UIFactory barButtonItemSystemItemFlexibleSpace],
                               [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)],
                               ];
@@ -128,6 +131,13 @@
 }
 
 #pragma mark - private methods
+- (void)reloadScriptAndResourceList
+{
+    self.scriptNameList = [self.project scriptNameList];
+    self.resourceNameList = [self.project resourceNameList];
+    [self.tableView reloadData];
+}
+
 - (NSString *)autoGenerateMainScript
 {
     NSString *autoGenerateMainScriptName = @"main";
@@ -278,7 +288,14 @@
 
 - (void)updateToolbarItemsStatesWithSelectState:(BOOL)selected
 {
-    self.setMainScriptButton.enabled = selected;
+    self.setMainScriptButton.enabled = selected && self.tableView.indexPathForSelectedRow.section == 0;
+    self.renameButton.enabled = selected;
+    if(self.tableView.indexPathForSelectedRow.section == 1){
+        NSString *resName = [self.resourceNameList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        if([resName isEqualToString:kProjectInfoListFileName]){
+            self.renameButton.enabled = NO;
+        }
+    }
 }
 
 #pragma mark - events
@@ -345,7 +362,6 @@
         [self.project sychronizeProjectConfiguration];
         
     }];
-    selectProjectVC.title = NSLocalizedString(@"Link Project", nil);
     UINavigationController *nc = [[[UINavigationController alloc] initWithRootViewController:selectProjectVC] autorelease];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         nc.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -361,12 +377,73 @@
     if([SVLuaCommonUtils scriptIsMainScript:script]){
         [self.project setMainScriptName:scriptName];
         [self.tableView reloadData];
+        [self updateToolbarItemsStatesWithSelectState:NO];
     }else{
         [SVAlertDialog showWithTitle:NSLocalizedString(@"error", nil)
                            message:[NSString stringWithFormat:@"Cannot find main function in script:%@", scriptName]
                         completion:nil
                  cancelButtonTitle:@"确定"
                  otherButtonTitles:nil];
+    }
+}
+
+- (void)renameScriptWithName:(NSString *)scriptName newName:(NSString *)newName
+{
+    NSString *content = [self.project scriptContentWithName:scriptName];
+    [self.project saveScriptWithName:newName content:content];
+    [self.project removeScriptWithName:scriptName];
+}
+
+- (void)renameResourceWithName:(NSString *)resourceName newName:(NSString *)newName
+{
+    NSData *resourceData = [self.project resourceDataWithName:resourceName];
+    [self.project saveResourceData:resourceData name:newName];
+    [self.project removeResourceDataWithName:resourceName];
+}
+
+- (void)renameScriptWithName:(NSString *)scriptName
+{
+    [SVInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:scriptName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+        if([self.project scriptExistsWithName:input]){
+            [SVAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新脚本名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                if(buttonIndex == 1){
+                    [self renameScriptWithName:scriptName];
+                }
+            } cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        }else{
+            [self renameScriptWithName:scriptName newName:input];
+            [self reloadScriptAndResourceList];
+            [self updateToolbarItemsStatesWithSelectState:NO];
+        }
+    }];
+}
+
+- (void)renameResourceWithName:(NSString *)resourceName
+{
+    [SVInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:resourceName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+        if([self.project resourceDataExistsWithName:input]){
+            [SVAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                if(buttonIndex == 1){
+                    [self renameResourceWithName:resourceName];
+                }
+            } cancelButtonTitle:@"取消" otherButtonTitles:@"重新输入", nil];
+        }else{
+            [self renameResourceWithName:resourceName newName:input];
+            [self reloadScriptAndResourceList];
+            [self updateToolbarItemsStatesWithSelectState:NO];
+        }
+    }];
+}
+
+- (void)renameButtonTapped
+{
+    BOOL isScript = self.tableView.indexPathForSelectedRow.section == 0;
+    if(isScript){
+        NSString *scriptName = [self.scriptNameList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        [self renameScriptWithName:scriptName];
+    }else{
+        NSString *resourceName = [self.resourceNameList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        [self renameResourceWithName:resourceName];
     }
 }
 
@@ -382,7 +459,7 @@
 {
     if(self.tableView.editing){
         if(indexPath.section == 1){
-            return nil;
+            self.tableViewLastSelectedIndexPath = [tableView indexPathForSelectedRow];
         }else{
             self.tableViewLastSelectedIndexPath = [tableView indexPathForSelectedRow];
         }
@@ -419,7 +496,7 @@
             } cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitleList:projectNameList];
         }
     }else{
-        if(indexPath.section == 0){
+//        if(indexPath.section == 0){
             [self updateToolbarItemsStatesWithSelectState:YES];
             if(self.tableViewLastSelectedIndexPath
                && indexPath.section == self.tableViewLastSelectedIndexPath.section
@@ -427,7 +504,7 @@
                 [tableView deselectRowAtIndexPath:indexPath animated:NO];
                 [self updateToolbarItemsStatesWithSelectState:NO];
             }
-        }
+//        }
     }
 }
 

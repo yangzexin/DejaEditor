@@ -152,7 +152,7 @@
 
 - (NSString *)projectInfoFilePath
 {
-    return [[self projectPath] stringByAppendingPathComponent:@"project.plist"];
+    return [[self projectPath] stringByAppendingPathComponent:kProjectInfoListFileName];
 }
 
 - (BOOL)projectExists

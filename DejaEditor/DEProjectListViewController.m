@@ -82,9 +82,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self reloadProjectList];
     self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
     
+    [self reloadProjectList];
     [SVAppManager destoryAllApps];
 }
 
@@ -212,7 +212,7 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    [self viewWillAppear:YES];
+    [self reloadProjectList];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

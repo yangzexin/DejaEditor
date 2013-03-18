@@ -9,10 +9,12 @@
 #import "DELinkProjectViewController.h"
 #import "DEProjectManager.h"
 #import "SVAlertDialog.h"
+#import "SVDelayControl.h"
 
 @interface DELinkProjectViewController ()
 
 @property(nonatomic, retain)NSArray *projectNameList;
+@property(nonatomic, retain)NSMutableArray *unlinkedProjectNameList;
 @property(nonatomic, retain)NSMutableArray *linkedProjectNameList;
 
 @end
@@ -25,6 +27,7 @@
     self.removeProjectBlock = nil;
     self.projectManager = nil;
     self.projectNameList = nil;
+    self.unlinkedProjectNameList = nil;
     self.linkedProjectNameList = nil;
     [super dealloc];
 }
@@ -32,6 +35,9 @@
 - (id)initWithProjectNameList:(NSArray *)projectNameList linkedProjectNameList:(NSArray *)linkedProjectNameList
 {
     self = [super init];
+    
+    self.title = @"Link Other Projects";
+    self.projectNameList = projectNameList;
     
     NSMutableArray *tmpUnlinkdProjectNameList = [NSMutableArray array];
     if(linkedProjectNameList.count != 0){
@@ -43,7 +49,7 @@
     }else{
         [tmpUnlinkdProjectNameList addObjectsFromArray:projectNameList];
     }
-    self.projectNameList = tmpUnlinkdProjectNameList;
+    self.unlinkedProjectNameList = tmpUnlinkdProjectNameList;
     self.linkedProjectNameList = [NSMutableArray arrayWithArray:linkedProjectNameList];
     
     
@@ -53,7 +59,7 @@
 - (void)loadView
 {
     [super loadView];
-    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"取消"
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"返回"
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(cancelButtontapped)] autorelease];
@@ -74,11 +80,22 @@
 {
     if(self.selectProjectBlock){
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *projectName = [self.projectNameList objectAtIndex:indexPath.row];
+        NSString *projectName = [self.unlinkedProjectNameList objectAtIndex:indexPath.row];
         self.selectProjectBlock(projectName, indexPath.row);
         [self.linkedProjectNameList addObject:projectName];
+        [self.unlinkedProjectNameList removeObjectAtIndex:indexPath.row];
+        self.navigationItem.rightBarButtonItem = nil;
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexPath.row inSection:1]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.linkedProjectNameList.count - 1 inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView endUpdates];
+        [[[[SVDelayControl alloc] initWithInterval:0.25f completion:^{
+            [self.tableView reloadData];
+        }] autorelease] start];
     }
-    [self dismissModalViewControllerAnimated:YES];
+//    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)removeButtonTapped:(UIButton *)removeButton
@@ -89,11 +106,18 @@
             if(self.removeProjectBlock){
                 self.removeProjectBlock([self.linkedProjectNameList objectAtIndex:index], index);
             }
+            [self.unlinkedProjectNameList addObject:[self.linkedProjectNameList objectAtIndex:index]];
             [self.linkedProjectNameList removeObjectAtIndex:index];
+            self.navigationItem.rightBarButtonItem = nil;
             [self.tableView beginUpdates];
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.unlinkedProjectNameList.count - 1 inSection:1]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView endUpdates];
+            [[[[SVDelayControl alloc] initWithInterval:0.25f completion:^{
+                [self.tableView reloadData];
+            }] autorelease] start];
         }
     } cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
 }
@@ -101,10 +125,12 @@
 #pragma mark - UITableViewDelegate & dataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"链接"
-                                                                               style:UIBarButtonItemStyleDone
-                                                                              target:self
-                                                                              action:@selector(doneButtonTapped)] autorelease];
+    if(indexPath.section == 1){
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"链接"
+                                                                                   style:UIBarButtonItemStyleDone
+                                                                                  target:self
+                                                                                  action:@selector(doneButtonTapped)] autorelease];
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -127,7 +153,7 @@
     if(section == 0){
         return self.linkedProjectNameList.count;
     }else if(section == 1){
-        return self.projectNameList.count;
+        return self.unlinkedProjectNameList.count;
     }
     return 0;
 }
@@ -143,6 +169,7 @@
         UIButton *removeButton = nil;
         if(!cell){
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:idnetifierForLinkedProject] autorelease];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             nameLabel = [[UILabel new] autorelease];
             nameLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -181,7 +208,7 @@
             cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
         }
         
-        cell.textLabel.text = [self.projectNameList objectAtIndex:indexPath.row];
+        cell.textLabel.text = [self.unlinkedProjectNameList objectAtIndex:indexPath.row];
         return cell;
     }
     return nil;
