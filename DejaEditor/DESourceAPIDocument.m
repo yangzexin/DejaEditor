@@ -9,7 +9,7 @@
 #import "DESourceAPIDocument.h"
 #import "SVFileUtils.h"
 #import "NSString+JavaLikeStringHandle.h"
-#import "SVClassDefineReplaceChecker.h"
+#import "SVClassDefineChecker.h"
 
 @interface DESourceAPIDocument ()
 
@@ -57,7 +57,7 @@
 - (NSArray *)classNameListForScript:(NSString *)script
 {
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
-    [SVClassDefineReplaceChecker handleScript:script classNameBlock:^(NSString *className) {
+    [SVClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
         [tmpClassNameList addObject:className];
     }];
     return tmpClassNameList;

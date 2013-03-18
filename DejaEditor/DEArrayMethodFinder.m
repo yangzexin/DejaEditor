@@ -13,7 +13,7 @@
 #import "NSString+JavaLikeStringHandle.h"
 #import "SVLuaCommonUtils.h"
 #import "DEProject.h"
-#import "SVClassDefineReplaceChecker.h"
+#import "SVClassDefineChecker.h"
 #import "DEFunctionPosition.h"
 
 #define kMethodTypeInstanceMethod 0
@@ -416,7 +416,7 @@
             NSString *paramText = [script substringWithBeginIndex:leftBracketLocation + 1 endIndex:endIndex];
             NSString *className = nil;
             NSString *baseClassName = nil;
-            if(leftInnerText.length == 0 && [SVClassDefineReplaceChecker paramValid:paramText className:&className baseClassName:&baseClassName]){
+            if(leftInnerText.length == 0 && [SVClassDefineChecker paramValid:paramText className:&className baseClassName:&baseClassName]){
                 if([SVLuaCommonUtils isAlphbelts:className]){
                     [nameList addObject:className];
                 }
