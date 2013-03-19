@@ -14,6 +14,7 @@
 #import "SVLuaCommonUtils.h"
 #import "DEProject.h"
 #import "SVClassDefineChecker.h"
+#import "SVPropertyDefineChecker.h"
 #import "DEFunctionPosition.h"
 
 #define kMethodTypeInstanceMethod 0
@@ -105,6 +106,7 @@
                               [DEPretype createWithText:@"math::bitLeftshift(i, p)"],
                               [DEPretype createWithText:@"math::bitRightshift(i, p)"],
                               [DEPretype createWithText:@"class(class, baseClass--[[option]])" additionalText:@"define new class"],
+                              [DEPretype createWithText:@"property(class, property)" additionalText:@"define class property"],
                               [DEPretype createWithText:@"toCStruct(...)"],
                               [DEPretype createWithText:@"table.concat(table, sep,  start, end)"],
                               [DEPretype createWithText:@"table.insert(table, pos, value)"],
@@ -404,30 +406,21 @@
 
 - (NSArray *)classNameListWithScript:(NSString *)script
 {
-    NSInteger beginIndex = 0;
-    NSInteger endIndex = 0;
     NSMutableArray *nameList = [NSMutableArray array];
-    while((beginIndex = [script find:@"class" fromIndex:endIndex]) != -1){
-        NSInteger leftBracketLocation = [script find:@"(" fromIndex:beginIndex + 5];
-        endIndex = [script find:@")" fromIndex:beginIndex + 5];
-        if(leftBracketLocation != -1 && endIndex != -1){
-            NSString *leftInnerText = [script substringWithBeginIndex:beginIndex + 5 endIndex:leftBracketLocation];
-            leftInnerText = [leftInnerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            NSString *paramText = [script substringWithBeginIndex:leftBracketLocation + 1 endIndex:endIndex];
-            NSString *className = nil;
-            NSString *baseClassName = nil;
-            if(leftInnerText.length == 0 && [SVClassDefineChecker paramValid:paramText className:&className baseClassName:&baseClassName]){
-                if([SVLuaCommonUtils isAlphbelts:className]){
-                    [nameList addObject:className];
-                }
-            }else{
-                break;
-            }
-        }else{
-            break;
-        }
-    }
+    [SVClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
+        [nameList addObject:className];
+    }];
     return nameList;
+}
+
+- (NSArray *)propertyMethodListWithScript:(NSString *)script
+{
+    NSMutableArray *methodList = [NSMutableArray array];
+    [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+        [methodList addObject:[SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]];
+        [methodList addObject:[SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]];
+    }];
+    return methodList;
 }
 
 - (void)analyzeProject:(id<DEProject>)project exceptedScriptName:(NSString *)scriptName
@@ -458,6 +451,14 @@
             [self.class addPretypeTextList:tmpOtherFunctionNameList
                                     toList:self.commonPretypeListRaw
                               additionText:[NSString stringWithFormat:@"%@ function", tmpScriptName]];
+            [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]
+                                        toList:self.commonPretypeListRaw
+                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]
+                                        toList:self.commonPretypeListRaw
+                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+            }];
         }
     }
 }
@@ -525,6 +526,7 @@
         }
         [self.localVarNameList addObjectsFromArray:tmpLocalVarNameList];
         if(tmpClassNameList.count != 0){
+            [self.class addPretypeTextList:tmpClassNameList toList:self.commonPretypeList additionText:@"local class"];
             [tmpLocalVarNameList addObjectsFromArray:tmpClassNameList];
             [self.highlightPretypeText addObjectsFromArray:tmpClassNameList];
         }
@@ -533,6 +535,15 @@
         
         if(tmpFunctionNameList.count != 0){
             [self.class addPretypeTextList:tmpFunctionNameList toList:self.commonPretypeList additionText:@"local function"];
+            // property methods
+            [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
+                                        toList:self.instanceMethodList
+                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
+                                        toList:self.instanceMethodList
+                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+            }];
             [self.highlightPretypeText addObjectsFromArray:tmpFunctionNameList];
         }
         if(tmpClassMethodNameList.count != 0){
