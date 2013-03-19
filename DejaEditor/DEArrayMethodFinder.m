@@ -453,10 +453,10 @@
                               additionText:[NSString stringWithFormat:@"%@ function", tmpScriptName]];
             [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
                 [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]
-                                        toList:self.commonPretypeListRaw
+                                        toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
                 [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]
-                                        toList:self.commonPretypeListRaw
+                                        toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
             }];
         }
@@ -533,17 +533,17 @@
         // add all local var as common pretype
         [self.class addPretypeTextList:tmpLocalVarNameList toList:self.commonPretypeList additionText:@"local variable"];
         
+        // property methods
+        [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
+                                    toList:self.instanceMethodList
+                              additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
+                                    toList:self.instanceMethodList
+                              additionText:[NSString stringWithFormat:@"%@ instance method", className]];
+        }];
         if(tmpFunctionNameList.count != 0){
             [self.class addPretypeTextList:tmpFunctionNameList toList:self.commonPretypeList additionText:@"local function"];
-            // property methods
-            [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
-                                        toList:self.instanceMethodList
-                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
-                                        toList:self.instanceMethodList
-                                  additionText:[NSString stringWithFormat:@"%@ instance method", className]];
-            }];
             [self.highlightPretypeText addObjectsFromArray:tmpFunctionNameList];
         }
         if(tmpClassMethodNameList.count != 0){
