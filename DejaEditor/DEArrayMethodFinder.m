@@ -452,10 +452,10 @@
                                     toList:self.commonPretypeListRaw
                               additionText:[NSString stringWithFormat:@"%@ function", tmpScriptName]];
             [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
                                         toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
                                         toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
             }];
