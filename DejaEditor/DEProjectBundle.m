@@ -100,4 +100,14 @@
     return NO;
 }
 
+- (NSArray *)scriptNames
+{
+    return nil;
+}
+
+- (NSArray *)resourceNames
+{
+    return nil;
+}
+
 @end
