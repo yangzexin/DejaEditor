@@ -18,6 +18,7 @@
 #import "SVApp.h"
 #import "SVAppManager.h"
 #import "LINavigationController.h"
+#import "SVWaiting.h"
 
 @interface DEProjectListViewController ()
 
