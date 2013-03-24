@@ -61,7 +61,7 @@
         for(id<DEProject> relatedProject in linkedProjectList){
             data = [relatedProject resourceDataWithName:resName];
             if(data != nil){
-                break;
+                return data;
             }
         }
     }
