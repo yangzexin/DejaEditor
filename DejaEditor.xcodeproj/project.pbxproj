@@ -10,6 +10,7 @@
 		3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */; };
 		3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
+		3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */; };
 		3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E41C19416F584B600F01993 /* MediaPlayer.framework */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
@@ -80,6 +81,7 @@
 		3E0ADFBA16E82E4600685764 /* NSAttributedString+TextColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+TextColor.h"; sourceTree = "<group>"; };
 		3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+TextColor.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3E41C19416F584B600F01993 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -176,6 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */,
 				3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */,
 				3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */,
 				3E6541C516DCE35900368931 /* AudioToolbox.framework in Frameworks */,
@@ -410,6 +413,7 @@
 		3E6541B616DCE30400368931 /* AddInFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */,
 				3E6541BA16DCE35900368931 /* AudioToolbox.framework */,
 				3E6541BB16DCE35900368931 /* AVFoundation.framework */,
 				3E6541BC16DCE35900368931 /* CFNetwork.framework */,
