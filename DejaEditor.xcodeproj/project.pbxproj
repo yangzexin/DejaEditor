@@ -12,6 +12,9 @@
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
 		3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */; };
 		3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E41C19416F584B600F01993 /* MediaPlayer.framework */; };
+		3E4CA894171FB51E0037DFC1 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4CA893171FB51E0037DFC1 /* Dropbox.framework */; };
+		3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */; };
+		3E4CA899171FB5870037DFC1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4CA898171FB5870037DFC1 /* Security.framework */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
 		3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412A16DCE0E900368931 /* CoreGraphics.framework */; };
@@ -83,6 +86,10 @@
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3E41C19416F584B600F01993 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3E4CA893171FB51E0037DFC1 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = 3rdLibraries/Dropbox.framework; sourceTree = SOURCE_ROOT; };
+		3E4CA895171FB5440037DFC1 /* DropboxFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxFileManager.h; sourceTree = "<group>"; };
+		3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxFileManager.m; sourceTree = "<group>"; };
+		3E4CA898171FB5870037DFC1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E65412816DCE0E900368931 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E4CA899171FB5870037DFC1 /* Security.framework in Frameworks */,
 				3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */,
 				3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */,
 				3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */,
@@ -196,12 +204,24 @@
 				3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */,
 				3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */,
 				3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */,
+				3E4CA894171FB51E0037DFC1 /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E4CA891171FB4F30037DFC1 /* Dropbox */ = {
+			isa = PBXGroup;
+			children = (
+				3E4CA898171FB5870037DFC1 /* Security.framework */,
+				3E4CA893171FB51E0037DFC1 /* Dropbox.framework */,
+				3E4CA895171FB5440037DFC1 /* DropboxFileManager.h */,
+				3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */,
+			);
+			name = Dropbox;
+			sourceTree = "<group>";
+		};
 		3E65411A16DCE0E900368931 = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +285,7 @@
 		3E65414316DCE10100368931 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3E4CA891171FB4F30037DFC1 /* Dropbox */,
 				3E65414416DCE13600368931 /* DETextInputCatcher.h */,
 				3E65414516DCE13600368931 /* DETextInputCatcher.m */,
 			);
@@ -546,6 +567,7 @@
 				3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */,
 				3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */,
 				3ECD133D16EC077A00B716AF /* TestVC.m in Sources */,
+				3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +644,10 @@
 		3E65414116DCE0E900368931 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/3rdLibraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../Savanna/**";
@@ -639,6 +665,10 @@
 		3E65414216DCE0E900368931 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/3rdLibraries\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../Savanna/**";
