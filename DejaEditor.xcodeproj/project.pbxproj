@@ -11,6 +11,7 @@
 		3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
 		3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */; };
+		3E3D0E571755FE8E00351A95 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3D0E561755FE8E00351A95 /* libSavanna.a */; };
 		3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E41C19416F584B600F01993 /* MediaPlayer.framework */; };
 		3E4CA894171FB51E0037DFC1 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4CA893171FB51E0037DFC1 /* Dropbox.framework */; };
 		3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */; };
@@ -50,7 +51,6 @@
 		3E65419B16DCE22800368931 /* DEAPIClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419016DCE22800368931 /* DEAPIClassViewController.m */; };
 		3E65419C16DCE22800368931 /* DEBaseSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419216DCE22800368931 /* DEBaseSearchViewController.m */; };
 		3E65419D16DCE22800368931 /* DELinkProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65419416DCE22800368931 /* DELinkProjectViewController.m */; };
-		3E6541B916DCE35900368931 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541B416DCE2E100368931 /* libSavanna.a */; };
 		3E6541C516DCE35900368931 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541BA16DCE35900368931 /* AudioToolbox.framework */; };
 		3E6541C616DCE35900368931 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541BB16DCE35900368931 /* AVFoundation.framework */; };
 		3E6541C716DCE35900368931 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541BC16DCE35900368931 /* CFNetwork.framework */; };
@@ -68,16 +68,6 @@
 		3ECD133D16EC077A00B716AF /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestVC.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		3E6541B316DCE2E100368931 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E653EDF16DCDB4C00368931;
-			remoteInfo = Savanna;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		3E0ADFB616E82DA400685764 /* DESimpleColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESimpleColorfulTextView.h; sourceTree = "<group>"; };
 		3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESimpleColorfulTextView.m; sourceTree = "<group>"; };
@@ -85,6 +75,7 @@
 		3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+TextColor.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		3E3D0E561755FE8E00351A95 /* libSavanna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSavanna.a; path = "../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos/libSavanna.a"; sourceTree = "<group>"; };
 		3E41C19416F584B600F01993 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3E4CA893171FB51E0037DFC1 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = 3rdLibraries/Dropbox.framework; sourceTree = SOURCE_ROOT; };
 		3E4CA895171FB5440037DFC1 /* DropboxFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxFileManager.h; sourceTree = "<group>"; };
@@ -159,7 +150,6 @@
 		3E65419216DCE22800368931 /* DEBaseSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEBaseSearchViewController.m; sourceTree = "<group>"; };
 		3E65419316DCE22800368931 /* DELinkProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELinkProjectViewController.h; sourceTree = "<group>"; };
 		3E65419416DCE22800368931 /* DELinkProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELinkProjectViewController.m; sourceTree = "<group>"; };
-		3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
 		3E6541BA16DCE35900368931 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3E6541BB16DCE35900368931 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3E6541BC16DCE35900368931 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -185,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E3D0E571755FE8E00351A95 /* libSavanna.a in Frameworks */,
 				3E4CA899171FB5870037DFC1 /* Security.framework in Frameworks */,
 				3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */,
 				3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */,
@@ -200,7 +191,6 @@
 				3E6541CD16DCE35900368931 /* MobileCoreServices.framework in Frameworks */,
 				3E6541CE16DCE35900368931 /* QuartzCore.framework in Frameworks */,
 				3E6541CF16DCE35900368931 /* SystemConfiguration.framework in Frameworks */,
-				3E6541B916DCE35900368931 /* libSavanna.a in Frameworks */,
 				3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */,
 				3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */,
 				3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */,
@@ -226,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				3E65412C16DCE0E900368931 /* DejaEditor */,
-				3E6541AE16DCE2C700368931 /* SubProjects */,
 				3E65412516DCE0E900368931 /* Frameworks */,
 				3E6541B616DCE30400368931 /* AddInFrameworks */,
 				3E65412416DCE0E900368931 /* Products */,
@@ -415,25 +404,10 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		3E6541AE16DCE2C700368931 /* SubProjects */ = {
-			isa = PBXGroup;
-			children = (
-				3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */,
-			);
-			name = SubProjects;
-			sourceTree = "<group>";
-		};
-		3E6541B016DCE2E100368931 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3E6541B416DCE2E100368931 /* libSavanna.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3E6541B616DCE30400368931 /* AddInFrameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E3D0E561755FE8E00351A95 /* libSavanna.a */,
 				3E6541BA16DCE35900368931 /* AudioToolbox.framework */,
 				3E6541BB16DCE35900368931 /* AVFoundation.framework */,
 				3E6541BC16DCE35900368931 /* CFNetwork.framework */,
@@ -491,28 +465,12 @@
 			mainGroup = 3E65411A16DCE0E900368931;
 			productRefGroup = 3E65412416DCE0E900368931 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3E6541B016DCE2E100368931 /* Products */;
-					ProjectRef = 3E6541AF16DCE2E100368931 /* Savanna.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3E65412216DCE0E900368931 /* DejaEditor */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		3E6541B416DCE2E100368931 /* libSavanna.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSavanna.a;
-			remoteRef = 3E6541B316DCE2E100368931 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E65412116DCE0E900368931 /* Resources */ = {
@@ -652,6 +610,10 @@
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../Savanna/**";
 				INFOPLIST_FILE = "DejaEditor/DejaEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -673,6 +635,10 @@
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "../Savanna/**";
 				INFOPLIST_FILE = "DejaEditor/DejaEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
