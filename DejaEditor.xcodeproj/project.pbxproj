@@ -407,13 +407,13 @@
 		3E6541B616DCE30400368931 /* AddInFrameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3E3D0E561755FE8E00351A95 /* libSavanna.a */,
 				3E6541BA16DCE35900368931 /* AudioToolbox.framework */,
 				3E6541BB16DCE35900368931 /* AVFoundation.framework */,
 				3E6541BC16DCE35900368931 /* CFNetwork.framework */,
 				3E6541BD16DCE35900368931 /* CoreLocation.framework */,
 				3E262F9C16DEEAEB0037AA98 /* CoreText.framework */,
 				3E6541BE16DCE35900368931 /* ImageIO.framework */,
+				3E3D0E561755FE8E00351A95 /* libSavanna.a */,
 				3E6541BF16DCE35900368931 /* libsqlite3.dylib */,
 				3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */,
 				3E6541C016DCE35900368931 /* libz.dylib */,
