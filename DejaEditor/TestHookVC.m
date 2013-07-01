@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 yangzexin. All rights reserved.
 //
 
-#import "TestVC.h"
+#import "TestHookVC.h"
 #import <objc/runtime.h>
 
 typedef void(*UIViewController_viewDidLoad_like_method) (id self, SEL cmd);
@@ -19,9 +19,9 @@ void replace_viewDidLoad(id self, SEL cmd)
     original_viewDidLoad(self, cmd);
 }
 
-@implementation TestVC
+@implementation TestHookVC
 
-+ (void)hook:(TestVC *)vc
++ (void)hook:(TestHookVC *)vc
 {
     Method method = class_getInstanceMethod([vc class], @selector(viewDidLoad));
     original_viewDidLoad = (UIViewController_viewDidLoad_like_method)method_setImplementation(method, (IMP)replace_viewDidLoad);

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TestVC : UIViewController
+@interface TestHookVC : UIViewController
 
 + (void)hook:(UIViewController *)vc;
 

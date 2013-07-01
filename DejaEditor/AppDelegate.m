@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DEProjectListViewController.h"
-#import "TestVC.h"
+#import "TestHookVC.h"
 
 @implementation AppDelegate
 

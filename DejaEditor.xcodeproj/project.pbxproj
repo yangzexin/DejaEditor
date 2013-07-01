@@ -65,7 +65,7 @@
 		3E6541D116DCE41200368931 /* BaseScripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541D016DCE41200368931 /* BaseScripts.bundle */; };
 		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
 		3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */; };
-		3ECD133D16EC077A00B716AF /* TestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestVC.m */; };
+		3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestHookVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,8 +166,8 @@
 		3E934B1F16DDD91600458E83 /* UIFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFactory.m; sourceTree = "<group>"; };
 		3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEColorfulTextView.h; sourceTree = "<group>"; };
 		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
-		3ECD133B16EC077A00B716AF /* TestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestVC.h; sourceTree = "<group>"; };
-		3ECD133C16EC077A00B716AF /* TestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestVC.m; sourceTree = "<group>"; };
+		3ECD133B16EC077A00B716AF /* TestHookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHookVC.h; sourceTree = "<group>"; };
+		3ECD133C16EC077A00B716AF /* TestHookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHookVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,8 +251,8 @@
 				3E65413516DCE0E900368931 /* AppDelegate.h */,
 				3E65413616DCE0E900368931 /* AppDelegate.m */,
 				3E65412D16DCE0E900368931 /* Supporting Files */,
-				3ECD133B16EC077A00B716AF /* TestVC.h */,
-				3ECD133C16EC077A00B716AF /* TestVC.m */,
+				3ECD133B16EC077A00B716AF /* TestHookVC.h */,
+				3ECD133C16EC077A00B716AF /* TestHookVC.m */,
 			);
 			path = DejaEditor;
 			sourceTree = "<group>";
@@ -524,7 +524,7 @@
 				3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */,
 				3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */,
 				3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */,
-				3ECD133D16EC077A00B716AF /* TestVC.m in Sources */,
+				3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */,
 				3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
