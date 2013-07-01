@@ -7,19 +7,19 @@
 //
 
 #import "DEEditorViewController.h"
-#import "SVLuaCommonUtils.h"
-#import "SVAlertDialog.h"
+#import "YXLuaCommonUtils.h"
+#import "YXAlertDialog.h"
 #import "DEAPIDocumentViewController.h"
 #import "DEMethodFinder.h"
 #import "DEMethodFinderFactory.h"
 #import "DETextInputCatcher.h"
-#import "SVLuaCommonUtils.h"
-#import "SVDelayControl.h"
+#import "YXLuaCommonUtils.h"
+#import "YXDelayControl.h"
 #import "DEPretype.h"
 #import "NSString+JavaLikeStringHandle.h"
 #import "DEStringPosition.h"
 #import "LogView.h"
-#import "SVUITools.h"
+#import "YXUITools.h"
 #import "DEFunctionPosition.h"
 #import <QuartzCore/QuartzCore.h>
 #import "QRFindReplaceView.h"
@@ -53,7 +53,7 @@
 @property(nonatomic, retain)UITableView *pretypeSelectionListTableView;
 @property(nonatomic, retain)UIView *pretypeSelectionListTableViewShadowView;
 @property(nonatomic, retain)NSArray *pretypeSelectionList;
-@property(nonatomic, retain)SVDelayControl *delayControlForAnalyzer;
+@property(nonatomic, retain)YXDelayControl *delayControlForAnalyzer;
 @property(nonatomic, retain)UIToolbar *bottomToolbar;
 @property(nonatomic, retain)UIToolbar *topToolbar;
 @property(nonatomic, retain)UIBarButtonItem *showTopBarButton;
@@ -397,7 +397,7 @@
         }];
         [((DESimpleColorfulTextView *)self.textView) setTextDidResetBlock:^{
             self.blockPretypeAnalyse = YES;
-            [[[[SVDelayControl alloc] initWithInterval:1.0f completion:^{
+            [[[[YXDelayControl alloc] initWithInterval:1.0f completion:^{
                 self.blockPretypeAnalyse = NO;
             }] autorelease] start];
         }];
@@ -425,7 +425,7 @@
 - (void)startAnalyse
 {
     [self.methodFinder analyzeWithScriptName:self.scriptName script:self.textView.text project:self.project];
-    self.delayControlForAnalyzer = [[[SVDelayControl alloc] initWithInterval:5.0f completion:^{
+    self.delayControlForAnalyzer = [[[YXDelayControl alloc] initWithInterval:5.0f completion:^{
         [self startAnalyse];
     }] autorelease];
     [self.delayControlForAnalyzer start];
@@ -465,7 +465,7 @@
                                               range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastDotLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastDotLocation + 1, caretLocation - lastDotLocation - 1)];
-        if(![SVLuaCommonUtils isAlphbelts:innerText]){
+        if(![YXLuaCommonUtils isAlphbelts:innerText]){
             lastDotLocation = NSNotFound;
         }
     }
@@ -474,7 +474,7 @@
                                                 range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastColonLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastColonLocation + 1, caretLocation - lastColonLocation - 1)];
-        if(![SVLuaCommonUtils isAlphbelts:innerText]){
+        if(![YXLuaCommonUtils isAlphbelts:innerText]){
             lastColonLocation = NSNotFound;
         }
     }
@@ -619,7 +619,7 @@
 {   
     NSString *script = self.textView.text;
     NSString *scriptName = self.scriptName;
-    if(![SVLuaCommonUtils scriptIsMainScript:script]){
+    if(![YXLuaCommonUtils scriptIsMainScript:script]){
         scriptName = nil;
     }
     [self saveScript];
@@ -983,7 +983,7 @@
                                                         range:NSMakeRange(self.currentInvokeCaretLocation, text.length - self.currentInvokeCaretLocation)].location;
         if(rightBracketLocation != NSNotFound){
             NSString *innerText = [text substringWithRange:NSMakeRange(self.currentInvokeCaretLocation, rightBracketLocation - self.currentInvokeCaretLocation)];
-            if([SVLuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
+            if([YXLuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
                 rightBracketExists = YES;
             }
         }

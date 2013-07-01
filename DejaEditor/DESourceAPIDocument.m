@@ -7,9 +7,9 @@
 //
 
 #import "DESourceAPIDocument.h"
-#import "SVFileUtils.h"
+#import "YXFileUtils.h"
 #import "NSString+JavaLikeStringHandle.h"
-#import "SVClassDefineChecker.h"
+#import "YXClassDefineChecker.h"
 
 @interface DESourceAPIDocument ()
 
@@ -35,7 +35,7 @@
     NSString *bundlePath = [bundle bundlePath];
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
     NSMutableDictionary *tmpClassFilePathDictionary = [NSMutableDictionary dictionary];
-    [SVFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
+    [YXFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
         if(!isDirectory){
             NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
             NSArray *scriptClassNameList = [self classNameListForScript:script];
@@ -57,7 +57,7 @@
 - (NSArray *)classNameListForScript:(NSString *)script
 {
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
-    [SVClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
+    [YXClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
         [tmpClassNameList addObject:className];
     }];
     return tmpClassNameList;

@@ -8,7 +8,7 @@
 
 #import "DEProjectBundle.h"
 #import "DEProject.h"
-#import "SVLuaCommonUtils.h"
+#import "YXLuaCommonUtils.h"
 
 @interface DEProjectBundle ()
 
@@ -80,7 +80,7 @@
     if(_mainScriptName.length == 0){
         for(NSString *fileName in [self.project scriptNameList]){
             NSString *script = [self.project scriptContentWithName:fileName];
-            if([SVLuaCommonUtils scriptIsMainScript:script]){
+            if([YXLuaCommonUtils scriptIsMainScript:script]){
                 return script;
             }
         }

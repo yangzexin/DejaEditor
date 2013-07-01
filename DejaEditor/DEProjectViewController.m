@@ -8,17 +8,17 @@
 
 #import "DEProjectViewController.h"
 #import "DEEditorViewController.h"
-#import "SVApp.h"
-#import "SVAppManager.h"
+#import "YXApp.h"
+#import "YXAppManager.h"
 #import "DEProjectBundle.h"
-#import "SVAlertDialog.h"
-#import "SVInputDialog.h"
+#import "YXAlertDialog.h"
+#import "YXInputDialog.h"
 #import "LogView.h"
-#import "SVImagePicker.h"
+#import "YXImagePicker.h"
 #import "DELinkProjectViewController.h"
-#import "SVLuaCommonUtils.h"
+#import "YXLuaCommonUtils.h"
 #import "LINavigationController.h"
-#import "SVActionDialog.h"
+#import "YXActionDialog.h"
 
 @interface DEProjectViewController ()
 
@@ -68,7 +68,7 @@
         NSString *mainScriptName = nil;
         for(NSString *fileName in [self.project scriptNameList]){
             NSString *script = [self.project scriptContentWithName:fileName];
-            if([SVLuaCommonUtils scriptIsMainScript:script]){
+            if([YXLuaCommonUtils scriptIsMainScript:script]){
                 mainScriptName = fileName;
                 break;
             }
@@ -160,7 +160,7 @@
     DEProjectBundle *bundle = [[[DEProjectBundle alloc] initWithProject:self.project] autorelease];
     bundle.mainScriptName = mainScriptName;
     if([bundle mainScript].length == 0){
-        [SVAlertDialog showWithTitle:@"没有找到程序入口函数main，是否创建?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        [YXAlertDialog showWithTitle:@"没有找到程序入口函数main，是否创建?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
             if(buttonIndex == 1){
                 NSMutableArray *viewControllers = [NSMutableArray array];
                 for(UIViewController *viewController in self.navigationController.viewControllers){
@@ -181,12 +181,12 @@
         [nc setConsoleButtonTapBlock:^{
             [[LogView sharedInstance] setHidden:NO];
         }];
-        SVApp *app = [[[SVApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
+        YXApp *app = [[[YXApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
         [app setConsoleOutputBlock:^(NSString *output) {
             VLog(@"%@", output);
         }];
         [self presentViewController:nc animated:YES completion:nil];
-        [SVAppManager runApp:app];
+        [YXAppManager runApp:app];
         [self.runningAppList addObject:app];
     }
 }
@@ -207,8 +207,8 @@
     }
     [self.navigationController setViewControllers:newViewControllers animated:animated];
     
-    for(SVApp *app in self.runningAppList){
-        [SVAppManager destoryAppWithAppId:[app.scriptBundle bundleId]];
+    for(YXApp *app in self.runningAppList){
+        [YXAppManager destoryAppWithAppId:[app.scriptBundle bundleId]];
         [[LogView sharedInstance] log:[NSString stringWithFormat:@"stop app:%@", [app.scriptBundle bundleId]]];
     }
     [self.runningAppList removeAllObjects];
@@ -216,10 +216,10 @@
 
 - (void)createScript
 {
-    [SVInputDialog showWithTitle:@"输入脚本名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [YXInputDialog showWithTitle:@"输入脚本名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0){
             if([self.project scriptExistsWithName:input]){
-                [SVAlertDialog showWithTitle:nil message:@"文件已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [YXAlertDialog showWithTitle:nil message:@"文件已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
             }else{
                 [self createScriptWithName:input];
             }
@@ -236,14 +236,14 @@
 
 - (void)createImage
 {
-    [SVImagePicker presentWithViewController:self completion:^(UIImage *image) {
+    [YXImagePicker presentWithViewController:self completion:^(UIImage *image) {
         [self addImageToProject:image];
     }];
 }
 
 - (void)addImageToProject:(UIImage *)image
 {
-    [SVInputDialog showWithTitle:@"添加图片" message:@"请输入图片名" cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [YXInputDialog showWithTitle:@"添加图片" message:@"请输入图片名" cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0){
             if(![[input lowercaseString] hasSuffix:@".png"]){
                 input = [NSString stringWithFormat:@"%@.png", input];
@@ -251,7 +251,7 @@
             NSData *imgData = UIImagePNGRepresentation(image);
             
             if([self.project resourceDataExistsWithName:input]){
-                [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"文件%@已存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                [YXAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"文件%@已存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                     if(buttonIndex == 1){
                         [self saveImageWithName:input data:imgData];
                     }else if(buttonIndex == 2){
@@ -317,7 +317,7 @@
 
 - (void)addButtonTapped
 {
-    [SVAlertDialog showWithTitle:@"新建文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [YXAlertDialog showWithTitle:@"新建文件" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if(buttonIndex == 1){
             [self createScript];
         }else if(buttonIndex == 2){
@@ -351,7 +351,7 @@
             [self.project sychronizeProjectConfiguration];
             return YES;
         }else{
-            [SVAlertDialog showWithTitle:@"链接项目失败，该项目已经链接" message:nil completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+            [YXAlertDialog showWithTitle:@"链接项目失败，该项目已经链接" message:nil completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
         }
         return NO;
     }];
@@ -374,12 +374,12 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     NSString *scriptName = [self.scriptNameList objectAtIndex:indexPath.row];
     NSString *script = [self.project scriptContentWithName:scriptName];
-    if([SVLuaCommonUtils scriptIsMainScript:script]){
+    if([YXLuaCommonUtils scriptIsMainScript:script]){
         [self.project setMainScriptName:scriptName];
         [self.tableView reloadData];
         [self updateToolbarItemsStatesWithSelectState:NO];
     }else{
-        [SVAlertDialog showWithTitle:NSLocalizedString(@"error", nil)
+        [YXAlertDialog showWithTitle:NSLocalizedString(@"error", nil)
                            message:[NSString stringWithFormat:@"Cannot find main function in script:%@", scriptName]
                         completion:nil
                  cancelButtonTitle:@"确定"
@@ -403,9 +403,9 @@
 
 - (void)renameScriptWithName:(NSString *)scriptName
 {
-    [SVInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:scriptName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [YXInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:scriptName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if([self.project scriptExistsWithName:input]){
-            [SVAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新脚本名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [YXAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新脚本名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [self renameScriptWithName:scriptName];
                 }
@@ -420,9 +420,9 @@
 
 - (void)renameResourceWithName:(NSString *)resourceName
 {
-    [SVInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:resourceName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [YXInputDialog showWithTitle:@"新名称" message:@"请输入脚本的新名称" initText:resourceName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if([self.project resourceDataExistsWithName:input]){
-            [SVAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [YXAlertDialog showWithTitle:@"发生错误" message:[NSString stringWithFormat:@"新名称: %@ 已经存在", input] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [self renameResourceWithName:resourceName];
                 }
@@ -476,7 +476,7 @@
             NSString *resName = [self.resourceNameList objectAtIndex:indexPath.row];
             NSData *resData = [self.project resourceDataWithName:resName];
             NSArray *projectNameList = [self.projectManager projectNameList];
-            [SVActionDialog showWithTitle:@"选择已有项目打开文件" completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [YXActionDialog showWithTitle:@"选择已有项目打开文件" completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex < projectNameList.count){
                     [[LogView sharedInstance] clear];
                     id<DEProject> selectedProject = [self.projectManager projectWithName:[projectNameList objectAtIndex:buttonIndex]];
@@ -485,13 +485,13 @@
                     [nc setStopButtonTapBlock:^{
                         [self stopAllRunningAppAnimated:NO];
                     }];
-                    SVApp *app = [[[SVApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
+                    YXApp *app = [[[YXApp alloc] initWithScriptBundle:bundle relatedViewController:nc] autorelease];
                     [app setConsoleOutputBlock:^(NSString *output) {
                         [[LogView sharedInstance] log:output];
                     }];
                     [self presentViewController:nc animated:YES completion:nil];
                     [self.runningAppList addObject:app];
-                    [SVAppManager runApp:app params:resData];
+                    [YXAppManager runApp:app params:resData];
                 }
             } cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitleList:projectNameList];
         }
@@ -530,7 +530,7 @@
 {
     if(editingStyle == UITableViewCellEditingStyleDelete){
         NSString *fileName = indexPath.section == 0 ? [self.scriptNameList objectAtIndex:indexPath.row] : [self.resourceNameList objectAtIndex:indexPath.row];
-        [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"删除%@?", fileName] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+        [YXAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"删除%@?", fileName] completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
             if(buttonIndex == 1){
                 if(indexPath.section == 0){
                     [self.project removeScriptWithName:fileName];

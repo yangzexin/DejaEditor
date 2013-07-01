@@ -7,7 +7,7 @@
 //
 
 #import "LogView.h"
-#import "SVCommonUtils.h"
+#import "YXCommonUtils.h"
 
 @interface LogView ()
 
@@ -73,13 +73,13 @@
 
 - (void)saveToLastLog:(NSString *)log
 {
-    NSString *filePath = [[SVCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
+    NSString *filePath = [[YXCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
     [log writeToFile:filePath atomically:NO encoding:NSUTF8StringEncoding error:nil];
 }
 
 - (NSString *)lastLog
 {
-    NSString *filePath = [[SVCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
+    NSString *filePath = [[YXCommonUtils tmpPath] stringByAppendingPathComponent:@"log.txt"];
     return [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
 }
 

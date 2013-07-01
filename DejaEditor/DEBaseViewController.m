@@ -8,13 +8,13 @@
 
 #import "DEBaseViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "SVProviderPool.h"
+#import "YXProviderPool.h"
 
 @interface DEBaseViewController ()
 
 @property(nonatomic, retain)UILabel *titleLabel;
 @property(nonatomic, copy)NSString *customTitle;
-@property(nonatomic, retain)SVProviderPool *providerPool;
+@property(nonatomic, retain)YXProviderPool *providerPool;
 
 @end
 
@@ -37,7 +37,7 @@
     self.title = NSLocalizedString(@"Back", nil);
     self.customTitle = @"Untitled";
     
-    self.providerPool = [[SVProviderPool new] autorelease];
+    self.providerPool = [[YXProviderPool new] autorelease];
     
     return self;
 }
@@ -88,7 +88,7 @@
     self.customTitle = title;
 }
 
-- (void)addProviderToPool:(id<SVProviderPoolable>)provider
+- (void)addProviderToPool:(id<YXProviderPoolable>)provider
 {
     [_providerPool tryToReleaseProvider];
     [_providerPool addProvider:provider];

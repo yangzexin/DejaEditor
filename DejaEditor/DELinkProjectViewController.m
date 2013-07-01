@@ -8,8 +8,8 @@
 
 #import "DELinkProjectViewController.h"
 #import "DEProjectManager.h"
-#import "SVAlertDialog.h"
-#import "SVDelayControl.h"
+#import "YXAlertDialog.h"
+#import "YXDelayControl.h"
 
 @interface DELinkProjectViewController ()
 
@@ -91,7 +91,7 @@
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.linkedProjectNameList.count - 1 inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView endUpdates];
-        [[[[SVDelayControl alloc] initWithInterval:0.25f completion:^{
+        [[[[YXDelayControl alloc] initWithInterval:0.25f completion:^{
             [self.tableView reloadData];
         }] autorelease] start];
     }
@@ -101,7 +101,7 @@
 - (void)removeButtonTapped:(UIButton *)removeButton
 {
     NSInteger index = removeButton.tag;
-    [SVAlertDialog showWithTitle:@"确定要解除该项目吗?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+    [YXAlertDialog showWithTitle:@"确定要解除该项目吗?" message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
         if(buttonIndex == 1){
             if(self.removeProjectBlock){
                 self.removeProjectBlock([self.linkedProjectNameList objectAtIndex:index], index);
@@ -115,7 +115,7 @@
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.unlinkedProjectNameList.count - 1 inSection:1]]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
             [self.tableView endUpdates];
-            [[[[SVDelayControl alloc] initWithInterval:0.25f completion:^{
+            [[[[YXDelayControl alloc] initWithInterval:0.25f completion:^{
                 [self.tableView reloadData];
             }] autorelease] start];
         }
