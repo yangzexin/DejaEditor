@@ -68,6 +68,23 @@
 		3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestHookVC.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3ECF7DFA179177E2002B25DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E653EDF16DCDB4C00368931;
+			remoteInfo = Savanna;
+		};
+		3ECF7DFC179177E2002B25DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E6AC49F1764804000AE1E34;
+			remoteInfo = SerailizationUtils;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		3E0ADFB616E82DA400685764 /* DESimpleColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESimpleColorfulTextView.h; sourceTree = "<group>"; };
 		3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESimpleColorfulTextView.m; sourceTree = "<group>"; };
@@ -168,6 +185,7 @@
 		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
 		3ECD133B16EC077A00B716AF /* TestHookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHookVC.h; sourceTree = "<group>"; };
 		3ECD133C16EC077A00B716AF /* TestHookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHookVC.m; sourceTree = "<group>"; };
+		3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +261,7 @@
 		3E65412C16DCE0E900368931 /* DejaEditor */ = {
 			isa = PBXGroup;
 			children = (
+				3ECF7DF4179177AA002B25DC /* Dependencies */,
 				3E65414316DCE10100368931 /* Utils */,
 				3E65414716DCE18E00368931 /* UIComponents */,
 				3E65414E16DCE1A100368931 /* SubModules */,
@@ -426,6 +445,23 @@
 			name = AddInFrameworks;
 			sourceTree = "<group>";
 		};
+		3ECF7DF4179177AA002B25DC /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		3ECF7DF6179177E2002B25DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3ECF7DFB179177E2002B25DC /* libSavanna.a */,
+				3ECF7DFD179177E2002B25DC /* libSerailizationUtils.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -465,12 +501,35 @@
 			mainGroup = 3E65411A16DCE0E900368931;
 			productRefGroup = 3E65412416DCE0E900368931 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3ECF7DF6179177E2002B25DC /* Products */;
+					ProjectRef = 3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3E65412216DCE0E900368931 /* DejaEditor */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3ECF7DFB179177E2002B25DC /* libSavanna.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSavanna.a;
+			remoteRef = 3ECF7DFA179177E2002B25DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3ECF7DFD179177E2002B25DC /* libSerailizationUtils.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSerailizationUtils.a;
+			remoteRef = 3ECF7DFC179177E2002B25DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3E65412116DCE0E900368931 /* Resources */ = {
