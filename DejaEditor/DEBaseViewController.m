@@ -50,12 +50,20 @@
 {
     [super loadView];
     
+    BOOL ios7 = [UIDevice currentDevice].systemVersion.floatValue >= 7.0f;
+    
     self.titleLabel = [UIFactory label];
     self.titleLabel.textAlignment = UITextAlignmentCenter;
-    self.titleLabel.textColor = [UIColor blackColor];
+    self.titleLabel.textColor = ios7 ? [UIColor blackColor] : [UIColor whiteColor];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     self.titleLabel.text = _customTitle;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
+    if (!ios7) {
+        self.titleLabel.layer.shadowRadius = 0.5f;
+        self.titleLabel.layer.shadowOpacity = 1.0f;
+        self.titleLabel.layer.shadowOffset = CGSizeMake(0, -0.5f);
+        self.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    }
     self.titleLabel.frame = CGRectMake(0, 0, [_customTitle sizeWithFont:self.titleLabel.font].width,
                                        self.titleLabel.font.lineHeight);
     self.navigationItem.titleView = self.titleLabel;

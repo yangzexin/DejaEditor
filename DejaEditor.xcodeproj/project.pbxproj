@@ -62,9 +62,9 @@
 		3E6541CD16DCE35900368931 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C216DCE35900368931 /* MobileCoreServices.framework */; };
 		3E6541CE16DCE35900368931 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C316DCE35900368931 /* QuartzCore.framework */; };
 		3E6541CF16DCE35900368931 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C416DCE35900368931 /* SystemConfiguration.framework */; };
-		3E6541D116DCE41200368931 /* BaseScripts.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3E6541D016DCE41200368931 /* BaseScripts.bundle */; };
 		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
 		3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */; };
+		3EC711FA193E189C00ABE4EB /* Savanna.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3EC711F9193E189C00ABE4EB /* Savanna.bundle */; };
 		3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestHookVC.m */; };
 /* End PBXBuildFile section */
 
@@ -171,11 +171,11 @@
 		3E6541C216DCE35900368931 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3E6541C316DCE35900368931 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3E6541C416DCE35900368931 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3E6541D016DCE41200368931 /* BaseScripts.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = BaseScripts.bundle; path = ../../Savanna/Resources/BaseScripts.bundle; sourceTree = "<group>"; };
 		3E934B1E16DDD91600458E83 /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
 		3E934B1F16DDD91600458E83 /* UIFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFactory.m; sourceTree = "<group>"; };
 		3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEColorfulTextView.h; sourceTree = "<group>"; };
 		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
+		3EC711F9193E189C00ABE4EB /* Savanna.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Savanna.bundle; path = ../../Savanna/Savanna.bundle; sourceTree = "<group>"; };
 		3ECD133B16EC077A00B716AF /* TestHookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHookVC.h; sourceTree = "<group>"; };
 		3ECD133C16EC077A00B716AF /* TestHookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHookVC.m; sourceTree = "<group>"; };
 		3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
@@ -411,7 +411,7 @@
 		3E65419E16DCE23700368931 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3E6541D016DCE41200368931 /* BaseScripts.bundle */,
+				3EC711F9193E189C00ABE4EB /* Savanna.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -522,8 +522,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E6541D116DCE41200368931 /* BaseScripts.bundle in Resources */,
 				3E65413116DCE0E900368931 /* InfoPlist.strings in Resources */,
+				3EC711FA193E189C00ABE4EB /* Savanna.bundle in Resources */,
 				3E65413916DCE0E900368931 /* Default.png in Resources */,
 				3E65413B16DCE0E900368931 /* Default@2x.png in Resources */,
 				3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */,
