@@ -31,7 +31,7 @@
 {
     self = [super init];
     
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"BaseScripts" ofType:@"bundle"]];
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"Savanna" ofType:@"bundle"]];
     NSString *bundlePath = [bundle bundlePath];
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
     NSMutableDictionary *tmpClassFilePathDictionary = [NSMutableDictionary dictionary];
