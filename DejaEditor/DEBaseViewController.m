@@ -8,13 +8,13 @@
 
 #import "DEBaseViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "YXProviderPool.h"
+#import "SVProviderPool.h"
 
 @interface DEBaseViewController ()
 
 @property(nonatomic, retain)UILabel *titleLabel;
 @property(nonatomic, copy)NSString *customTitle;
-@property(nonatomic, retain)YXProviderPool *providerPool;
+@property(nonatomic, retain)SVProviderPool *providerPool;
 
 @end
 
@@ -37,7 +37,7 @@
     self.title = NSLocalizedString(@"Back", nil);
     self.customTitle = @"Untitled";
     
-    self.providerPool = [[YXProviderPool new] autorelease];
+    self.providerPool = [[SVProviderPool new] autorelease];
     
     return self;
 }
@@ -52,13 +52,9 @@
     
     self.titleLabel = [UIFactory label];
     self.titleLabel.textAlignment = UITextAlignmentCenter;
-    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.textColor = [UIColor blackColor];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     self.titleLabel.text = _customTitle;
-    self.titleLabel.layer.shadowRadius = 0.5f;
-    self.titleLabel.layer.shadowOpacity = 1.0f;
-    self.titleLabel.layer.shadowOffset = CGSizeMake(0, -0.5f);
-    self.titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
     self.titleLabel.adjustsFontSizeToFitWidth = YES;
     self.titleLabel.frame = CGRectMake(0, 0, [_customTitle sizeWithFont:self.titleLabel.font].width,
                                        self.titleLabel.font.lineHeight);
@@ -88,7 +84,7 @@
     self.customTitle = title;
 }
 
-- (void)addProviderToPool:(id<YXProviderPoolable>)provider
+- (void)addProviderToPool:(id<SVProviderPoolable>)provider
 {
     [_providerPool tryToReleaseProvider];
     [_providerPool addProvider:provider];

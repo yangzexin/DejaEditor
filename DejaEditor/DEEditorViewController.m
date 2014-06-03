@@ -7,19 +7,19 @@
 //
 
 #import "DEEditorViewController.h"
-#import "YXLuaCommonUtils.h"
-#import "YXAlertDialog.h"
+#import "SVLuaCommonUtils.h"
+#import "SVAlertDialog.h"
 #import "DEAPIDocumentViewController.h"
 #import "DEMethodFinder.h"
 #import "DEMethodFinderFactory.h"
 #import "DETextInputCatcher.h"
-#import "YXLuaCommonUtils.h"
-#import "YXDelayControl.h"
+#import "SVLuaCommonUtils.h"
+#import "SVDelayControl.h"
 #import "DEPretype.h"
-#import "NSString+JavaLikeStringHandle.h"
+#import "NSString+SVJavaLikeStringHandle.h"
 #import "DEStringPosition.h"
 #import "LogView.h"
-#import "YXUITools.h"
+#import "SVUITools.h"
 #import "DEFunctionPosition.h"
 #import <QuartzCore/QuartzCore.h>
 #import "QRFindReplaceView.h"
@@ -53,7 +53,7 @@
 @property(nonatomic, retain)UITableView *pretypeSelectionListTableView;
 @property(nonatomic, retain)UIView *pretypeSelectionListTableViewShadowView;
 @property(nonatomic, retain)NSArray *pretypeSelectionList;
-@property(nonatomic, retain)YXDelayControl *delayControlForAnalyzer;
+@property(nonatomic, retain)SVDelayControl *delayControlForAnalyzer;
 @property(nonatomic, retain)UIToolbar *bottomToolbar;
 @property(nonatomic, retain)UIToolbar *topToolbar;
 @property(nonatomic, retain)UIBarButtonItem *showTopBarButton;
@@ -397,7 +397,7 @@
         }];
         [((DESimpleColorfulTextView *)self.textView) setTextDidResetBlock:^{
             self.blockPretypeAnalyse = YES;
-            [[[[YXDelayControl alloc] initWithInterval:1.0f completion:^{
+            [[[[SVDelayControl alloc] initWithInterval:1.0f completion:^{
                 self.blockPretypeAnalyse = NO;
             }] autorelease] start];
         }];
@@ -425,7 +425,7 @@
 - (void)startAnalyse
 {
     [self.methodFinder analyzeWithScriptName:self.scriptName script:self.textView.text project:self.project];
-    self.delayControlForAnalyzer = [[[YXDelayControl alloc] initWithInterval:5.0f completion:^{
+    self.delayControlForAnalyzer = [[[SVDelayControl alloc] initWithInterval:5.0f completion:^{
         [self startAnalyse];
     }] autorelease];
     [self.delayControlForAnalyzer start];
@@ -465,7 +465,7 @@
                                               range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastDotLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastDotLocation + 1, caretLocation - lastDotLocation - 1)];
-        if(![YXLuaCommonUtils isAlphbelts:innerText]){
+        if(![SVLuaCommonUtils isAlphbelts:innerText]){
             lastDotLocation = NSNotFound;
         }
     }
@@ -474,7 +474,7 @@
                                                 range:NSMakeRange(lastBlockBeginIndex, caretLocation - lastBlockBeginIndex)].location;
     if(lastColonLocation != NSNotFound){
         NSString *innerText = [text substringWithRange:NSMakeRange(lastColonLocation + 1, caretLocation - lastColonLocation - 1)];
-        if(![YXLuaCommonUtils isAlphbelts:innerText]){
+        if(![SVLuaCommonUtils isAlphbelts:innerText]){
             lastColonLocation = NSNotFound;
         }
     }
@@ -619,7 +619,7 @@
 {   
     NSString *script = self.textView.text;
     NSString *scriptName = self.scriptName;
-    if(![YXLuaCommonUtils scriptIsMainScript:script]){
+    if(![SVLuaCommonUtils scriptIsMainScript:script]){
         scriptName = nil;
     }
     [self saveScript];
@@ -634,29 +634,29 @@
         [self.textView insertText:@"\t"];
     }else{
         NSInteger caretLocation = self.textView.selectedRange.location;
-        NSInteger lastNewLineLocation = [self.textView.text find:@"\n" fromIndex:caretLocation reverse:YES];
+        NSInteger lastNewLineLocation = [self.textView.text sv_find:@"\n" fromIndex:caretLocation reverse:YES];
         if(lastNewLineLocation == -1){
             lastNewLineLocation = 0;
         }
-        NSInteger endNewLineLocation = [self.textView.text find:@"\n" fromIndex:caretLocation + self.textView.selectedRange.length];
+        NSInteger endNewLineLocation = [self.textView.text sv_find:@"\n" fromIndex:caretLocation + self.textView.selectedRange.length];
         if(endNewLineLocation == -1){
             endNewLineLocation = self.textView.text.length;
         }
-        NSString *selectedLinesText = [self.textView.text substringWithBeginIndex:lastNewLineLocation + 1 endIndex:endNewLineLocation];
+        NSString *selectedLinesText = [self.textView.text sv_substringWithBeginIndex:lastNewLineLocation + 1 endIndex:endNewLineLocation];
         NSMutableString *resultString = [NSMutableString stringWithString:@"\t"];
         NSInteger beginIndex = 0;
         NSInteger endIndex = 0;
-        while((beginIndex = [selectedLinesText find:@"\n" fromIndex:endIndex]) != -1){
-            [resultString appendFormat:@"%@\n\t", [selectedLinesText substringWithBeginIndex:endIndex endIndex:beginIndex]];
+        while((beginIndex = [selectedLinesText sv_find:@"\n" fromIndex:endIndex]) != -1){
+            [resultString appendFormat:@"%@\n\t", [selectedLinesText sv_substringWithBeginIndex:endIndex endIndex:beginIndex]];
             endIndex = beginIndex + 1;
         }
         if(endIndex != selectedLinesText.length){
-            [resultString appendString:[selectedLinesText substringWithBeginIndex:endIndex endIndex:selectedLinesText.length]];
+            [resultString appendString:[selectedLinesText sv_substringWithBeginIndex:endIndex endIndex:selectedLinesText.length]];
         }
-        NSString *leftString = [self.textView.text substringWithBeginIndex:0 endIndex:lastNewLineLocation + 1];
+        NSString *leftString = [self.textView.text sv_substringWithBeginIndex:0 endIndex:lastNewLineLocation + 1];
         NSString *rightString = @"";
         if(endNewLineLocation != self.textView.text.length){
-            rightString = [self.textView.text substringWithBeginIndex:endNewLineLocation endIndex:self.textView.text.length];
+            rightString = [self.textView.text sv_substringWithBeginIndex:endNewLineLocation endIndex:self.textView.text.length];
         }
         self.textView.text = [NSString stringWithFormat:@"%@%@%@", leftString, resultString, rightString];
         self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, 0);
@@ -726,7 +726,7 @@
     NSMutableArray *list = [NSMutableArray array];
     NSInteger beginIndex = 0;
     
-    while((beginIndex = [text find:matching fromIndex:beginIndex]) != -1){
+    while((beginIndex = [text sv_find:matching fromIndex:beginIndex]) != -1){
         [list addObject:[DEStringPosition createWithPosition:beginIndex string:matching]];
         ++beginIndex;
     }
@@ -747,7 +747,7 @@
     NSInteger lastIndex = 0;
     for(NSInteger i = 0; i < allPositionList.count; ++i){
         DEStringPosition *sp = [allPositionList objectAtIndex:i];
-        [self.textView insertText:[text substringWithBeginIndex:lastIndex endIndex:sp.position]];
+        [self.textView insertText:[text sv_substringWithBeginIndex:lastIndex endIndex:sp.position]];
         [self.textView insertText:sp.string];
         lastIndex = sp.position + 1;
     }
@@ -983,7 +983,7 @@
                                                         range:NSMakeRange(self.currentInvokeCaretLocation, text.length - self.currentInvokeCaretLocation)].location;
         if(rightBracketLocation != NSNotFound){
             NSString *innerText = [text substringWithRange:NSMakeRange(self.currentInvokeCaretLocation, rightBracketLocation - self.currentInvokeCaretLocation)];
-            if([YXLuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
+            if([SVLuaCommonUtils isAlphbelts:[innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]]){
                 rightBracketExists = YES;
             }
         }
@@ -991,15 +991,15 @@
         NSString *replaceMethodName = nil;
         BOOL originalParams = NO;
         if(!originalParams){
-            NSInteger leftEdge = [text find:@"\n" fromIndex:self.currentInvokePosition reverse:YES];
+            NSInteger leftEdge = [text sv_find:@"\n" fromIndex:self.currentInvokePosition reverse:YES];
             if(leftEdge == -1){
                 leftEdge = 0;
             }else{
                 ++leftEdge;
             }
-            NSInteger lastWhitespace = [text find:@" " fromIndex:self.currentInvokePosition reverse:YES];
+            NSInteger lastWhitespace = [text sv_find:@" " fromIndex:self.currentInvokePosition reverse:YES];
             if(leftEdge < lastWhitespace){
-                NSString *innerText = [text substringWithBeginIndex:leftEdge endIndex:lastWhitespace];
+                NSString *innerText = [text sv_substringWithBeginIndex:leftEdge endIndex:lastWhitespace];
                 innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                 if([innerText isEqualToString:@"function"]){
                     originalParams = YES;
@@ -1100,7 +1100,7 @@
     NSInteger beginIndex = 0;
     NSInteger endIndex = 0;
     NSInteger count = 1;
-    while((beginIndex = [subText find:@"\n" fromIndex:endIndex]) != -1){
+    while((beginIndex = [subText sv_find:@"\n" fromIndex:endIndex]) != -1){
         endIndex = beginIndex + 1;
         ++count;
     }

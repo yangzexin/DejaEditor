@@ -7,9 +7,9 @@
 //
 
 #import "DESourceAPIDocument.h"
-#import "YXFileUtils.h"
-#import "NSString+JavaLikeStringHandle.h"
-#import "YXClassDefineChecker.h"
+#import "SVFileUtils.h"
+#import "NSString+SVJavaLikeStringHandle.h"
+#import "SVClassDefineChecker.h"
 
 @interface DESourceAPIDocument ()
 
@@ -35,7 +35,7 @@
     NSString *bundlePath = [bundle bundlePath];
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
     NSMutableDictionary *tmpClassFilePathDictionary = [NSMutableDictionary dictionary];
-    [YXFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
+    [SVFileUtils enumerateWithDirectoryPath:bundlePath filePathBlock:^(NSString *filePath, BOOL isDirectory) {
         if(!isDirectory){
             NSString *script = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
             NSArray *scriptClassNameList = [self classNameListForScript:script];
@@ -57,7 +57,7 @@
 - (NSArray *)classNameListForScript:(NSString *)script
 {
     NSMutableArray *tmpClassNameList = [NSMutableArray array];
-    [YXClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
+    [SVClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
         [tmpClassNameList addObject:className];
     }];
     return tmpClassNameList;
@@ -81,20 +81,20 @@
     NSInteger beginIndex = -1;
     NSInteger endIndex = 0;
     NSString *matching = @"function ";
-    while((beginIndex = [script find:matching fromIndex:endIndex]) != -1){
+    while((beginIndex = [script sv_find:matching fromIndex:endIndex]) != -1){
         beginIndex += matching.length;
-        endIndex = [script find:@")" fromIndex:beginIndex];
+        endIndex = [script sv_find:@")" fromIndex:beginIndex];
         if(endIndex == -1){
             continue;
         }
-        NSString *methodName = [script substringWithBeginIndex:beginIndex endIndex:endIndex + 1];
+        NSString *methodName = [script sv_substringWithBeginIndex:beginIndex endIndex:endIndex + 1];
         methodName = [methodName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        NSInteger separatorIndex = [methodName find:@":" fromIndex:0];
+        NSInteger separatorIndex = [methodName sv_find:@":" fromIndex:0];
         if(separatorIndex == -1){
-            separatorIndex = [methodName find:@"." fromIndex:0];
+            separatorIndex = [methodName sv_find:@"." fromIndex:0];
         }
         if([methodName hasPrefix:className] && separatorIndex != -1){
-            methodName = [methodName substringWithBeginIndex:separatorIndex endIndex:methodName.length];
+            methodName = [methodName sv_substringWithBeginIndex:separatorIndex endIndex:methodName.length];
             [methodList addObject:methodName];
         }
     }

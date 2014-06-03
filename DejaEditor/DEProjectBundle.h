@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YXScriptBundle.h"
+#import "SVScriptBundle.h"
 #import "DEProject.h"
 
-@interface DEProjectBundle : NSObject <YXScriptBundle>
+@interface DEProjectBundle : NSObject <SVScriptBundle>
 
 @property(nonatomic, copy)NSString *mainScriptName;
 

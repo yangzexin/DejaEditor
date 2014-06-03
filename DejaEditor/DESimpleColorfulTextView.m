@@ -9,7 +9,7 @@
 #import "DESimpleColorfulTextView.h"
 #import "NSAttributedString+TextColor.h"
 #import "DEColorfulTextView.h"
-#import "NSString+JavaLikeStringHandle.h"
+#import "NSString+SVJavaLikeStringHandle.h"
 
 @implementation DESimpleColorfulTextView
 
@@ -72,8 +72,8 @@
     NSInteger beginIndex = 0;
     NSInteger endIndex = 0;
     UIColor *stringColor = [UIColor colorWithRed:203.f/255.f green:46.0/255.f blue:31.f/255.f alpha:1];
-    while((beginIndex = [text find:@"\"" fromIndex:endIndex]) != -1){
-        endIndex = [text find:@"\"" fromIndex:beginIndex + 1];
+    while((beginIndex = [text sv_find:@"\"" fromIndex:endIndex]) != -1){
+        endIndex = [text sv_find:@"\"" fromIndex:beginIndex + 1];
         if(endIndex != -1){
             NSRange range = NSMakeRange(beginIndex, ++endIndex - beginIndex);
             [tmpAttributedString setTextColor:stringColor range:range];
@@ -84,8 +84,8 @@
     beginIndex = 0;
     endIndex = 0;
     UIColor *commentColor = [UIColor colorWithRed:0 green:100.0/255.f blue:0 alpha:1];
-    while((beginIndex = [text find:@"--" fromIndex:endIndex]) != -1){
-        endIndex = [text find:@"\n" fromIndex:beginIndex];
+    while((beginIndex = [text sv_find:@"--" fromIndex:endIndex]) != -1){
+        endIndex = [text sv_find:@"\n" fromIndex:beginIndex];
         if(endIndex == -1){
             [tmpAttributedString setTextColor:commentColor range:NSMakeRange(beginIndex, text.length - beginIndex)];
             break;
@@ -95,8 +95,8 @@
     }
     beginIndex = 0;
     endIndex = 0;
-    while((beginIndex = [text find:@"--[[" fromIndex:endIndex]) != -1){
-        endIndex = [text find:@"]]" fromIndex:beginIndex];
+    while((beginIndex = [text sv_find:@"--[[" fromIndex:endIndex]) != -1){
+        endIndex = [text sv_find:@"]]" fromIndex:beginIndex];
         if(endIndex == -1){
             [tmpAttributedString setTextColor:commentColor range:NSMakeRange(beginIndex, text.length - beginIndex)];
             break;

@@ -9,16 +9,16 @@
 #import "DEProjectListViewController.h"
 #import "DEProjectManager.h"
 #import "DEProjectManagerFactory.h"
-#import "YXInputDialog.h"
+#import "SVInputDialog.h"
 #import "DEProjectViewController.h"
-#import "YXAlertDialog.h"
+#import "SVAlertDialog.h"
 #import "DEZipProjectManager.h"
-#import "YXWaiting.h"
-#import "YXLocalAppBundle.h"
-#import "YXApp.h"
-#import "YXAppManager.h"
+#import "SVWaiting.h"
+#import "SVLocalAppBundle.h"
+#import "SVApp.h"
+#import "SVAppManager.h"
 #import "LINavigationController.h"
-#import "YXWaiting.h"
+#import "SVWaiting.h"
 
 @interface DEProjectListViewController ()
 
@@ -86,7 +86,7 @@
     self.navigationController.toolbar.barStyle = self.navigationController.navigationBar.barStyle;
     
     [self reloadProjectList];
-    [YXAppManager destoryAllApps];
+    [SVAppManager destoryAllApps];
 }
 
 #pragma mark - private methods
@@ -156,10 +156,10 @@
 #pragma mark - events
 - (void)addNewProjectButtonTapped
 {
-    [YXInputDialog showWithTitle:@"请输入项目的名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+    [SVInputDialog showWithTitle:@"请输入项目的名称" message:nil cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
         if(input.length != 0 && [self validateProjectName:input]){
             if([self.projectManager projectExistsWithName:input]){
-                [YXAlertDialog showWithTitle:@"" message:@"项目已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [SVAlertDialog showWithTitle:@"" message:@"项目已存在" completion:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 return;
             }
             [self.projectManager projectWithName:input];
@@ -197,7 +197,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     if(indexPath.section == 0){
         NSString *projectName = [self.projectList objectAtIndex:indexPath.row];
-        [YXInputDialog showWithTitle:@"请输入新名称" message:nil initText:projectName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
+        [SVInputDialog showWithTitle:@"请输入新名称" message:nil initText:projectName cancelButtonTitle:@"取消" approveButtonTitle:@"确定" completion:^(NSString *input) {
             if(input.length != 0 && [self validateProjectName:input]){
                 [self.projectManager renameProjectWithName:projectName newName:input];
                 [self reloadProjectList];
@@ -260,7 +260,7 @@
         NSString *zipProjectName = [self.projectArchiveList objectAtIndex:indexPath.row];
         NSString *lowerZipProjectName = [zipProjectName lowercaseString];
         if([lowerZipProjectName hasSuffix:@".zip"]){
-            [YXAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"是否要解压项目%@", zipProjectName]
+            [SVAlertDialog showWithTitle:@"" message:[NSString stringWithFormat:@"是否要解压项目%@", zipProjectName]
                             completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
@@ -269,35 +269,35 @@
                         if(success){
                             [self reloadProjectList];
                         }else{
-                            [YXAlertDialog showWithTitle:nil
+                            [SVAlertDialog showWithTitle:nil
                                                message:[NSString stringWithFormat:@"项目%@已经存在", zipProjectName]
                                             completion:nil
                                      cancelButtonTitle:@"确定"
                                   otherButtonTitleList:nil];
                         }
                     }else{
-                        [YXAlertDialog showWithTitle:nil message:@"解压失败，不是有效的项目文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+                        [SVAlertDialog showWithTitle:nil message:@"解压失败，不是有效的项目文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
                     }
                 }
             } cancelButtonTitle:@"取消" otherButtonTitles:@"解压", nil];
         }else if([lowerZipProjectName hasSuffix:kPackageFileExtenstion]){
-            [YXWaiting showWaiting:YES inView:self.view];
+            [SVWaiting showWaiting:YES inView:self.view];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [YXWaiting showWaiting:NO inView:self.view];
+                    [SVWaiting showWaiting:NO inView:self.view];
                     if(unzipedProjectPath){
-                        id<YXScriptBundle> sb = [[[YXLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
+                        id<SVScriptBundle> sb = [[[SVLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
                         LINavigationController *nc = [[LINavigationController new] autorelease];
                         [nc setStopButtonTapBlock:^{
                             [self dismissViewControllerAnimated:YES completion:nil];
-                            [YXAppManager destoryAllApps];
+                            [SVAppManager destoryAllApps];
                         }];
                         [self presentViewController:nc animated:YES completion:nil];
-                        YXApp *app = [[[YXApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
-                        [YXAppManager runApp:app];
+                        SVApp *app = [[[SVApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
+                        [SVAppManager runApp:app];
                     }else{
-                        [YXAlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+                        [SVAlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
                     }
                 });
             });
@@ -323,7 +323,7 @@
     if(editingStyle == UITableViewCellEditingStyleDelete){
         if(indexPath.section == 0){
             NSString *projectName = [self.projectList objectAtIndex:indexPath.row];
-            [YXAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", projectName] message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [SVAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", projectName] message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [self.projectManager removeProjectWithName:projectName];
                     self.projectList = [self.projectManager projectNameList];
@@ -334,7 +334,7 @@
             } cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         }else if(indexPath.section == 1){
             NSString *zipProjectName = [self.projectArchiveList objectAtIndex:indexPath.row];
-            [YXAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", zipProjectName]  message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+            [SVAlertDialog showWithTitle:[NSString stringWithFormat:@"确定要删除项目%@吗", zipProjectName]  message:nil completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
                 if(buttonIndex == 1){
                     [DEZipProjectManager removeZipProjecWithName:zipProjectName];
                     self.projectArchiveList = [DEZipProjectManager zipProjectNameList];

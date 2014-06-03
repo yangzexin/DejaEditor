@@ -7,8 +7,8 @@
 //
 
 #import "DEColorfulTextView.h"
-#import "YXCommonUtils.h"
-#import "YXTimeCostTracer.h"
+#import "SVCommonUtils.h"
+#import "SVTimeCostTracer.h"
 #import "NSAttributedString+TextColor.h"
 
 @interface DEColorfulTextView ()
@@ -67,12 +67,12 @@
     BOOL isPrechAlphat = NO;
     if(range.location != 0){
         unichar prech = [text characterAtIndex:range.location - 1];
-        isPrechAlphat = [YXCommonUtils isAlphbelt:prech];
+        isPrechAlphat = [SVCommonUtils isAlphbelt:prech];
     }
     BOOL isSufchAlphbelt = NO;
     if(range.location + word.length < text.length){
         unichar sufch = [text characterAtIndex:range.location + word.length];
-        isSufchAlphbelt = [YXCommonUtils isAlphbelt:sufch];
+        isSufchAlphbelt = [SVCommonUtils isAlphbelt:sufch];
     }
     return !isPrechAlphat && !isSufchAlphbelt;
 }
@@ -85,7 +85,7 @@
     self.updatingColor = YES;
     NSString *text = self.text;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [YXTimeCostTracer markWithIdentifier:@"updateColorCost"];
+        [SVTimeCostTracer markWithIdentifier:@"updateColorCost"];
         NSAttributedString *attributedText = nil;
         NSMutableAttributedString *content = [[[NSMutableAttributedString alloc] initWithString:text] autorelease];
         content = [content setColor:[UIColor colorWithRed:223.f/255.f green:63.f/255.f blue:178.f/255.f alpha:1]
@@ -110,7 +110,7 @@
                 self.selectedRange = tmpRange;
             }
             self.updatingColor = NO;
-            [YXTimeCostTracer timeCostWithIdentifier:@"updateColorCost" print:YES];
+            [SVTimeCostTracer timeCostWithIdentifier:@"updateColorCost" print:YES];
         });
     });
 }

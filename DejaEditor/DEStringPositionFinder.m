@@ -7,7 +7,7 @@
 //
 
 #import "DEStringPositionFinder.h"
-#import "NSString+JavaLikeStringHandle.h"
+#import "NSString+SVJavaLikeStringHandle.h"
 #import "DEStringPosition.h"
 
 @interface StringPositionFinder ()
@@ -30,7 +30,7 @@
     NSMutableArray *positionList = [NSMutableArray array];
     NSInteger beginIndex = 0;
     NSInteger endIndex = 0;
-    while((beginIndex = [string find:matching fromIndex:endIndex reverse:NO isCaseSensitive:isCaseSensitive]) != -1){
+    while((beginIndex = [string sv_find:matching fromIndex:endIndex reverse:NO isCaseSensitive:isCaseSensitive]) != -1){
         endIndex = beginIndex + matching.length;
         DEStringPosition *tmpStrPosition = [DEStringPosition createWithPosition:beginIndex string:matching];
         [positionList addObject:tmpStrPosition];

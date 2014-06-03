@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "YXProviderPool.h"
+#import "SVProviderPool.h"
 
 @interface DEBaseViewController : UIViewController
 
-- (void)addProviderToPool:(id<YXProviderPoolable>)provider;
+- (void)addProviderToPool:(id<SVProviderPoolable>)provider;
 - (UIView *)customTitleView;
 
 @end

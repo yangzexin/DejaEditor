@@ -7,11 +7,11 @@
 //
 
 #import "DEZipProjectManager.h"
-#import "YXZipHandler.h"
-#import "YXZipHandlerFactory.h"
+#import "SVZipHandler.h"
+#import "SVZipHandlerFactory.h"
 #import "DEProject.h"
-#import "YXCommonUtils.h"
-#import "YXLuaScriptCompiler.h"
+#import "SVCommonUtils.h"
+#import "SVLuaScriptCompiler.h"
 
 NSString *kPackageFileExtenstion = @".pkg";
 
@@ -39,14 +39,14 @@ NSString *kPackageFileExtenstion = @".pkg";
 {
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *zipFilePath = [documentPath stringByAppendingPathComponent:zipProjectName];
-    id<YXZipHandler> zipHandler = [YXZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     [zipHandler unzipWithFilePath:zipFilePath toDirectoryPath:toDirectoryPath];
 }
 
 + (void)zipProject:(id<DEProject>)mainProject
 {
     BOOL zipLinkedProject = NO;
-    id<YXZipHandler> zipHandler = [YXZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     NSString *tmpPath = [NSString stringWithFormat:@"%@/tmp", NSHomeDirectory()];
     tmpPath = [tmpPath stringByAppendingPathComponent:@"__tmp"];
     if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]){
@@ -78,13 +78,13 @@ NSString *kPackageFileExtenstion = @".pkg";
     }
     
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
-    NSString *zipFilePath = [documentPath stringByAppendingPathComponent:[YXCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@.zip", [mainProject name]] atDirectory:documentPath]];
+    NSString *zipFilePath = [documentPath stringByAppendingPathComponent:[SVCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@.zip", [mainProject name]] atDirectory:documentPath]];
     [zipHandler zipWithDirectoryPath:projectPath toFilePath:zipFilePath];
 }
 
 + (void)packageProject:(id<DEProject>)mainProject
 {
-    id<YXZipHandler> zipHandler = [YXZipHandlerFactory defaultZipHandler];
+    id<SVZipHandler> zipHandler = [SVZipHandlerFactory defaultZipHandler];
     NSString *tmpPath = [NSString stringWithFormat:@"%@/tmp", NSHomeDirectory()];
     tmpPath = [tmpPath stringByAppendingPathComponent:@"__tmp"];
     if([[NSFileManager defaultManager] fileExistsAtPath:tmpPath]){
@@ -108,7 +108,7 @@ NSString *kPackageFileExtenstion = @".pkg";
     NSMutableArray *projectList = [NSMutableArray arrayWithArray:[mainProject linkedProjectList]];
     [projectList addObject:mainProject];// add main project to last, as to override resource files
     
-    id<YXScriptCompiler> scriptCompiler = [YXLuaScriptCompiler defaultScriptCompiler];
+    id<SVScriptCompiler> scriptCompiler = [SVLuaScriptCompiler defaultScriptCompiler];
     for(id<DEProject> tmpProject in projectList){
         for(NSString *resName in [tmpProject resourceNameList]){
             NSData *data = [tmpProject resourceDataWithName:resName];
@@ -132,7 +132,7 @@ NSString *kPackageFileExtenstion = @".pkg";
     
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *zipFilePath = [documentPath stringByAppendingPathComponent:
-                             [YXCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@%@", [mainProject name], kPackageFileExtenstion]
+                             [SVCommonUtils countableTempFileName:[NSString stringWithFormat:@"%@%@", [mainProject name], kPackageFileExtenstion]
                                                     atDirectory:documentPath]];
     [zipHandler zipWithDirectoryPath:projectPath toFilePath:zipFilePath];
 }
@@ -141,7 +141,7 @@ NSString *kPackageFileExtenstion = @".pkg";
 {
     NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
     NSString *fileName = [filePath lastPathComponent];
-    fileName = [YXCommonUtils countableTempFileName:fileName atDirectory:documentPath];
+    fileName = [SVCommonUtils countableTempFileName:fileName atDirectory:documentPath];
     [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:[documentPath stringByAppendingPathComponent:fileName] error:nil];
     return fileName;
 }

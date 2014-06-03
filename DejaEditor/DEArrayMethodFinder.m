@@ -10,11 +10,11 @@
 #import "DEScriptAPIDocument.h"
 #import "DEScriptAPIDocumentFactory.h"
 #import "DEPretype.h"
-#import "NSString+JavaLikeStringHandle.h"
-#import "YXLuaCommonUtils.h"
+#import "NSString+SVJavaLikeStringHandle.h"
+#import "SVLuaCommonUtils.h"
 #import "DEProject.h"
-#import "YXClassDefineChecker.h"
-#import "YXPropertyDefineChecker.h"
+#import "SVClassDefineChecker.h"
+#import "SVPropertyDefineChecker.h"
 #import "DEFunctionPosition.h"
 
 #define kMethodTypeInstanceMethod 0
@@ -289,33 +289,33 @@
     NSMutableArray *tmpFunctionNameList = [NSMutableArray array];
     NSMutableArray *tmpFunctionParamList = [NSMutableArray array];
     NSMutableArray *tmpFunctionPositionList = [NSMutableArray array];
-    while((beginIndex = [script find:matching fromIndex:endIndex]) != -1){
-        endIndex = [script find:@")" fromIndex:beginIndex];
+    while((beginIndex = [script sv_find:matching fromIndex:endIndex]) != -1){
+        endIndex = [script sv_find:@")" fromIndex:beginIndex];
         if(endIndex != -1){
             NSUInteger leftBracketLocation = [script rangeOfString:@"("
                                                            options:NSBackwardsSearch
                                                              range:NSMakeRange(beginIndex + matching.length, endIndex - beginIndex - matching.length)].location;
             if(leftBracketLocation != -1){
-                NSString *funcName = [script substringWithBeginIndex:beginIndex + matching.length endIndex:leftBracketLocation];
+                NSString *funcName = [script sv_substringWithBeginIndex:beginIndex + matching.length endIndex:leftBracketLocation];
                 funcName = [funcName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                NSInteger separatorLocation = [funcName find:@":"];
+                NSInteger separatorLocation = [funcName sv_find:@":"];
                 NSInteger methodType = -1;
                 if(separatorLocation != -1){
                     methodType = kMethodTypeInstanceMethod;
-                    funcName = [funcName substringWithBeginIndex:separatorLocation + 1 endIndex:funcName.length];
+                    funcName = [funcName sv_substringWithBeginIndex:separatorLocation + 1 endIndex:funcName.length];
                 }else{
-                    separatorLocation = [funcName find:@"."];
+                    separatorLocation = [funcName sv_find:@"."];
                     if(separatorLocation != -1){
                         methodType = kMethodTypeClassMethod;
-                        funcName = [funcName substringWithBeginIndex:separatorLocation + 1 endIndex:funcName.length];
+                        funcName = [funcName sv_substringWithBeginIndex:separatorLocation + 1 endIndex:funcName.length];
                     }else{
                         methodType = kMethodTypeCommonFunction;
                     }
                 }
-                if([YXLuaCommonUtils isAlphbelts:funcName]){
-                    NSString *funcParamsWithBracket = [script substringWithBeginIndex:leftBracketLocation endIndex:endIndex + 1];
+                if([SVLuaCommonUtils isAlphbelts:funcName]){
+                    NSString *funcParamsWithBracket = [script sv_substringWithBeginIndex:leftBracketLocation endIndex:endIndex + 1];
                     funcName = [NSString stringWithFormat:@"%@%@", funcName, funcParamsWithBracket];
-                    DEFunctionPosition *tmpFP = [DEFunctionPosition createWithFunctionName:[script substringWithBeginIndex:beginIndex endIndex:endIndex + 1]
+                    DEFunctionPosition *tmpFP = [DEFunctionPosition createWithFunctionName:[script sv_substringWithBeginIndex:beginIndex endIndex:endIndex + 1]
                                                                               location:beginIndex];
                     [tmpFunctionPositionList addObject:tmpFP];
                     switch (methodType) {
@@ -332,7 +332,7 @@
                             break;
                     }
                     
-                    NSString *params = [script substringWithBeginIndex:leftBracketLocation + 1 endIndex:endIndex];
+                    NSString *params = [script sv_substringWithBeginIndex:leftBracketLocation + 1 endIndex:endIndex];
                     NSArray *paramList = [params componentsSeparatedByString:@","];
                     for(NSString *param in paramList){
                         param = [param stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -389,13 +389,13 @@
     NSInteger beginIndex = 0;
     NSInteger endIndex = 0;
     NSMutableArray *list = [NSMutableArray array];
-    while((beginIndex = [script find:matching fromIndex:endIndex]) != -1){
-        endIndex = [script find:@"\n" fromIndex:beginIndex];
+    while((beginIndex = [script sv_find:matching fromIndex:endIndex]) != -1){
+        endIndex = [script sv_find:@"\n" fromIndex:beginIndex];
         if(endIndex != -1){
-            NSString *innerText = [script substringWithBeginIndex:beginIndex + matching.length endIndex:endIndex];
+            NSString *innerText = [script sv_substringWithBeginIndex:beginIndex + matching.length endIndex:endIndex];
             innerText = [innerText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             if([innerText hasPrefix:@"\""]){
-                innerText = [innerText substringWithBeginIndex:1 endIndex:innerText.length - 1];
+                innerText = [innerText sv_substringWithBeginIndex:1 endIndex:innerText.length - 1];
                 [list addObject:innerText];
             }
         }else{
@@ -408,7 +408,7 @@
 - (NSArray *)classNameListWithScript:(NSString *)script
 {
     NSMutableArray *nameList = [NSMutableArray array];
-    [YXClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
+    [SVClassDefineChecker handleScript:script classNameBlock:^(NSString *className) {
         [nameList addObject:className];
     }];
     return nameList;
@@ -417,9 +417,9 @@
 - (NSArray *)propertyMethodListWithScript:(NSString *)script
 {
     NSMutableArray *methodList = [NSMutableArray array];
-    [YXPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
-        [methodList addObject:[YXPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]];
-        [methodList addObject:[YXPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]];
+    [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+        [methodList addObject:[SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]];
+        [methodList addObject:[SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]];
     }];
     return methodList;
 }
@@ -452,11 +452,11 @@
             [self.class addPretypeTextList:tmpOtherFunctionNameList
                                     toList:self.commonPretypeListRaw
                               additionText:[NSString stringWithFormat:@"%@ function", tmpScriptName]];
-            [YXPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [YXPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
+            [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
                                         toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
-                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [YXPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
+                [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
                                         toList:self.instanceMethodListRaw
                                   additionText:[NSString stringWithFormat:@"%@ instance method", className]];
             }];
@@ -494,9 +494,9 @@
         NSInteger beginIndex = 0;
         NSInteger endIndex = 0;
         NSString *matching = @"local ";
-        while((beginIndex = [script find:matching fromIndex:endIndex]) != -1){
-            NSInteger assignPosition = [script find:@"=" fromIndex:beginIndex];
-            NSInteger endPosition = [script find:@";" fromIndex:beginIndex];
+        while((beginIndex = [script sv_find:matching fromIndex:endIndex]) != -1){
+            NSInteger assignPosition = [script sv_find:@"=" fromIndex:beginIndex];
+            NSInteger endPosition = [script sv_find:@";" fromIndex:beginIndex];
             if(assignPosition == -1){
                 endIndex = endPosition;
             }else if(endPosition == -1){
@@ -505,15 +505,15 @@
                 endIndex = MIN(assignPosition, endPosition);
             }
             if(endIndex != -1){
-                NSString *varName = [script substringWithBeginIndex:beginIndex + 6 endIndex:endIndex];
+                NSString *varName = [script sv_substringWithBeginIndex:beginIndex + 6 endIndex:endIndex];
                 varName = [varName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                if([YXLuaCommonUtils isAlphbelts:varName] && ![tmpLocalVarNameList containsObject:varName]){
+                if([SVLuaCommonUtils isAlphbelts:varName] && ![tmpLocalVarNameList containsObject:varName]){
                     [tmpLocalVarNameList addObject:varName];
                 }else if([varName rangeOfString:@","].location != NSNotFound){
                     NSArray *varNameList = [varName componentsSeparatedByString:@","];
                     for(NSString *tmpVarName in varNameList){
                         tmpVarName = [tmpVarName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                        if([YXLuaCommonUtils isAlphbelts:tmpVarName] && ![tmpLocalVarNameList containsObject:tmpVarName]){
+                        if([SVLuaCommonUtils isAlphbelts:tmpVarName] && ![tmpLocalVarNameList containsObject:tmpVarName]){
                             [tmpLocalVarNameList addObject:tmpVarName];
                         }
                     }
@@ -535,11 +535,11 @@
         [self.class addPretypeTextList:tmpLocalVarNameList toList:self.commonPretypeList additionText:@"local variable"];
         
         // property methods
-        [YXPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
-            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [YXPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
+        [SVPropertyDefineChecker handleScript:script propertyNameBlock:^(NSString *className, NSString *propertyName) {
+            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@(obj)", [SVPropertyDefineChecker setterMethodNameWithPropertyName:propertyName]]]
                                     toList:self.instanceMethodList
                               additionText:[NSString stringWithFormat:@"%@ instance method", className]];
-            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [YXPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
+            [self.class addPretypeTextList:[NSArray arrayWithObject:[NSString stringWithFormat:@"%@()", [SVPropertyDefineChecker getterMethodNameWithPropertyName:propertyName]]]
                                     toList:self.instanceMethodList
                               additionText:[NSString stringWithFormat:@"%@ instance method", className]];
         }];
@@ -558,13 +558,13 @@
             varName = [NSString stringWithFormat:@"%@.", varName];
             beginIndex = 0;
             endIndex = 0;
-            while((beginIndex = [script find:varName fromIndex:endIndex]) != -1){
-                endIndex = [script find:@"=" fromIndex:beginIndex];
+            while((beginIndex = [script sv_find:varName fromIndex:endIndex]) != -1){
+                endIndex = [script sv_find:@"=" fromIndex:beginIndex];
                 if(endIndex != -1){
-                    NSString *subVarName = [script substringWithBeginIndex:beginIndex + varName.length endIndex:endIndex];
+                    NSString *subVarName = [script sv_substringWithBeginIndex:beginIndex + varName.length endIndex:endIndex];
                     subVarName = [subVarName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                     endIndex = beginIndex + varName.length;
-                    if([YXLuaCommonUtils isAlphbelts:subVarName] && ![tmpSubVarNameList containsObject:subVarName]){
+                    if([SVLuaCommonUtils isAlphbelts:subVarName] && ![tmpSubVarNameList containsObject:subVarName]){
                         [tmpSubVarNameList addObject:subVarName];
                     }
                 }else{
