@@ -1,0 +1,37 @@
+PODS:
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - Reachability (3.2)
+  - Savanna (0.0.1):
+    - ASIHTTPRequest (~> 1.8.2)
+    - ZipArchive (~> 1.2.0)
+    - ZipKit (~> 1.0.1)
+  - ZipArchive (1.2.0)
+  - ZipKit (1.0.3)
+
+DEPENDENCIES:
+  - Savanna (from `../Savanna`)
+
+EXTERNAL SOURCES:
+  Savanna:
+    :path: ../Savanna
+
+SPEC CHECKSUMS:
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Savanna: fefa468e09793cc5e611e2acea6863ed90180d93
+  ZipArchive: 83ea626ea99bae97743ae6413aeb493dd4e48335
+  ZipKit: 594735e7ad2fd3ee7349759681a0423a1b296572
+
+COCOAPODS: 0.39.0

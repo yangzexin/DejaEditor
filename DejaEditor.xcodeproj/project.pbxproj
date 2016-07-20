@@ -64,19 +64,8 @@
 		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
 		3EA5B26E193EAA85009027DC /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA5B26D193EAA85009027DC /* Dropbox.framework */; };
 		3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */; };
-		3EC711FA193E189C00ABE4EB /* Savanna.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3EC711F9193E189C00ABE4EB /* Savanna.bundle */; };
-		3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD133C16EC077A00B716AF /* TestHookVC.m */; };
+		C51CD826334DC1488072A95A /* libPods-DejaEditor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C837132489AC98470403F1F /* libPods-DejaEditor.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3ECF7DFA179177E2002B25DC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E653EDF16DCDB4C00368931;
-			remoteInfo = Savanna;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3E0ADFB616E82DA400685764 /* DESimpleColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESimpleColorfulTextView.h; sourceTree = "<group>"; };
@@ -175,10 +164,9 @@
 		3EA5B26D193EAA85009027DC /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Vendor/Dropbox.framework; sourceTree = SOURCE_ROOT; };
 		3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEColorfulTextView.h; sourceTree = "<group>"; };
 		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
-		3EC711F9193E189C00ABE4EB /* Savanna.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Savanna.bundle; path = ../../Savanna/Savanna.bundle; sourceTree = "<group>"; };
-		3ECD133B16EC077A00B716AF /* TestHookVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHookVC.h; sourceTree = "<group>"; };
-		3ECD133C16EC077A00B716AF /* TestHookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHookVC.m; sourceTree = "<group>"; };
-		3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Savanna.xcodeproj; path = ../../Savanna/Savanna.xcodeproj; sourceTree = "<group>"; };
+		5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DejaEditor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DejaEditor/Pods-DejaEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		7C837132489AC98470403F1F /* libPods-DejaEditor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DejaEditor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DejaEditor.release.xcconfig"; path = "Pods/Target Support Files/Pods-DejaEditor/Pods-DejaEditor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,12 +194,22 @@
 				3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */,
 				3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */,
 				3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */,
+				C51CD826334DC1488072A95A /* libPods-DejaEditor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2958431D6E46634C8C262DE6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */,
+				E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3E4CA891171FB4F30037DFC1 /* Dropbox */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,10 +225,10 @@
 			isa = PBXGroup;
 			children = (
 				3E65412C16DCE0E900368931 /* DejaEditor */,
-				3ECF7DF4179177AA002B25DC /* Dependencies */,
 				3E65412516DCE0E900368931 /* Frameworks */,
 				3E6541B616DCE30400368931 /* AddInFrameworks */,
 				3E65412416DCE0E900368931 /* Products */,
+				2958431D6E46634C8C262DE6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -248,6 +246,7 @@
 				3E65412616DCE0E900368931 /* UIKit.framework */,
 				3E65412816DCE0E900368931 /* Foundation.framework */,
 				3E65412A16DCE0E900368931 /* CoreGraphics.framework */,
+				7C837132489AC98470403F1F /* libPods-DejaEditor.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -259,11 +258,8 @@
 				3E65414716DCE18E00368931 /* UIComponents */,
 				3E65414E16DCE1A100368931 /* SubModules */,
 				3E65418216DCE21B00368931 /* ViewControllers */,
-				3E65419E16DCE23700368931 /* Resources */,
 				3E65413516DCE0E900368931 /* AppDelegate.h */,
 				3E65413616DCE0E900368931 /* AppDelegate.m */,
-				3ECD133B16EC077A00B716AF /* TestHookVC.h */,
-				3ECD133C16EC077A00B716AF /* TestHookVC.m */,
 				3E65412D16DCE0E900368931 /* Supporting Files */,
 			);
 			path = DejaEditor;
@@ -408,14 +404,6 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		3E65419E16DCE23700368931 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3EC711F9193E189C00ABE4EB /* Savanna.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		3E6541B616DCE30400368931 /* AddInFrameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,23 +426,6 @@
 			name = AddInFrameworks;
 			sourceTree = "<group>";
 		};
-		3ECF7DF4179177AA002B25DC /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */,
-			);
-			name = Dependencies;
-			path = DejaEditor;
-			sourceTree = "<group>";
-		};
-		3ECF7DF6179177E2002B25DC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3ECF7DFB179177E2002B25DC /* libSavanna.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,9 +433,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E65414016DCE0E900368931 /* Build configuration list for PBXNativeTarget "DejaEditor" */;
 			buildPhases = (
+				41214CDFB75402B1D0441DAF /* Check Pods Manifest.lock */,
 				3E65411F16DCE0E900368931 /* Sources */,
 				3E65412016DCE0E900368931 /* Frameworks */,
 				3E65412116DCE0E900368931 /* Resources */,
+				E1499076FAFBD166AE2ED19F /* Embed Pods Frameworks */,
+				878445967BB603D78F45C8F1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -494,12 +468,6 @@
 			mainGroup = 3E65411A16DCE0E900368931;
 			productRefGroup = 3E65412416DCE0E900368931 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 3ECF7DF6179177E2002B25DC /* Products */;
-					ProjectRef = 3ECF7DF5179177E2002B25DC /* Savanna.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3E65412216DCE0E900368931 /* DejaEditor */,
@@ -507,23 +475,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		3ECF7DFB179177E2002B25DC /* libSavanna.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSavanna.a;
-			remoteRef = 3ECF7DFA179177E2002B25DC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		3E65412116DCE0E900368931 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3E65413116DCE0E900368931 /* InfoPlist.strings in Resources */,
-				3EC711FA193E189C00ABE4EB /* Savanna.bundle in Resources */,
 				3E65413916DCE0E900368931 /* Default.png in Resources */,
 				3E65413B16DCE0E900368931 /* Default@2x.png in Resources */,
 				3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */,
@@ -531,6 +488,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41214CDFB75402B1D0441DAF /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		878445967BB603D78F45C8F1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DejaEditor/Pods-DejaEditor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1499076FAFBD166AE2ED19F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DejaEditor/Pods-DejaEditor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3E65411F16DCE0E900368931 /* Sources */ = {
@@ -569,7 +574,6 @@
 				3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */,
 				3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */,
 				3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */,
-				3ECD133D16EC077A00B716AF /* TestHookVC.m in Sources */,
 				3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +650,7 @@
 		};
 		3E65414116DCE0E900368931 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,24 +659,27 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
-				HEADER_SEARCH_PATHS = "../Savanna/**";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "DejaEditor/DejaEditor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../Savanna/**";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		3E65414216DCE0E900368931 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,18 +688,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DejaEditor/DejaEditor-Prefix.pch";
-				HEADER_SEARCH_PATHS = "../Savanna/**";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "DejaEditor/DejaEditor-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos\"",
 				);
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../Savanna/**";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
