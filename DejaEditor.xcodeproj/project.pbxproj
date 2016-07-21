@@ -10,6 +10,7 @@
 		3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFB716E82DA400685764 /* DESimpleColorfulTextView.m */; };
 		3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */; };
 		3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E262F9C16DEEAEB0037AA98 /* CoreText.framework */; };
+		3E30B8771D4188DE00F384EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E30B8761D4188DE00F384EC /* Images.xcassets */; };
 		3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */; };
 		3E3D0E571755FE8E00351A95 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3D0E561755FE8E00351A95 /* libSavanna.a */; };
 		3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E41C19416F584B600F01993 /* MediaPlayer.framework */; };
@@ -19,9 +20,6 @@
 		3E65413116DCE0E900368931 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3E65412F16DCE0E900368931 /* InfoPlist.strings */; };
 		3E65413316DCE0E900368931 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65413216DCE0E900368931 /* main.m */; };
 		3E65413716DCE0E900368931 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65413616DCE0E900368931 /* AppDelegate.m */; };
-		3E65413916DCE0E900368931 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E65413816DCE0E900368931 /* Default.png */; };
-		3E65413B16DCE0E900368931 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E65413A16DCE0E900368931 /* Default@2x.png */; };
-		3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E65413C16DCE0E900368931 /* Default-568h@2x.png */; };
 		3E65414616DCE13600368931 /* DETextInputCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65414516DCE13600368931 /* DETextInputCatcher.m */; };
 		3E65414C16DCE19600368931 /* QRFindReplaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65414916DCE19600368931 /* QRFindReplaceView.m */; };
 		3E65414D16DCE19600368931 /* LogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E65414B16DCE19600368931 /* LogView.m */; };
@@ -70,6 +68,7 @@
 		3E0ADFBA16E82E4600685764 /* NSAttributedString+TextColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+TextColor.h"; sourceTree = "<group>"; };
 		3E0ADFBB16E82E4600685764 /* NSAttributedString+TextColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+TextColor.m"; sourceTree = "<group>"; };
 		3E262F9C16DEEAEB0037AA98 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3E30B8761D4188DE00F384EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3E3D0E561755FE8E00351A95 /* libSavanna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSavanna.a; path = "../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos/libSavanna.a"; sourceTree = "<group>"; };
 		3E41C19416F584B600F01993 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -83,9 +82,6 @@
 		3E65413416DCE0E900368931 /* DejaEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DejaEditor-Prefix.pch"; sourceTree = "<group>"; };
 		3E65413516DCE0E900368931 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3E65413616DCE0E900368931 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3E65413816DCE0E900368931 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3E65413A16DCE0E900368931 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3E65413C16DCE0E900368931 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3E65414416DCE13600368931 /* DETextInputCatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETextInputCatcher.h; sourceTree = "<group>"; };
 		3E65414516DCE13600368931 /* DETextInputCatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETextInputCatcher.m; sourceTree = "<group>"; };
 		3E65414816DCE19600368931 /* QRFindReplaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRFindReplaceView.h; sourceTree = "<group>"; };
@@ -248,13 +244,11 @@
 		3E65412D16DCE0E900368931 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3E30B8761D4188DE00F384EC /* Images.xcassets */,
 				3E65412E16DCE0E900368931 /* DejaEditor-Info.plist */,
 				3E65412F16DCE0E900368931 /* InfoPlist.strings */,
 				3E65413216DCE0E900368931 /* main.m */,
 				3E65413416DCE0E900368931 /* DejaEditor-Prefix.pch */,
-				3E65413816DCE0E900368931 /* Default.png */,
-				3E65413A16DCE0E900368931 /* Default@2x.png */,
-				3E65413C16DCE0E900368931 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -465,9 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E65413116DCE0E900368931 /* InfoPlist.strings in Resources */,
-				3E65413916DCE0E900368931 /* Default.png in Resources */,
-				3E65413B16DCE0E900368931 /* Default@2x.png in Resources */,
-				3E65413D16DCE0E900368931 /* Default-568h@2x.png in Resources */,
+				3E30B8771D4188DE00F384EC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +627,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -661,6 +655,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
