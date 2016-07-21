@@ -4,6 +4,6 @@
 # use_frameworks!
 
 target 'DejaEditor' do
-    pod 'Savanna', :path => '../Savanna'
+    pod 'Savanna', :git => 'https://github.com/yang2507366/Savanna.git'
 end
 

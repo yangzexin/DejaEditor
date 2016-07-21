@@ -21,11 +21,16 @@ PODS:
   - ZipKit (1.0.3)
 
 DEPENDENCIES:
-  - Savanna (from `../Savanna`)
+  - Savanna (from `https://github.com/yang2507366/Savanna.git`)
 
 EXTERNAL SOURCES:
   Savanna:
-    :path: ../Savanna
+    :git: https://github.com/yang2507366/Savanna.git
+
+CHECKOUT OPTIONS:
+  Savanna:
+    :commit: 343ee6b5a17cc2ed69353b51e0cda0d7f8d5b9fe
+    :git: https://github.com/yang2507366/Savanna.git
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
