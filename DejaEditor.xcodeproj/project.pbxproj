@@ -13,8 +13,6 @@
 		3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */; };
 		3E3D0E571755FE8E00351A95 /* libSavanna.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E3D0E561755FE8E00351A95 /* libSavanna.a */; };
 		3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E41C19416F584B600F01993 /* MediaPlayer.framework */; };
-		3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */; };
-		3E4CA899171FB5870037DFC1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4CA898171FB5870037DFC1 /* Security.framework */; };
 		3E65412716DCE0E900368931 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412616DCE0E900368931 /* UIKit.framework */; };
 		3E65412916DCE0E900368931 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412816DCE0E900368931 /* Foundation.framework */; };
 		3E65412B16DCE0E900368931 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E65412A16DCE0E900368931 /* CoreGraphics.framework */; };
@@ -62,7 +60,6 @@
 		3E6541CE16DCE35900368931 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C316DCE35900368931 /* QuartzCore.framework */; };
 		3E6541CF16DCE35900368931 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E6541C416DCE35900368931 /* SystemConfiguration.framework */; };
 		3E934B2016DDD91600458E83 /* UIFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E934B1F16DDD91600458E83 /* UIFactory.m */; };
-		3EA5B26E193EAA85009027DC /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EA5B26D193EAA85009027DC /* Dropbox.framework */; };
 		3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */; };
 		C51CD826334DC1488072A95A /* libPods-DejaEditor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C837132489AC98470403F1F /* libPods-DejaEditor.a */; };
 /* End PBXBuildFile section */
@@ -76,9 +73,6 @@
 		3E3AB27616FFEFF300D8DB15 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		3E3D0E561755FE8E00351A95 /* libSavanna.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSavanna.a; path = "../../../Library/Developer/Xcode/DerivedData/YzxsWorkspace-bikcokbkcyhwebaaijorehvxqhka/Build/Products/Debug-iphoneos/libSavanna.a"; sourceTree = "<group>"; };
 		3E41C19416F584B600F01993 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		3E4CA895171FB5440037DFC1 /* DropboxFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxFileManager.h; sourceTree = "<group>"; };
-		3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxFileManager.m; sourceTree = "<group>"; };
-		3E4CA898171FB5870037DFC1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3E65412316DCE0E900368931 /* DejaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DejaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E65412616DCE0E900368931 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3E65412816DCE0E900368931 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -161,7 +155,6 @@
 		3E6541C416DCE35900368931 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3E934B1E16DDD91600458E83 /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
 		3E934B1F16DDD91600458E83 /* UIFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFactory.m; sourceTree = "<group>"; };
-		3EA5B26D193EAA85009027DC /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = Vendor/Dropbox.framework; sourceTree = SOURCE_ROOT; };
 		3EA7EA5816E7583500992AD3 /* DEColorfulTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEColorfulTextView.h; sourceTree = "<group>"; };
 		3EA7EA5916E7583500992AD3 /* DEColorfulTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEColorfulTextView.m; sourceTree = "<group>"; };
 		5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DejaEditor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DejaEditor/Pods-DejaEditor.debug.xcconfig"; sourceTree = "<group>"; };
@@ -175,13 +168,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E3D0E571755FE8E00351A95 /* libSavanna.a in Frameworks */,
-				3E4CA899171FB5870037DFC1 /* Security.framework in Frameworks */,
 				3E3AB27716FFEFF300D8DB15 /* libxml2.dylib in Frameworks */,
 				3E41C19516F584B600F01993 /* MediaPlayer.framework in Frameworks */,
 				3E262F9D16DEEAEB0037AA98 /* CoreText.framework in Frameworks */,
 				3E6541C516DCE35900368931 /* AudioToolbox.framework in Frameworks */,
 				3E6541C616DCE35900368931 /* AVFoundation.framework in Frameworks */,
-				3EA5B26E193EAA85009027DC /* Dropbox.framework in Frameworks */,
 				3E6541C716DCE35900368931 /* CFNetwork.framework in Frameworks */,
 				3E6541C816DCE35900368931 /* CoreLocation.framework in Frameworks */,
 				3E6541C916DCE35900368931 /* ImageIO.framework in Frameworks */,
@@ -208,17 +199,6 @@
 				E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		3E4CA891171FB4F30037DFC1 /* Dropbox */ = {
-			isa = PBXGroup;
-			children = (
-				3EA5B26D193EAA85009027DC /* Dropbox.framework */,
-				3E4CA898171FB5870037DFC1 /* Security.framework */,
-				3E4CA895171FB5440037DFC1 /* DropboxFileManager.h */,
-				3E4CA896171FB5440037DFC1 /* DropboxFileManager.m */,
-			);
-			name = Dropbox;
 			sourceTree = "<group>";
 		};
 		3E65411A16DCE0E900368931 = {
@@ -282,7 +262,6 @@
 		3E65414316DCE10100368931 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3E4CA891171FB4F30037DFC1 /* Dropbox */,
 				3E65414416DCE13600368931 /* DETextInputCatcher.h */,
 				3E65414516DCE13600368931 /* DETextInputCatcher.m */,
 			);
@@ -457,6 +436,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = yangzexin;
+				TargetAttributes = {
+					3E65412216DCE0E900368931 = {
+						DevelopmentTeam = 5HNESHK23T;
+					};
+				};
 			};
 			buildConfigurationList = 3E65411E16DCE0E900368931 /* Build configuration list for PBXProject "DejaEditor" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -574,7 +558,6 @@
 				3EA7EA5A16E7583500992AD3 /* DEColorfulTextView.m in Sources */,
 				3E0ADFB816E82DA400685764 /* DESimpleColorfulTextView.m in Sources */,
 				3E0ADFBC16E82E4600685764 /* NSAttributedString+TextColor.m in Sources */,
-				3E4CA897171FB5440037DFC1 /* DropboxFileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FC65B7F6DFA3B22A61E3E2C /* Pods-DejaEditor.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
@@ -677,6 +661,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8A23CC9145C34040C54B21D /* Pods-DejaEditor.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",

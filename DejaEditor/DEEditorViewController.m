@@ -257,8 +257,8 @@
     self.pretypeSelectionListTableViewShadowView.backgroundColor = [UIColor whiteColor];
     self.pretypeSelectionListTableViewShadowView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     self.pretypeSelectionListTableViewShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.pretypeSelectionListTableViewShadowView.layer.shadowOpacity = 1.0f;
-    self.pretypeSelectionListTableViewShadowView.layer.shadowRadius = 5.0f;
+    self.pretypeSelectionListTableViewShadowView.layer.shadowOpacity = .20f;
+    self.pretypeSelectionListTableViewShadowView.layer.shadowRadius = 1.0f;
     self.pretypeSelectionListTableViewShadowView.layer.shadowOffset = CGSizeMake(-1, 1.0f);
     self.pretypeSelectionListTableViewShadowView.layer.shouldRasterize = YES;
     self.pretypeSelectionListTableViewShadowView.frame = self.pretypeSelectionListTableView.frame;
@@ -286,9 +286,9 @@
                                                                     self.functionPositionListTableView.frame.size.height);
     self.functionPositionListTableViewShadowView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     self.functionPositionListTableViewShadowView.backgroundColor = [UIColor whiteColor];
-    self.functionPositionListTableViewShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.functionPositionListTableViewShadowView.layer.shadowOpacity = 1.0f;
-    self.functionPositionListTableViewShadowView.layer.shadowRadius = 5.0f;
+    self.functionPositionListTableViewShadowView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    self.functionPositionListTableViewShadowView.layer.shadowOpacity = .2f;
+    self.functionPositionListTableViewShadowView.layer.shadowRadius = 1.0f;
     self.functionPositionListTableViewShadowView.layer.shouldRasterize = YES;
     [self.view addSubview:self.functionPositionListTableViewShadowView];
     [self.view addSubview:self.functionPositionListTableView];
