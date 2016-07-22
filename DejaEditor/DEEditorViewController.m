@@ -70,6 +70,8 @@
 @property(nonatomic, retain)UIBarButtonItem *lineNumberLabel;
 @property(nonatomic, assign)BOOL blockPretypeAnalyse;
 
+@property (nonatomic, assign) UIEdgeInsets textViewOriginalEdgeInsets;
+
 @end
 
 @implementation DEEditorViewController
@@ -128,7 +130,7 @@
     self.textView.frame = self.view.bounds;
     self.textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.textView.delegate = self;
-    self.textView.backgroundColor = [UIColor clearColor];
+    self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.font = [UIFont systemFontOfSize:16.0f];
     [self.view addSubview:self.textView];
     
@@ -171,14 +173,14 @@
     UIBarButtonItem *tabBtn = [UIFactory borderedBarButtonItemWithTitle:@"Tab" target:self action:@selector(tabButtonTapped)];
     UIBarButtonItem *bracketBtn = [UIFactory borderedBarButtonItemWithTitle:@" ( ) " target:self action:@selector(bracketButtonTapped)];
     UIBarButtonItem *bigBracketBtn = [UIFactory borderedBarButtonItemWithTitle:@" { } " target:self action:@selector(bigBracketButtonTapped)];
-    UIBarButtonItem *semicolonBtn = [UIFactory borderedBarButtonItemWithTitle:@"  ;  " target:self action:@selector(semicolonButtonTapped)];
+    UIBarButtonItem *semicolonBtn = [UIFactory borderedBarButtonItemWithTitle:@"  _  " target:self action:@selector(semicolonButtonTapped)];
     UIBarButtonItem *assignBtn = [UIFactory borderedBarButtonItemWithTitle:@"  =  " target:self action:@selector(assignButtonTapped)];
     UIBarButtonItem *negateBtn = [UIFactory borderedBarButtonItemWithTitle:@" ~= " target:self action:@selector(negateButtonTapped)];
     UIBarButtonItem *quotesBtn = [UIFactory borderedBarButtonItemWithTitle:@" \"\" " target:self action:@selector(quotesButtonTapped)];
     UIBarButtonItem *colonBtn = [UIFactory borderedBarButtonItemWithTitle:@"  :  " target:self action:@selector(colonButtonTapped)];
-    UIBarButtonItem *logBtn = [UIFactory borderedBarButtonItemWithTitle:@"log" target:self action:@selector(logButtonTapped)];
+    UIBarButtonItem *logBtn = [UIFactory borderedBarButtonItemWithTitle:@" Log " target:self action:@selector(logButtonTapped)];
     UIBarButtonItem *pasteBtn = [UIFactory borderedBarButtonItemWithTitle:@"Paste" target:self action:@selector(pasteButtonTapped)];
-    UIBarButtonItem *delLineBtn = [UIFactory borderedBarButtonItemWithTitle:@"Del" target:self action:@selector(deleteLineButtonTapped)];
+    UIBarButtonItem *delLineBtn = [UIFactory borderedBarButtonItemWithTitle:@" Del " target:self action:@selector(deleteLineButtonTapped)];
     UIBarButtonItem *gotoLineBeginBtn = [UIFactory borderedBarButtonItemWithTitle:@"<-" target:self action:@selector(gotoLineBeginButtonTapped)];
     UIBarButtonItem *gotoLineEndBtn = [UIFactory borderedBarButtonItemWithTitle:@"->" target:self action:@selector(gotoLineEndButtonTapped)];
     UIBarButtonItem *closeKeyboardBtn = [UIFactory barButtonItemSystemItem:UIBarButtonSystemItemDone target:self action:@selector(closeKeyboardButtonTapped)];
@@ -215,7 +217,7 @@
         secToolbar.barStyle = keyboardToolbar.barStyle;
         secToolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         secToolbar.frame = CGRectMake(0, keyboardToolbar.frame.size.height, keyboardToolbar.frame.size.width, keyboardToolbar.frame.size.height);
-        UIBarButtonItem *dotBtn = [UIFactory borderedBarButtonItemWithTitle:@"." target:self action:@selector(dotButtonTapped)];
+        UIBarButtonItem *dotBtn = [UIFactory borderedBarButtonItemWithTitle:@"  .  " target:self action:@selector(dotButtonTapped)];
         secToolbar.items = @[colonBtn, dotBtn, logBtn, pasteBtn, delLineBtn, gotoLineBeginBtn, gotoLineEndBtn];
         [self.keyboardToolsView addSubview:secToolbar];
     }
@@ -254,7 +256,7 @@
     self.pretypeSelectionListTableView.rowHeight = 60.0f;
     self.pretypeSelectionListTableView.backgroundColor = [UIColor clearColor];
     self.pretypeSelectionListTableViewShadowView = [[UIView new] autorelease];
-    self.pretypeSelectionListTableViewShadowView.backgroundColor = [UIColor whiteColor];
+    self.pretypeSelectionListTableViewShadowView.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.50f];
     self.pretypeSelectionListTableViewShadowView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     self.pretypeSelectionListTableViewShadowView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.pretypeSelectionListTableViewShadowView.layer.shadowOpacity = .20f;
@@ -298,6 +300,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.textViewOriginalEdgeInsets = UIEdgeInsetsZero;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -530,13 +534,16 @@
 
 - (void)showTopToolbar:(BOOL)show
 {
-    self.showTopBarButton.style = show ? UIBarButtonItemStyleDone : UIBarButtonItemStyleBordered;
+    if (UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsetsZero, self.textViewOriginalEdgeInsets)) {
+        self.textViewOriginalEdgeInsets = self.textView.contentInset;
+    }
+    self.showTopBarButton.style = show ? UIBarButtonItemStyleDone : UIBarButtonItemStylePlain;
     [self setFunctionPositionListTableViewHidden:YES];
     BOOL repositionTextViewY = self.textView.contentOffset.y < self.topToolbar.frame.size.height;
     [UIView animateWithDuration:0.25f animations:^{
-        self.textView.contentInset = UIEdgeInsetsMake(show ? self.topToolbar.frame.size.height : 0, 0, 0, 0);
+        self.textView.contentInset = UIEdgeInsetsMake(self.textViewOriginalEdgeInsets.top + (show ? self.topToolbar.frame.size.height : 0), 0, 0, 0);
         CGRect tmpRect = self.topToolbar.frame;
-        tmpRect.origin.y = show ? 0 : -tmpRect.size.height;
+        tmpRect.origin.y = show ? fabs(self.textViewOriginalEdgeInsets.top) : -tmpRect.size.height;
         self.topToolbar.frame = tmpRect;
     } completion:^(BOOL finished) {
         if(repositionTextViewY){
@@ -568,13 +575,14 @@
 
 - (void)showTopBarButtonTapped
 {
-    BOOL show = self.showTopBarButton.style == UIBarButtonItemStyleBordered;
+    BOOL show = self.showTopBarButton.style == UIBarButtonItemStylePlain;
     [self showTopToolbar:show];
 }
 
 - (void)showFunctionIndexButtonTapped
 {
     [self.textView resignFirstResponder];
+    self.functionPositionListTableView.contentInset = self.textView.contentInset;
     if(self.functionPositionListTableView.hidden){
         [self showTopToolbar:NO];
         self.functionPositionList = [self.methodFinder cachedFunctionPositionList];
@@ -658,12 +666,12 @@
         if(endNewLineLocation != self.textView.text.length){
             rightString = [self.textView.text sv_substringWithBeginIndex:endNewLineLocation endIndex:self.textView.text.length];
         }
-        self.textView.text = [NSString stringWithFormat:@"%@%@%@", leftString, resultString, rightString];
-        self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, 0);
-        if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
-            [self.textView insertText:@" "];
-            [self.textView deleteBackward];
-        }
+        
+        [UIView animateWithDuration:0.01f animations:^{
+            self.textView.text = [NSString stringWithFormat:@"%@%@%@", leftString, resultString, rightString];
+        } completion:^(BOOL finished) {
+            self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, 0);
+        }];
         self.textView.selectedRange = NSMakeRange(lastNewLineLocation + 1, endNewLineLocation - lastNewLineLocation - 1);
     }
 }
@@ -691,7 +699,7 @@
 
 - (void)semicolonButtonTapped
 {
-    [self.textView insertText:@";"];
+    [self.textView insertText:@"_"];
 }
 
 - (void)assignButtonTapped
@@ -789,15 +797,15 @@
     NSString *text = self.textView.text;
     NSString *newText = [NSString stringWithFormat:@"%@%@", [text substringWithRange:NSMakeRange(0, lastNewLineLocation)],
                          [text substringWithRange:NSMakeRange(nextNewLineLocation, text.length - nextNewLineLocation)]];
-    self.textView.text = newText;
-    self.textView.selectedRange = NSMakeRange(lastNewLineLocation, 0);
-    for(NSInteger i = 0; i < numberOfTabs; ++i){
-        [self.textView insertText:@"\t"];
-    }
-    if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
-        [self.textView insertText:@" "];
-        [self.textView deleteBackward];
-    }
+    
+    [UIView animateWithDuration:.01f animations:^{
+        self.textView.text = newText;
+    } completion:^(BOOL finished) {
+        self.textView.selectedRange = NSMakeRange(lastNewLineLocation, 0);
+        for(NSInteger i = 0; i < numberOfTabs; ++i){
+            [self.textView insertText:@"\t"];
+        }
+    }];
 }
 
 - (void)gotoLineBeginButtonTapped
@@ -1019,12 +1027,11 @@
         if([self.textView respondsToSelector:@selector(setTextDidResetBlock:)]){
             [self setPretypeSelectionListTableViewHidden:YES];
         }
-        self.textView.text = [NSString stringWithFormat:@"%@%@%@", prefix, replaceMethodName, suffix];
-        self.textView.selectedRange = NSMakeRange(prefix.length + leftBracketPosition, 0);
-        if([[[UIDevice currentDevice] systemVersion] compare:@"5.0"] == NSOrderedDescending){
-            [self.textView insertText:@" "];
-            [self.textView deleteBackward];
-        }
+        [UIView animateWithDuration:0.01f animations:^{
+            self.textView.text = [NSString stringWithFormat:@"%@%@%@", prefix, replaceMethodName, suffix];
+        } completion:^(BOOL finished) {
+            self.textView.selectedRange = NSMakeRange(prefix.length + leftBracketPosition, 0);
+        }];
         if(![self.textView respondsToSelector:@selector(setTextDidResetBlock:)]){
             [self setPretypeSelectionListTableViewHidden:YES];
         }

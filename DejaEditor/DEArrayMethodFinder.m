@@ -94,7 +94,7 @@
                               [DEPretype createWithText:@"true"],
                               [DEPretype createWithText:@"false"],
                               [DEPretype createWithText:@"break"],
-                              [DEPretype createWithText:@"return ;"],
+                              [DEPretype createWithText:@"return"],
                               [DEPretype createWithText:@"tonumber(s)"],
                               [DEPretype createWithText:@"runtime::invokeMethod(objId, methodName, ...--[[params]])"],
                               [DEPretype createWithText:@"runtime::invokeClassMethod(className, methodName, ...--[[params]])"],
@@ -141,7 +141,7 @@
                                  [DEPretype createWithText:@"string.gmatch(str, pattern)"],
                                  [DEPretype createWithText:@"string.gsub(str, pattern, repl, n)"],
                                  [DEPretype createWithText:@"string.match(str, pattern, init)"],
-                                 [DEPretype createWithText:@"string.find(str, pattern, init, plain)"],
+                                 [DEPretype createWithText:@"string.find(str, pattern, init, plain)"]
                               ]];
     
     NSMutableArray *tmpInstanceMethodList = [NSMutableArray array];
