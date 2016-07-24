@@ -17,20 +17,36 @@ PODS:
     - ASIHTTPRequest (~> 1.8.2)
     - ZipArchive (~> 1.2.0)
     - ZipKit (~> 1.0.1)
+  - SFFoundation (1.0.0):
+    - SFFoundation/ARC (= 1.0.0)
+    - SFFoundation/MRC (= 1.0.0)
+  - SFFoundation/ARC (1.0.0):
+    - SFFoundation/MRC
+  - SFFoundation/MRC (1.0.0)
+  - SFiOSKit (1.0.0):
+    - SFFoundation
   - ZipArchive (1.2.0)
   - ZipKit (1.0.3)
 
 DEPENDENCIES:
   - Savanna (from `../Savanna`)
+  - SFFoundation (from `../SFLibraries`)
+  - SFiOSKit (from `../SFLibraries`)
 
 EXTERNAL SOURCES:
   Savanna:
     :path: ../Savanna
+  SFFoundation:
+    :path: ../SFLibraries
+  SFiOSKit:
+    :path: ../SFLibraries
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Savanna: fefa468e09793cc5e611e2acea6863ed90180d93
+  SFFoundation: aff55b3de1a7f52e323f7d59163830755bafdf12
+  SFiOSKit: 36515035c50b92fd8050350864e8a37e9ac55116
   ZipArchive: 83ea626ea99bae97743ae6413aeb493dd4e48335
   ZipKit: 594735e7ad2fd3ee7349759681a0423a1b296572
 

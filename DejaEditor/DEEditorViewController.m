@@ -964,7 +964,7 @@
             }
             return [NSString stringWithFormat:@"%@%@)", [method substringWithRange:NSMakeRange(0, beginIndex)], newParams];
         }
-    }else if([method hasPrefix:@"require"] || [method hasPrefix:@"return"]){
+    }else if([method hasPrefix:@"require"]){
         *outLeftBracketPosition = method.length - 1;
     }else{
         *outLeftBracketPosition = method.length;

@@ -5,5 +5,7 @@
 
 target 'DejaEditor' do
     pod 'Savanna', :path => '../Savanna'
+    pod 'SFFoundation', :path => '../SFLibraries'
+    pod 'SFiOSKit', :path => '../SFLibraries'
 end
 
