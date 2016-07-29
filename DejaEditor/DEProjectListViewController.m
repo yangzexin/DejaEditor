@@ -20,7 +20,9 @@
 #import "LINavigationController.h"
 #import "SVWaiting.h"
 
-@interface DEProjectListViewController ()
+#import <SFiOSKit/SFiOSKit.h>
+
+@interface DEProjectListViewController () <UIDocumentInteractionControllerDelegate>
 
 @property(nonatomic, retain)id<DEProjectManager> projectManager;
 @property(nonatomic, retain)NSArray *projectList;
@@ -281,26 +283,37 @@
                 }
             } cancelButtonTitle:@"取消" otherButtonTitles:@"解压", nil];
         }else if([lowerZipProjectName hasSuffix:kPackageFileExtenstion]){
-            [SVWaiting showWaiting:YES inView:self.view];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [SVWaiting showWaiting:NO inView:self.view];
-                    if(unzipedProjectPath){
-                        id<SVScriptBundle> sb = [[[SVLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
-                        LINavigationController *nc = [[LINavigationController new] autorelease];
-                        [nc setStopButtonTapBlock:^{
-                            [self dismissViewControllerAnimated:YES completion:nil];
-                            [SVAppManager destoryAllApps];
-                        }];
-                        [self presentViewController:nc animated:YES completion:nil];
-                        SVApp *app = [[[SVApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
-                        [SVAppManager runApp:app];
-                    }else{
-                        [SVAlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
-                    }
-                });
-            });
+            [UIActionSheet sf_actionSheetWithTitle:@"打开PKG" completion:^(NSInteger buttonIndex, NSString *buttonTitle) {
+                if ([buttonTitle isEqualToString:@"运行"]) {
+                    [SVWaiting showWaiting:YES inView:self.view];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        NSString *unzipedProjectPath = [self unzipProjectWithName:zipProjectName];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [SVWaiting showWaiting:NO inView:self.view];
+                            if(unzipedProjectPath){
+                                id<SVScriptBundle> sb = [[[SVLocalAppBundle alloc] initWithDirectory:unzipedProjectPath] autorelease];
+                                LINavigationController *nc = [[LINavigationController new] autorelease];
+                                [nc setStopButtonTapBlock:^{
+                                    [self dismissViewControllerAnimated:YES completion:nil];
+                                    [SVAppManager destoryAllApps];
+                                }];
+                                [self presentViewController:nc animated:YES completion:nil];
+                                SVApp *app = [[[SVApp alloc] initWithScriptBundle:sb relatedViewController:nc] autorelease];
+                                [SVAppManager runApp:app];
+                            }else{
+                                [SVAlertDialog showWithTitle:nil message:@"运行失败，不是有效的文件" completion:nil cancelButtonTitle:@"确定" otherButtonTitleList:nil];
+                            }
+                        });
+                    });
+                } else if ([buttonTitle isEqualToString:@"其他应用程序打开"]) {
+                    NSString *documentPath = [NSString stringWithFormat:@"%@/Documents", NSHomeDirectory()];
+                    NSString *zipFilePath = [documentPath stringByAppendingPathComponent:zipProjectName];
+                    UIDocumentInteractionController *controller = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:zipFilePath]];
+                    controller.delegate = self;
+                    [controller presentOpenInMenuFromRect:CGRectZero inView:self.view animated:YES];
+                    [self sf_setAssociatedObject:controller key:@"documentInteractionController"];
+                }
+            } cancelButtonTitle:@"取消" destructiveButtonTitle:@"运行" otherButtonTitles:@"其他应用程序打开", nil];
         }
     }
 }
@@ -390,6 +403,15 @@
         }
     }
     return cell;
+}
+
+#pragma mark - UIDocumentInteractionControllerDelegate
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
+    return self;
+}
+
+- (nullable UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller {
+    return self.view;
 }
 
 @end
